@@ -1,0 +1,16 @@
+button {
+    all: unset;
+    font-weight: 500;
+    padding: .75rem 1.5rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #FFFFFF;
+    background-color: var(--btn-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--stroke-hightlight);
+}

@@ -1,0 +1,29 @@
+main {
+    overflow: auto;
+    padding: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+}
+
+.main-container {
+    max-width: 36rem;
+    justify-items: center;
+    margin-top: 32px;
+}
+
+.main-container h1 {
+    font: 600 1.5rem/1.25 var(--font-family);
+    margin-bottom: .5rem;
+}
+
+.child-info legend {
+    color: var(--text-primary);
+}
+
+.underline-orange {
+    text-decoration: underline;
+    text-decoration-color:  var(--stroke-hightlight);
+    text-decoration-thickness: 4px;
+}

@@ -26,6 +26,13 @@ input:invalid {
     border: 0.125rem solid var(--semantic-error);
 }
 
+#name-error,
+#email-error,
+#password-error {
+    color: red;
+    display: none;
+}
+
 
 
   

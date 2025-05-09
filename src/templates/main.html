@@ -113,5 +113,22 @@
                 </button>
             </div>
         </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const openModalBtn = document.getElementById('openModalBtn');
+                const closeModalBtn = document.getElementById('closeModalBtn');
+                const modal = document.getElementById('addLinkModal');
+    
+                openModalBtn.addEventListener('click', function() {
+                    modal.style.display = 'flex';
+                });
+    
+                closeModalBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+                
+            });
+        </script>
 </body>
 </html>

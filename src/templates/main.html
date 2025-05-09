@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebobina</title>
+    <link rel="stylesheet" href="/src/styles/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    body {
+        background-color: var(--bg-input);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+<body>
+
+    <body>
+        <div class="container">
+            <header class="header">
+                <h1 class="section-title">
+                    <span class="underline-orange">Lin</span>ks
+                </h1>
+                <button class="btn-primary" id="openModalBtn">
+                    <i class="fas fa-plus"></i> Adicionar Link
+                </button>
+            </header>
+    
+            <main class="links-container" id="linksContainer">
+
+                <section class="link-card">
+                    <h3 class="movie-title">O Poderoso Chefão</h3>
+                    <div class="watch-on">
+                        <i class="fab fa-amazon"></i> Amazon Prime
+                    </div>
+                    <a href="https://www.primevideo.com/detail/0L2QVLWQ4Z8H1QZ1JQZJZJZJZJ" class="movie-link" target="_blank">
+                        https://www.primevideo.com/detail/0L2QVLWQ4Z8H1QZ1JQZJZJZJZJ
+                    </a>
+                    <div class="card-actions">
+                        <button class="action-btn edit-btn">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="action-btn delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </section>
+    
+                <section class="link-card">
+                    <h3 class="movie-title">O Poderoso Chefão</h3>
+                    <div class="watch-on">
+                        <i class="fab fa-amazon"></i> Amazon Prime
+                    </div>
+                    <a href="https://www.primevideo.com/detail/0L2QVLWQ4Z8H1QZ1JQZJZJZJZJ" class="movie-link" target="_blank">
+                        https://www.primevideo.com/detail/0L2QVLWQ4Z8H1QZ1JQZJZJZJZJ
+                    </a>
+                    <div class="card-actions">
+                        <button class="action-btn edit-btn">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="action-btn delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="link-card">
+                    <h3 class="movie-title">O Poderoso Chefão</h3>
+                    <div class="watch-on">
+                        <i class="fab fa-amazon"></i> Amazon Prime
+                    </div>
+                    <a href="https://www.primevideo.com/detail/0L2QVLWQ4Z8H1QZ1JQZJZJZJZJ" class="movie-link" target="_blank">
+                        https://www.primevideo.com/detail/0L2QVLWQ4Z8H1QZ1JQZJZJZJZJ
+                    </a>
+                    <div class="card-actions">
+                        <button class="action-btn edit-btn">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="action-btn delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </section>
+
+            </main>
+            
+        </div>
+    
+        <section class="modal" id="addLinkModal">
+            <div class="modal-content">
+                <span class="close-modal" id="closeModalBtn">&times;</span>
+                <h2 class="modal-title">Adicionar Novo Link</h2>
+                <form id="addLinkForm">
+                    <div class="form-group">
+                        <label for="movieName">Nome do Filme</label>
+                        <input type="text" id="movieName" placeholder="Digite o nome do filme" required>
+                    </div>
+                    <button type="submit" class="btn-primary submit-btn">Buscar Informações</button>
+                </form>
+            </div>
+        </section>
+    
+        <footer class="footer">
+            <div class="users-container">
+                <button class="user-btn profile-btn">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </footer>
+</body>
+</html>

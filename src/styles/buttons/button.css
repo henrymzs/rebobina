@@ -9,8 +9,10 @@ button {
 .btn-primary {
     color: #FFFFFF;
     background-color: var(--btn-color);
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
     background-color: var(--stroke-hightlight);
+    transform: translateY(-2px);
 }

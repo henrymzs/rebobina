@@ -11,6 +11,7 @@
 
     --text-primary: #ffffff;
     --text-secondary: #57534E;
+    --text-tertiary: #f97316;
 
     --btn-color: #E43A12;
     --stroke-hightlight: #F3541C;
@@ -37,6 +38,14 @@ h1, h2 {
     grid-template-columns: 51.25% 48.75%;
     height: 100vh;
     overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
 }
 
 .ilustrator {

@@ -1,0 +1,50 @@
+.footer {
+    background-color: var(--bg-banner);
+    padding: 12px;
+    margin-top: auto;
+}
+
+.users-container {
+    display: flex;
+    justify-content: center;
+}
+
+.user-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    border-radius: 50%;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    background-color: var(--btn-color);
+}
+
+.user-btn:hover {
+    background-color: var(--stroke-hightlight);
+    transform: scale(1.1);
+    
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .link-card {
+        padding: 10px;
+    }
+
+    .movie-title {
+        font-size: 1.1rem;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .submit-btn {
+        width: 86%;
+    }
+
+}

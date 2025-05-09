@@ -1,0 +1,65 @@
+.links-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.link-card {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 14px;
+    transition: all 0.3s ease;
+}
+
+.link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(249, 115, 22, 0.2);
+}
+
+.movie-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--stroke-hightlight);
+}
+
+.watch-on {
+    color: #aaa;
+    margin: 0px 8px 8px 0px;
+}
+
+.watch-on i {
+    color: var(--text-tertiary);
+}
+
+.movie-link {
+    word-break: break-word;
+    color: #fff;
+    text-decoration: none;
+}
+
+.movie-link:hover {
+    text-decoration: underline;
+    color: var(--text-tertiary);
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.action-btn {
+    color: #aaa;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    padding: 5px;
+    margin-top: 12px;
+}
+
+.action-btn:hover {
+    color: #f97316;
+    transform: scale(1.1);
+}

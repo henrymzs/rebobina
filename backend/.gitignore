@@ -1,0 +1,10 @@
+.env
+node_modules/
+.tool-versions
+
+logs/
+*.log
+npm-debug.log*
+
+.vscode/
+.idea/

@@ -1,5 +1,6 @@
-const express = require('express');
+const app = require('./app');
+const Usuario = require('./src/models/Usuario');
 
-const app = express();
+const PORT = 3000;
 
-app.listen(3000, () => console.log('🚀 Backend rodando na porta 3000'));
+app.listen(PORT, () => console.log(`Servidor escutando na porta ${PORT}`));

@@ -1,6 +1,6 @@
-const User = require('../users');
+const User = require('../Usuario');
 
-class UserDAO {
+class UsuarioDAO {
     async create({ nome, email, senha }) {
         let newUser;
         try {
@@ -71,15 +71,14 @@ class UserDAO {
     }
 
     async findOne(query) {
-        let user;
-        try {
-            user = await User.findOne({ where: query });
-        } catch (error) {
-            console.error('Erro ao buscar usuário', error);
-        } finally {
-            return user;
-        }
+    try {
+        return await User.findOne({ where: query });
+    } catch (error) {
+        console.error('Erro ao buscar usuário:', error);
+        throw new Error('Erro ao buscar usuário');
     }
 }
 
-module.exports = new UserDAO();
+}
+
+module.exports = new UsuarioDAO();

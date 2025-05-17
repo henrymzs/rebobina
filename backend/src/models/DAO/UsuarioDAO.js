@@ -4,7 +4,7 @@ class UsuarioDAO {
     async create({ nome, email, senha }) {
         let newUser;
         try {
-            newUser = await User.create({ nome, email, senha});
+            newUser = await User.create({ nome, email, senha });
         } catch (error) {
             console.error('Erro ao criar usuário: ', error);
         } finally {
@@ -54,31 +54,27 @@ class UsuarioDAO {
     }
 
     async delete(userId) {
-        let userDelete = false;
         try {
             const user = await User.findByPk(userId);
-            if (user) {
-                await user.destroy();
-                userDelete = true;
-            } else {
-                console.error('Usuário não encontrado para exclusão. ');
+            if (!user) {
+                return { success: false, message: 'Usuário não encontrado para exclusão.' };
             }
+            await user.destroy();
+            return { success: true, message: `Usuário ${userId} excluído com sucesso.` };
         } catch (error) {
             console.error('Erro ao excluir usuário: ', error);
-        } finally {
-            return userDelete;
+            return { success: false, message: 'Erro ao excluir usuário.' }
         }
     }
 
     async findOne(query) {
-    try {
-        return await User.findOne({ where: query });
-    } catch (error) {
-        console.error('Erro ao buscar usuário:', error);
-        throw new Error('Erro ao buscar usuário');
+        try {
+            return await User.findOne({ where: query });
+        } catch (error) {
+            console.error('Erro ao buscar usuário:', error);
+            throw new Error('Erro ao buscar usuário');
+        }
     }
-}
-
 }
 
 module.exports = new UsuarioDAO();

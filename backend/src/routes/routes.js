@@ -4,7 +4,6 @@ const LoginController = require('../controllers/LoginController');
 const RegisterController = require('../controllers/RegisterController')
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 
-
 async function getUsuarioLogado(req) {
   return await UsuarioDAO.getById(req.id);
 }
@@ -69,5 +68,26 @@ router.get('/deslogar', async (req, res) => {
   });
 });
 
+router.get('/usuarios', async (req, res) => {
+  const usuarioLogado = await getUsuarioLogado(req); 
+  if (!usuarioLogado || usuarioLogado.role !== 'admin') {
+    return res.redirect('/');
+  }
+  const listaUsuarios = await UsuarioDAO.getAll();
+  res.status(200).json(listaUsuarios);
+});
+
+router.delete('/usuarios/:id', async (req, res) => {
+    const usuarioLogado = await getUsuarioLogado(req);
+    if (!usuarioLogado || usuarioLogado.role !== 'admin') {
+        return res.status(403).json({ error: 'Apenas administradores podem excluir usuários.' });
+    }
+    const usuarioId = req.params.id;
+    const result = await UsuarioDAO.delete(usuarioId)
+    if (result.success) {
+      return res.status(200).json({ message: result.message });
+    }
+    return res.status(404).json({ message: result.message });
+});
 
 module.exports = router;

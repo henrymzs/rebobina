@@ -4,7 +4,6 @@ const router = require('./src/routes/routes');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
-
 class App {
     constructor() {
         this.server = express();

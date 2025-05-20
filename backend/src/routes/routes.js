@@ -53,7 +53,7 @@ router.get('/login', async (req, res) => {
     message: 'Usuário já esta logado, redirecionando para á página principal. ',
     acesso: false,
     redirect: '/'
-  }); 
+  });
 });
 
 router.get('/deslogar', async (req, res) => {
@@ -69,7 +69,7 @@ router.get('/deslogar', async (req, res) => {
 });
 
 router.get('/usuarios', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req); 
+  const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado || usuarioLogado.role !== 'admin') {
     return res.redirect('/');
   }
@@ -78,16 +78,42 @@ router.get('/usuarios', async (req, res) => {
 });
 
 router.delete('/usuarios/:id', async (req, res) => {
-    const usuarioLogado = await getUsuarioLogado(req);
-    if (!usuarioLogado || usuarioLogado.role !== 'admin') {
-        return res.status(403).json({ error: 'Apenas administradores podem excluir usuários.' });
-    }
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (!usuarioLogado || usuarioLogado.role !== 'admin') {
+    return res.status(403).json({ error: 'Apenas administradores podem excluir usuários.' });
+  }
+  const usuarioId = req.params.id;
+  const result = await UsuarioDAO.delete(usuarioId)
+  if (result.success) {
+    return res.status(200).json({ message: result.message });
+  }
+  return res.status(404).json({ message: result.message });
+});
+
+router.put('/usuarios/update/:id', async (req, res) => {
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (usuarioLogado.role === 'admin') {
     const usuarioId = req.params.id;
-    const result = await UsuarioDAO.delete(usuarioId)
-    if (result.success) {
-      return res.status(200).json({ message: result.message });
+    const novoRole = req.body.role;
+
+    if (novoRole !== 'admin' && novoRole !== 'user') {
+      return res.status(400).json({ error: 'Role inválido. Deve ser "admin" ou "user".' });
     }
-    return res.status(404).json({ message: result.message });
+
+    try {
+      const result = await UsuarioDAO.updateRole(usuarioId, novoRole);
+      if (result.success) {
+        res.status(200).json({ message: result.message });
+      } else {
+        res.status(404).json({ message: result.message });
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar role do usuário:', error);
+      res.status(500).json({ error: 'Erro ao atualizar role do usuário' });
+    }
+  } else {
+    res.status(403).json({ error: 'Usuário não autorizado' });
+  }
 });
 
 module.exports = router;

@@ -75,6 +75,16 @@ class UsuarioDAO {
             throw new Error('Erro ao buscar usuário');
         }
     }
+
+    async updateRole(userId, newRole) {
+        const user = await User.findByPk(userId);
+        if (!user) {
+            return { success: false, message: 'Usuário não encontrado.' };
+        }
+        user.role = newRole;
+        await user.save();
+        return { success: true, message: 'Role do usuário atualizado com sucesso! ' };
+    }
 }
 
 module.exports = new UsuarioDAO();

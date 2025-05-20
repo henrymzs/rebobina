@@ -3,6 +3,7 @@ const router = new Router();
 const LoginController = require('../controllers/LoginController');
 const RegisterController = require('../controllers/RegisterController')
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
+const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 
 async function getUsuarioLogado(req) {
   return await UsuarioDAO.getById(req.id);
@@ -115,5 +116,40 @@ router.put('/usuarios/update/:id', async (req, res) => {
     res.status(403).json({ error: 'Usuário não autorizado' });
   }
 });
+
+router.post('/criar-lista', async (req, res) => {
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (!usuarioLogado) {
+    return res.status(403).json({ error: 'Usuário não autenticado' });
+  }
+
+  const { nomeLista } = req.body;
+
+  try {
+    const novaLista = await ListaFilmesDAO.create({ usuarioId: usuarioLogado.id, nomeLista });
+    if (novaLista) {
+      res.status(201).json({ message: 'Lista criada com sucesso!', lista: novaLista });
+    } else {
+      res.status(500).json({ error: 'Erro ao criar lista.' });
+    }
+  } catch (error) {
+    console.error('Erro na rota de criação da lista', error);
+    res.status(500).json({ error: 'Erro ao criar lista de filmes' });
+  }
+});
+
+router.get('/minha-lista', async (req, res) => {
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (!usuarioLogado) {
+    return res.status(403).json({ error: 'Usuário não autenticado.' });
+  }
+
+  const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
+  if (!resultado.sucesso) {
+    return res.status(404).json({ error: resultado.mensagem });
+  }
+  res.status(200).json({ lista: resultado.lista });
+});
+
 
 module.exports = router;

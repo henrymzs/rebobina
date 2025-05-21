@@ -151,5 +151,23 @@ router.get('/minha-lista', async (req, res) => {
   res.status(200).json({ lista: resultado.lista });
 });
 
+router.put('/nome-lista', async (req, res) => {
+    const usuarioLogado = await getUsuarioLogado(req);
+    if (!usuarioLogado) {
+        return res.status(403).json({ error: "Usuário não autenticado." });
+    }
+    const { nomeLista } = req.body;
+    try {
+        const resultado = await ListaFilmesDAO.updateLista(usuarioLogado.id, nomeLista);
+        if (!resultado.sucesso) {
+            return res.status(404).json({ error: resultado.mensagem });
+        }
+        res.status(200).json({ message: "Nome da lista atualizado com sucesso!", lista: resultado.lista });
+    } catch (error) {
+        console.error("Erro na rota de atualização da lista:", error);
+        res.status(500).json({ error: "Erro ao atualizar lista." });
+    }
+});
+
 
 module.exports = router;

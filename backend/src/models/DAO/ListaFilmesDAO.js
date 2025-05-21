@@ -24,6 +24,22 @@ class ListaFilmesDAO {
             return { sucesso: false, mensagem: 'Erro ao buscar lista.'}
         }
     }
+
+    async updateLista(usuarioId, nomeNovo) {
+        let lista;
+        try {
+            lista = await ListaFilmes.findOne({ where: { usuarioId } });
+            if (!lista) {
+                return { sucesso: false, mensagem: "Usuário não possui uma lista de filmes para editar." };
+            }
+            lista.nomeLista = nomeNovo || lista.nomeLista;
+            await lista.save(); 
+            return { sucesso: true, lista };
+        } catch (error) {
+            console.error("Erro ao atualizar lista de filmes:", error);
+            return { sucesso: false, mensagem: "Erro ao atualizar lista de filmes." };
+        }
+    }
 }
 
 

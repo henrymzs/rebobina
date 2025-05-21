@@ -154,7 +154,7 @@ router.get('/minha-lista', async (req, res) => {
 router.put('/nome-lista', async (req, res) => {
     const usuarioLogado = await getUsuarioLogado(req);
     if (!usuarioLogado) {
-        return res.status(403).json({ error: "Usuário não autenticado." });
+      return res.status(403).json({ error: 'Usuário não autenticado.' });
     }
     const { nomeLista } = req.body;
     try {
@@ -162,12 +162,29 @@ router.put('/nome-lista', async (req, res) => {
         if (!resultado.sucesso) {
             return res.status(404).json({ error: resultado.mensagem });
         }
-        res.status(200).json({ message: "Nome da lista atualizado com sucesso!", lista: resultado.lista });
+        res.status(200).json({ message: 'Nome da lista atualizado com sucesso!', lista: resultado.lista });
     } catch (error) {
-        console.error("Erro na rota de atualização da lista:", error);
-        res.status(500).json({ error: "Erro ao atualizar lista." });
+        console.error('Erro na rota de atualização da lista:', error);
+        res.status(500).json({ error: 'Erro ao atualizar lista.' });
     }
 });
+
+router.delete('/minha-lista', async (req, res) => {
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (!usuarioLogado) {
+    return res.status(403).json({ error: 'Usuário não autenticado. ' })
+  }
+  try {
+    const resultado = await ListaFilmesDAO.deleteLista(usuarioLogado.id);
+    if (!resultado.sucesso) {
+      return res.status(404).json({ error: resultado.mensagem });
+    }
+    res.status(200).json({ message: 'Lista excluída com sucesso!'});
+  } catch (error) {
+    console.error("Erro na rota de exclusão da lista:", error);
+    res.status(500).json({ error: "Erro ao exclusão lista." });
+  }
+})
 
 
 module.exports = router;

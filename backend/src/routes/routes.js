@@ -199,6 +199,7 @@ router.get('/minha-lista/compartilhar', async (req, res) => {
     if (!usuarioLogado) {
         return res.status(403).json({ error: 'Usuário não autenticado.' });
     }
+
     try {
         const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
         if (!resultado.sucesso) {

@@ -7,12 +7,14 @@ ListasAcessadas.init({
     usuarioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'usuarios', key: 'id' }
+        references: { model: 'usuarios', key: 'id' },
+        onDelete: 'CASCADE'
     },
     listaId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'lista_filmes', key: 'id'}
+        references: { model: 'lista_filmes', key: 'id'},
+        onDelete: 'CASCADE'
     },
     data_acesso: {
         type: DataTypes.DATE,

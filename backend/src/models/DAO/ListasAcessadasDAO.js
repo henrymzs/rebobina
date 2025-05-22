@@ -1,4 +1,5 @@
 const ListasAcessadas = require('../ListasAcessadas');
+const ListaFilmes = require('../ListaFilmes')
 
 class ListasAcessadasDAO {
     async registrarAcesso(usuarioId, listaId) {
@@ -21,6 +22,20 @@ class ListasAcessadasDAO {
             return [];
         }
     }
+
+    async excluirAcessosPorLista(usuarioId) {
+    try {
+        const lista = await ListaFilmes.findOne({ where: { usuarioId } });
+
+        if (!lista) return { sucesso: false, mensagem: "Lista não encontrada." };
+
+        await ListasAcessadas.destroy({ where: { listaId: lista.id } });
+        return { sucesso: true };
+    } catch (error) {
+        console.error("Erro ao excluir acessos à lista:", error);
+        return { sucesso: false, mensagem: "Erro ao excluir acessos." };
+    }
+}
 }
 
 module.exports = new ListasAcessadasDAO();

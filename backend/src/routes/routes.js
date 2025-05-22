@@ -4,7 +4,7 @@ const LoginController = require('../controllers/LoginController');
 const RegisterController = require('../controllers/RegisterController')
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
-const ListaFilmes = require('../models/ListaFilmes');
+const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
 
 async function getUsuarioLogado(req) {
   return await UsuarioDAO.getById(req.id);
@@ -183,14 +183,15 @@ router.delete('/minha-lista', async (req, res) => {
     return res.status(403).json({ error: 'Usuário não autenticado. ' })
   }
   try {
+    await ListasAcessadasDAO.excluirAcessosPorLista(usuarioLogado.id);
     const resultado = await ListaFilmesDAO.deleteLista(usuarioLogado.id);
     if (!resultado.sucesso) {
       return res.status(404).json({ error: resultado.mensagem });
     }
     res.status(200).json({ message: 'Lista excluída com sucesso!'});
   } catch (error) {
-    console.error("Erro na rota de exclusão da lista:", error);
-    res.status(500).json({ error: "Erro ao exclusão lista." });
+    console.error('Erro na rota de exclusão da lista:', error);
+    res.status(500).json({ error: 'Erro ao exclusão lista.' });
   }
 })
 
@@ -211,8 +212,50 @@ router.get('/minha-lista/compartilhar', async (req, res) => {
         res.status(200).json({ link: linkCompartilhamento });
 
     } catch (error) {
-        console.error("Erro ao gerar link de compartilhamento:", error);
-        res.status(500).json({ error: "Erro ao gerar link de compartilhamento." });
+        console.error('Erro ao gerar link de compartilhamento:', error);
+        res.status(500).json({ error: 'Erro ao gerar link de compartilhamento.' });
+    }
+});
+
+router.get('/lista-filmes/:token', async (req, res) => {
+    const { token } = req.params;
+    const usuarioLogado = await getUsuarioLogado(req);
+    try {
+        const resultado = await ListaFilmesDAO.findByToken(token);
+        if (!resultado.sucesso) {
+            return res.status(404).json({ error: resultado.mensagem });
+        }
+         if (usuarioLogado) {
+            await ListasAcessadasDAO.registrarAcesso(usuarioLogado.id, resultado.lista.id);
+        }
+        res.status(200).json({ lista: resultado.lista });
+    } catch (error) {
+        console.error('Erro ao buscar lista filmes:', error);
+        res.status(500).json({ error: 'Erro ao buscar lista .' });
+    }
+});
+
+router.get('/info-lista/:token', async (req, res) => {
+    const { token } = req.params;
+    const usuarioLogado = await getUsuarioLogado(req); 
+
+    try {
+        const resultado = await ListaFilmesDAO.findByToken(token);
+        if (!resultado.sucesso) {
+            return res.status(404).json({ error: resultado.mensagem });
+        }
+        const acessos = await ListasAcessadasDAO.buscarAcessosPorLista(resultado.lista.id);
+        res.status(200).json({
+            nomeLista: resultado.lista.nomeLista,
+            dono: resultado.lista.usuarioId,
+            tokenCompartilhamento: resultado.lista.tokenCompartilhamento,
+            usuariosQueAcessaram: acessos || [],
+            usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null
+        });
+
+    } catch (error) {
+        console.error('Erro ao obter informações da lista:', error);
+        res.status(500).json({ error: 'Erro ao obter informações da lista.' });
     }
 });
 

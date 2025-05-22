@@ -54,6 +54,22 @@ class ListaFilmesDAO {
             return { sucesso: false, mensagem: 'Erro ao excluir lista de filmes.' };
         }
     }
+
+    async findByToken(token) {
+        try {
+            const lista = await ListaFilmes.findOne({ where: { tokenCompartilhamento: token } });
+
+            if (!lista) {
+                return { sucesso: false, mensagem: 'Lista não encontrada.' };
+            }
+
+            return { sucesso: true, lista };
+        } catch (error) {
+            console.error('Erro ao buscar lista de filmes:', error);
+            return { sucesso: false, mensagem: 'Erro ao buscar lista de filmes.' };
+        }
+    }
+
 }
 
 

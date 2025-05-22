@@ -4,6 +4,7 @@ const LoginController = require('../controllers/LoginController');
 const RegisterController = require('../controllers/RegisterController')
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
+const ListaFilmes = require('../models/ListaFilmes');
 
 async function getUsuarioLogado(req) {
   return await UsuarioDAO.getById(req.id);
@@ -13,15 +14,22 @@ router.post('/register', RegisterController.register);
 router.post('/login', LoginController.login);
 
 router.get('/profile', async (req, res) => {
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (!usuarioLogado) {
+    return res.status(403).json({ error: 'Usuário não autenticado.' });
+  }
   try {
-    const usuarioLogado = await getUsuarioLogado(req);
-    if (!usuarioLogado) {
-      return res.status(404).send('Usuário não encontrado')
-    }
-    res.status(200).json(usuarioLogado);
+    const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
+    const perfilUsuario = {
+      id: usuarioLogado.id,
+      nome: usuarioLogado.nome,
+      email: usuarioLogado.email,
+      ListaFilmes: resultado.sucesso ? resultado.lista : null
+    };
+    res.status(200).json(perfilUsuario);
   } catch (error) {
-    console.error('Erro ao buscar perfil: ', error);
-    res.status(500).send('Erro interno ao buscar perfil');
+    console.error('Erro ao buscar perfil do usuário.');
+    res.status(500).json({ error: 'Erro ao buscar o perfil do usuário.' })
   }
 });
 
@@ -186,5 +194,25 @@ router.delete('/minha-lista', async (req, res) => {
   }
 })
 
+router.get('/minha-lista/compartilhar', async (req, res) => {
+    const usuarioLogado = await getUsuarioLogado(req);
+    if (!usuarioLogado) {
+        return res.status(403).json({ error: 'Usuário não autenticado.' });
+    }
+    try {
+        const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
+        if (!resultado.sucesso) {
+            return res.status(404).json({ error: resultado.mensagem });
+        }
+
+        const linkCompartilhamento = `https://meusistema.com/lista-filmes/${resultado.lista.tokenCompartilhamento}`;
+
+        res.status(200).json({ link: linkCompartilhamento });
+
+    } catch (error) {
+        console.error("Erro ao gerar link de compartilhamento:", error);
+        res.status(500).json({ error: "Erro ao gerar link de compartilhamento." });
+    }
+});
 
 module.exports = router;

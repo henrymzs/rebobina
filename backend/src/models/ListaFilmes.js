@@ -1,5 +1,6 @@
 const db = require('../config/database');
 const {  Model, DataTypes } = require('sequelize');
+const Filme = require('./Filme');
 
 class ListaFilmes extends Model {}
 
@@ -18,8 +19,11 @@ ListaFilmes.init({
     }
 }, {
     sequelize: db.sequelize,
-    modelName: 'listarFilmes',
+    modelName: 'ListaFilmes',
     tableName: 'lista_filmes',
 });
+
+Filme.belongsTo(ListaFilmes, { foreignKey: 'listaId' });
+ListaFilmes.hasMany(Filme, { foreignKey: 'listaid', onDelete: 'CASCADE' });
 
 module.exports = ListaFilmes;

@@ -2,6 +2,7 @@ const app = require('./app');
 const Usuario = require('./src/models/Usuario');
 const ListaFilmes = require('./src/models/ListaFilmes');
 const ListasAcessadas = require('./src/models/ListasAcessadas');
+const Filme = require('./src/models/Filme')
 const database = require('./src/config/database');
 
 const PORT = 3000;

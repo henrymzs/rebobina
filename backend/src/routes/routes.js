@@ -7,6 +7,7 @@ const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
 const FilmeController = require('../controllers/FilmeController');
 const FilmeDAO = require('../models/DAO/FilmeDAO');
+const Filme = require('../models/Filme');
 
 async function getUsuarioLogado(req) {
   return await UsuarioDAO.getById(req.id);
@@ -266,5 +267,7 @@ router.get('/info-lista/:token', async (req, res) => {
 router.post('/filmes', FilmeController.adicionarFilme);
 
 router.put('/filmes/:id', FilmeController.editarFilme);
+
+router.delete('/filmes/:id', FilmeController.excluirFilme);
 
 module.exports = router;

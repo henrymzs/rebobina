@@ -53,3 +53,13 @@ exports.editarFilme = async (req, res) => {
         res.status(400).json({ erro: error.message });
     }
 }
+
+exports.excluirFilme = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const resultado = await FilmeDAO.filmeDelete(id);
+        res.status(200).json(resultado);
+    } catch (error) {
+        res.status(400).json({ erro: message || 'Erro ao excluir filme.' })
+    }
+};

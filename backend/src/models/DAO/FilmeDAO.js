@@ -41,6 +41,19 @@ class FilmeDAO {
             throw new Error(error.message || 'Erro ao atualizar o filme.');
         }
     }
+
+    async filmeDelete(id) {
+        try {
+            const filme = await Filme.findByPk(id);
+            if (!filme) {
+                throw new Error('Filme não encontrado');
+            }
+            await filme.destroy();
+            return { sucesso: true, mensagem: 'Filme removido com sucesso!' };
+        } catch (error) {
+            throw new Error('Erro ao excluir filme.');
+        }
+    }
 }
 
 module.exports = new FilmeDAO();

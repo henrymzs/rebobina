@@ -5,6 +5,8 @@ const RegisterController = require('../controllers/RegisterController')
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
+const FilmeController = require('../controllers/FilmeController');
+const FilmeDAO = require('../models/DAO/FilmeDAO');
 
 async function getUsuarioLogado(req) {
   return await UsuarioDAO.getById(req.id);
@@ -245,12 +247,14 @@ router.get('/info-lista/:token', async (req, res) => {
             return res.status(404).json({ error: resultado.mensagem });
         }
         const acessos = await ListasAcessadasDAO.buscarAcessosPorLista(resultado.lista.id);
+        const filmes = await FilmeDAO.findAllByLista(resultado.lista.id);
         res.status(200).json({
             nomeLista: resultado.lista.nomeLista,
             dono: resultado.lista.usuarioId,
             tokenCompartilhamento: resultado.lista.tokenCompartilhamento,
             usuariosQueAcessaram: acessos || [],
-            usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null
+            usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null,
+            filmes: filmes || []
         });
 
     } catch (error) {
@@ -258,5 +262,7 @@ router.get('/info-lista/:token', async (req, res) => {
         res.status(500).json({ error: 'Erro ao obter informações da lista.' });
     }
 });
+
+router.post('/filmes', FilmeController.adicionarFilme);
 
 module.exports = router;

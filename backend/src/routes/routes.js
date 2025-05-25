@@ -265,4 +265,6 @@ router.get('/info-lista/:token', async (req, res) => {
 
 router.post('/filmes', FilmeController.adicionarFilme);
 
+router.put('/filmes/:id', FilmeController.editarFilme);
+
 module.exports = router;

@@ -14,7 +14,32 @@ class FilmeDAO {
     }
 
     async findAllByLista(listaId) {
-        return await Filme.findAll({ where: { listaId } });
+        return await Filme.findAll({ 
+            where: { listaId },
+            attributes: ['id', 'id_tmdb', 'titulo', 'listaId', 'createdAt', 'updatedAt']
+         });
+    }
+
+    async update(id, dadosAtualizados) {
+        try {
+            const filme = await Filme.findByPk(id);
+            if (!filme) {
+                throw new Error('Filme não encontrado');
+            }
+            const tituloExistente = await Filme.findOne({
+                where: {
+                    titulo: dadosAtualizados.titulo,
+                    listaId: filme.listaId
+                }
+            });
+            if (tituloExistente) {
+                throw new Error('Já existe um filme com esse título na lista!');
+            }
+            await filme.update(dadosAtualizados);
+            return filme;
+        } catch (error) {
+            throw new Error(error.message || 'Erro ao atualizar o filme.');
+        }
     }
 }
 

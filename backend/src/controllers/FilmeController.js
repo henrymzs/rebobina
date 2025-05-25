@@ -1,8 +1,8 @@
 const axios = require('axios');
 const FilmeDAO = require('../models/DAO/FilmeDAO');
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
+const Filme = require('../models/Filme');
 require('dotenv').config();
-
 const apiKey = process.env.API_KEY;
 
 exports.adicionarFilme = async (req, res) => {
@@ -39,3 +39,17 @@ exports.adicionarFilme = async (req, res) => {
         console.error('erro', error);
     }
 };
+
+exports.editarFilme = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { titulo } = req.body;
+        if (!titulo) {
+            return res.status(400).json({ erro: 'Título é obrigatório para edição.' });
+        }
+        const filmesAtualizado = await FilmeDAO.update(id, { titulo });
+        res.status(200).json(filmesAtualizado);
+    } catch (error) {
+        res.status(400).json({ erro: error.message });
+    }
+}

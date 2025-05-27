@@ -10,20 +10,20 @@ class RegisterController {
         
             if (findNome) {
                 console.log('Cancelado, nome duplicado. ');
-                return res.status(400).send('Nome já está em uso');
+                return res.status(400).json({ erro: 'Nome já está em uso' });
             }
 
             if (findEmail) {
                 console.log('Cancelado, e-mail duplicado. ');
-                return res.status(400).send('E-mail já esta em uso. ');
+                return res.status(400).json( { erro: 'E-mail já esta em uso. ' });
             }
 
             const newUser = await UsuarioDAO.create({ nome, email, senha })
             console.log(newUser);
-            return res.redirect('/');
+            return res.status(201).json({ sucesso: true, mensagem: 'Conta criado com sucesso.' });
         } catch (error) {
             console.error('Erro ao registrar usuário', error);
-            return res.send('Erro ao registrar usuário');
+            return res.status(500).json( { erro: error.mensagem || 'Erro ao cadastrar usuário' });
         }
     }
 }

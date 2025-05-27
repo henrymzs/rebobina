@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = require('./src/routes/routes');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 require('dotenv').config();
 
 class App {
@@ -15,6 +16,7 @@ class App {
         this.server.use(express.json()); 
         this.server.use(express.urlencoded({ extended: true })); 
         this.server.use(cookieParser());
+        this.server.use(cors());
 
         this.server.use((req, res, next) => {
             res.set('Cache-Control', 'no-store');

@@ -114,7 +114,7 @@
             <button class="user-btn profile-btn">
                 <i class="fas fa-user"></i>
             </button>
-            <button id="logoutBtn">Sair</button>
+            <button id="logoutBtn" class="user-btn">Sair</button>
         </div>
     </footer>
 
@@ -139,6 +139,14 @@
                 if (event.target === modal) {
                     modal.style.display = 'none';
                 }
+            });
+
+            document.getElementById("logoutBtn").addEventListener("click", () => {
+                localStorage.removeItem("token"); 
+                localStorage.removeItem("usuarioId"); 
+
+                alert("Você saiu da conta!");
+                window.location.href = "./login.html"; 
             });
 
             addLinkForm.addEventListener('submit', async function (e) {
@@ -191,4 +199,5 @@
         });
     </script>
 </body>
+
 </html>

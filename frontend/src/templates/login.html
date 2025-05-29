@@ -105,6 +105,7 @@
                         }
                         const data = await response.json();
                         localStorage.setItem('token', data.token);
+                        localStorage.setItem('listaId', data.lista.id);
                         window.location.href = './main.html';
                     } catch (error) {
                         console.error('Erro ao conectar ao servidor:', error);

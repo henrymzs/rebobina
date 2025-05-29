@@ -15,13 +15,9 @@ class ListaFilmesDAO {
     async findByUserId(usuarioId) {
         try {
             const lista = await ListaFilmes.findOne({ where: { usuarioId } });
-            if (!lista) {
-                return { sucesso: false, mensagem: 'Usuário ainda não criou sua lista.' };
-            }
-            return { sucesso: true, lista };
+            return lista || null;
         } catch (error) {
             console.error('Erro ao buscar lista de filmes: ', error);
-            return { sucesso: false, mensagem: 'Erro ao buscar lista.'}
         }
     }
 

@@ -8,6 +8,7 @@ ListaFilmes.init({
     usuarioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        unique: true,
         references: { model: 'usuarios', key: 'id' }
     },
     nomeLista: { type: DataTypes.STRING, allowNull: false },
@@ -24,6 +25,6 @@ ListaFilmes.init({
 });
 
 Filme.belongsTo(ListaFilmes, { foreignKey: 'listaId' });
-ListaFilmes.hasMany(Filme, { foreignKey: 'listaid', onDelete: 'CASCADE' });
+ListaFilmes.hasMany(Filme, { foreignKey: 'listaId', onDelete: 'CASCADE' });
 
 module.exports = ListaFilmes;

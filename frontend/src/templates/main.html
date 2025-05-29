@@ -21,6 +21,7 @@
         flex-direction: column;
     }
 </style>
+
 <body>
     <div class="container">
         <header class="header">
@@ -124,6 +125,7 @@
             const modal = document.getElementById('addLinkModal');
             const addLinkForm = document.getElementById('addLinkForm');
             const linksContainer = document.getElementById('linksContainer');
+            const movieNameInput = document.getElementById('movieName');
 
             openModalBtn.addEventListener('click', function () {
                 modal.style.display = 'flex';
@@ -136,6 +138,54 @@
             window.addEventListener('click', function (event) {
                 if (event.target === modal) {
                     modal.style.display = 'none';
+                }
+            });
+
+            addLinkForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const titulo = movieNameInput.value.trim();
+
+                if (!titulo) {
+                    alert('Por favor, digite um nome válido');
+                    return;
+                }
+
+                try {
+                    const usuarioId = localStorage.getItem('usuarioId');
+
+                    const response = await fetch('http://localhost:3000/filmes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ titulo, usuarioId })
+                    });
+
+                    const data = await response.json();
+                    if (data.sucesso) {
+                        alert('Filme adicionado com sucesso!');
+                        modal.style.display = 'none';
+                        movieNameInput.value = '';
+
+                        const newCard = document.createElement('section');
+                        newCard.classList.add('link-card');
+                        newCard.innerHTML = `
+                            <h3 class="movie-title">${titulo}</h3>
+                            <div class="watch-on"><i class="fab fa-amazon"></i> ${plataforma}</div>
+                            <a href="${link}" class="movie-link" target="_blank">${link}</a>
+                            <div class="card-actions">
+                                <button class="action-btn edit-btn"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        `;
+                        linksContainer.appendChild(newCard);
+                    } else {
+                        alert(`Erro: ${data.erro}`);
+                    }
+                } catch (error) {
+                    alert('Erro ao conectar ao servidor');
                 }
             });
         });

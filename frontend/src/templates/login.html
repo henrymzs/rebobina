@@ -98,16 +98,16 @@
                             })
                         });
 
-                        const data = await response.json();
-
-                        if (response.ok) {
-                            alert("Login realizado com sucesso!");
-                            localStorage.setItem('token', data.token);
-                            window.location.href = "./main.html";
-                        } else {
-                            alert(`Erro: ${data.erro}`);
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            alert(`Erro: ${errorData.erro}`);
+                            return;
                         }
+                        const data = await response.json();
+                        localStorage.setItem('token', data.token);
+                        window.location.href = './main.html';
                     } catch (error) {
+                        console.error('Erro ao conectar ao servidor:', error);
                         alert("Erro ao conectar ao servidor.");
                     }
                 }

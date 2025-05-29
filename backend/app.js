@@ -1,5 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const router = require('./src/routes/routes');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -13,21 +12,14 @@ class App {
     }
 
     middlewares() {
-        this.server.use(express.json()); 
-        this.server.use(express.urlencoded({ extended: true })); 
+        this.server.use(express.json());
+        this.server.use(express.urlencoded({ extended: true }));
         this.server.use(cookieParser());
-        this.server.use(cors());
-
-        this.server.use((req, res, next) => {
-            res.set('Cache-Control', 'no-store');
-            let token = req.cookies["tokenJWT"];
-            jwt.verify(token, 'chave_secreta', (err, user) => {
-                if (user) req.id = user.id;
-            });
-            next();
-        });
+        this.server.use(cors({
+            origin: '*',
+            credentials: true,
+        }));
     }
-
     routes() {
         this.server.use(router);
     }

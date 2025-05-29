@@ -102,8 +102,8 @@
 
                         if (response.ok) {
                             alert("Login realizado com sucesso!");
-                            localStorage.setItem('token', data.token); 
-                            window.location.href = "./main.html"; 
+                            localStorage.setItem('token', data.token);
+                            window.location.href = "./main.html";
                         } else {
                             alert(`Erro: ${data.erro}`);
                         }
@@ -116,4 +116,5 @@
     </script>
 
 </body>
+
 </html>

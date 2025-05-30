@@ -119,6 +119,12 @@
     </footer>
 
     <script>
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Acesso negado! Faça login primeiro! ');
+            window.location.href = './login.html';
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const openModalBtn = document.getElementById('openModalBtn');
             const closeModalBtn = document.getElementById('closeModalBtn');
@@ -126,6 +132,7 @@
             const addLinkForm = document.getElementById('addLinkForm');
             const linksContainer = document.getElementById('linksContainer');
             const movieNameInput = document.getElementById('movieName');
+            const listaId = localStorage.getItem('listaId');
 
             openModalBtn.addEventListener('click', function () {
                 modal.style.display = 'flex';
@@ -142,11 +149,11 @@
             });
 
             document.getElementById("logoutBtn").addEventListener("click", () => {
-                localStorage.removeItem("token"); 
-                localStorage.removeItem("usuarioId"); 
+                localStorage.removeItem("token");
+                localStorage.removeItem("usuarioId");
 
                 alert("Você saiu da conta!");
-                window.location.href = "./login.html"; 
+                window.location.href = "./login.html";
             });
 
             addLinkForm.addEventListener('submit', async function (e) {
@@ -158,9 +165,15 @@
                     return;
                 }
 
-                try {
-                    const usuarioId = localStorage.getItem('usuarioId');
+                if (!listaId) {
+                    alert('Erro ao recuperar credenciais do usuário');
+                }
 
+                try {
+                    if (!token || !listaId) {
+                        alert('Erro ao recuperar credenciais do usuário');
+                        return;
+                    }
                     const response = await fetch('http://localhost:3000/filmes', {
                         method: 'POST',
                         headers: {
@@ -168,7 +181,7 @@
                             'Authorization': `Bearer ${token}`
                         },
                         credentials: 'include',
-                        body: JSON.stringify({ titulo, usuarioId })
+                        body: JSON.stringify({ titulo, listaId })
                     });
 
                     const data = await response.json();
@@ -181,8 +194,6 @@
                         newCard.classList.add('link-card');
                         newCard.innerHTML = `
                             <h3 class="movie-title">${titulo}</h3>
-                            <div class="watch-on"><i class="fab fa-amazon"></i> ${plataforma}</div>
-                            <a href="${link}" class="movie-link" target="_blank">${link}</a>
                             <div class="card-actions">
                                 <button class="action-btn edit-btn"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>

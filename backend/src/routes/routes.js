@@ -8,6 +8,7 @@ const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
 const FilmeController = require('../controllers/FilmeController');
 const FilmeDAO = require('../models/DAO/FilmeDAO');
 const AuthController = require('../controllers/AuthController');
+const AuthMiddleware = require('../middleware/AuthMiddleware')
 const UserController = require('../controllers/UserController');
 
 // async function getUsuarioLogado(req) {
@@ -16,7 +17,7 @@ const UserController = require('../controllers/UserController');
 
 router.post('/register', RegisterController.register);
 router.post('/login', LoginController.login);
-router.get('/user/perfil', AuthController, UserController.getProfile);
+router.get('/user/perfil', AuthMiddleware, UserController.getProfile);
 
 /*
 router.get('/profile', AuthController, async (req, res) => {
@@ -39,51 +40,51 @@ router.get('/profile', AuthController, async (req, res) => {
   }
 });
  */
-router.get('/register', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    res.status(200).json({
-      message: 'Usuário não registrado, redirecionando para á página de cadastro.',
-      acesso: true,
-      redirect: '/register'
-    });
-  }
-  return res.status(403).json({
-    message: 'Usuário já tem cadastro, redirecionando para a página de login.',
-    acesso: false,
-    redirect: '/login'
-  });
-});
+// router.get('/register', async (req, res) => {
+//   const usuarioLogado = await getUsuarioLogado(req);
+//   if (!usuarioLogado) {
+//     res.status(200).json({
+//       message: 'Usuário não registrado, redirecionando para á página de cadastro.',
+//       acesso: true,
+//       redirect: '/register'
+//     });
+//   }
+//   return res.status(403).json({
+//     message: 'Usuário já tem cadastro, redirecionando para a página de login.',
+//     acesso: false,
+//     redirect: '/login'
+//   });
+// });
 
-router.get('/login', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    res.status(200).json({
-      message: 'Usuário ainda não fez login, redirecionando para á página de login.',
-      acesso: true,
-      redirect: '/login'
-    });
-  }
-  return res.status(403).json({
-    message: 'Usuário já esta logado, redirecionando para á página principal. ',
-    acesso: false,
-    redirect: '/'
-  });
-});
+// router.get('/login', async (req, res) => {
+//   const usuarioLogado = await getUsuarioLogado(req);
+//   if (!usuarioLogado) {
+//     res.status(200).json({
+//       message: 'Usuário ainda não fez login, redirecionando para á página de login.',
+//       acesso: true,
+//       redirect: '/login'
+//     });
+//   }
+//   return res.status(403).json({
+//     message: 'Usuário já esta logado, redirecionando para á página principal. ',
+//     acesso: false,
+//     redirect: '/'
+//   });
+// });
+router.get('/user/deslogar', AuthController.deslogar);
+// // router.get('/deslogar', async (req, res) => {
+// //   const usuarioLogado = await UserController(req);
+// //   if (!usuarioLogado) {
+// //     return res.status(401).json({ error: 'Nenhum usuário logado.' });
+// //   }
+// //   res.clearCookie('tokenJWT');
+// //   res.status(200).json({
+// //     message: 'Usuário deslogado com sucesso!',
+// //     email: usuarioLogado.email
+// //   });
+// // });
 
-router.get('/deslogar', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    return res.status(401).json({ error: 'Nenhum usuário logado.' });
-  }
-  res.clearCookie('tokenJWT');
-  res.status(200).json({
-    message: 'Usuário deslogado com sucesso!',
-    email: usuarioLogado.email
-  });
-});
-
-router.get('/admin/users', AuthController, UserController.getAllUsers)
+router.get('/admin/users', AuthMiddleware, UserController.getAllUsers)
 
 // router.get('/usuarios',AuthController,  async (req, res) => {
 //   const usuarioLogado = await getUsuarioLogado(req);
@@ -95,7 +96,7 @@ router.get('/admin/users', AuthController, UserController.getAllUsers)
 // });
 
 
-router.delete('/admin/users/:id', AuthController, UserController.deleteUser);
+router.delete('/admin/users/:id', AuthMiddleware, UserController.deleteUser);
 //  router.delete('/usuarios/:id', AuthController, async (req, res) => {
 //    const usuarioLogado = await getUsuarioLogado(req);
 //    if (!usuarioLogado || usuarioLogado.role !== 'admin') {
@@ -157,7 +158,7 @@ router.post('/criar-lista', async (req, res) => {
   }
 });
 
-router.get('/minha-lista', AuthController, async (req, res) => {
+router.get('/minha-lista', AuthMiddleware, async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado) {
     return res.status(403).json({ error: 'Usuário não autenticado.' });
@@ -246,33 +247,33 @@ router.get('/lista-filmes/:token', async (req, res) => {
   }
 });
 
-router.get('/info-lista/:token', AuthController, async (req, res) => {
-  const { token } = req.params;
+ router.get('/info-lista/:token', AuthMiddleware, async (req, res) => {
+   const { token } = req.params;
   const usuarioLogado = await getUsuarioLogado(req);
 
-  try {
+   try {
     const resultado = await ListaFilmesDAO.findByToken(token);
-    if (!resultado.sucesso) {
+     if (!resultado.sucesso) {
       return res.status(404).json({ error: resultado.mensagem });
-    }
-    const acessos = await ListasAcessadasDAO.buscarAcessosPorLista(resultado.lista.id);
-    const filmes = await FilmeDAO.findAllByLista(resultado.lista.id);
-    res.status(200).json({
-      nomeLista: resultado.lista.nomeLista,
-      dono: resultado.lista.usuarioId,
+     }
+     const acessos = await ListasAcessadasDAO.buscarAcessosPorLista(resultado.lista.id);
+     const filmes = await FilmeDAO.findAllByLista(resultado.lista.id);
+     res.status(200).json({
+       nomeLista: resultado.lista.nomeLista,
+       dono: resultado.lista.usuarioId,
       tokenCompartilhamento: resultado.lista.tokenCompartilhamento,
-      usuariosQueAcessaram: acessos || [],
-      usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null,
-      filmes: filmes || []
-    });
+       usuariosQueAcessaram: acessos || [],
+       usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null,
+       filmes: filmes || []
+     });
 
-  } catch (error) {
-    console.error('Erro ao obter informações da lista:', error);
-    res.status(500).json({ error: 'Erro ao obter informações da lista.' });
-  }
-});
+   } catch (error) {
+     console.error('Erro ao obter informações da lista:', error);
+     res.status(500).json({ error: 'Erro ao obter informações da lista.' });
+   }
+ });
 
-router.post('/filmes', AuthController, FilmeController.adicionarFilme);
+router.post('/filmes', AuthMiddleware, FilmeController.adicionarFilme);
 
 router.put('/filmes/:id', FilmeController.editarFilme);
 

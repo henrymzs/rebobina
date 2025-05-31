@@ -10,7 +10,8 @@ exports.adicionarFilme = async (req, res) => {
         const usuarioId = req.id; 
         const lista = await ListaFilmesDAO.findByUserId(usuarioId);
 
-        if (!lista.sucesso) {
+        if (!lista || lista.usuarioId !== usuarioId) {
+            console.log("Nenhuma lista foi encontrada para o usuário ID:", usuarioId);
             return res.status(400).json({ erro: "Usuário ainda não criou uma lista de filmes" });
         }
 
@@ -20,7 +21,10 @@ exports.adicionarFilme = async (req, res) => {
         if (!filmeTMDb) {
             return res.status(404).json({ erro: "Filme não encontrado na API TMDb" });
         }
-        const listaId = lista.lista?.dataValues?.id;
+        const listaId = lista?.id;
+        console.log("🔍 ID da lista extraído:", listaId);
+        console.log("🔍 Tentando adicionar filme à lista ID:", listaId);
+        console.log("🔍 Usuário autenticado:", usuarioId);
         try {
             const novoFilme = await FilmeDAO.create({
             id_tmdb: filmeTMDb.id, 
@@ -34,6 +38,8 @@ exports.adicionarFilme = async (req, res) => {
     } catch (error) {
         res.status(500).json({ erro: "Erro ao adicionar filme" });
         console.error('erro', error);
+        throw error;
+
     }
 };
 

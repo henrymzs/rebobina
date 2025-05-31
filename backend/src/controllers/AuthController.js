@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
+    console.log("🔍 O middleware `AuthController` foi ativado!");
     res.set('Cache-Control', 'no-store');
     console.log("Headers recebidos no backend:", req.headers); 
 

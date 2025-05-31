@@ -14,10 +14,11 @@ class ListaFilmesDAO {
 
     async findByUserId(usuarioId) {
         try {
-            const lista = await ListaFilmes.findOne({ where: { usuarioId } });
-            return lista || null;
+            return await ListaFilmes.findOne({ where: { usuarioId } });
         } catch (error) {
             console.error('Erro ao buscar lista de filmes: ', error);
+            throw new Error("Erro ao buscar lista do usuário.")
+
         }
     }
 

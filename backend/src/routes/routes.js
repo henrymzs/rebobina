@@ -8,15 +8,18 @@ const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
 const FilmeController = require('../controllers/FilmeController');
 const FilmeDAO = require('../models/DAO/FilmeDAO');
 const AuthController = require('../controllers/AuthController');
+const UserController = require('../controllers/UserController');
 
-async function getUsuarioLogado(req) {
-  return await UsuarioDAO.getById(req.id);
-}
+// async function getUsuarioLogado(req) {
+//   return await UsuarioDAO.getById(req.id);
+// }
 
 router.post('/register', RegisterController.register);
 router.post('/login', LoginController.login);
+router.get('/user/perfil', AuthController, UserController.getProfile);
 
-router.get('/profile', async (req, res) => {
+/*
+router.get('/profile', AuthController, async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado) {
     return res.status(403).json({ error: 'Usuário não autenticado.' });
@@ -27,7 +30,7 @@ router.get('/profile', async (req, res) => {
       id: usuarioLogado.id,
       nome: usuarioLogado.nome,
       email: usuarioLogado.email,
-      ListaFilmes: resultado.sucesso ? resultado.lista : null
+      ListaFilmes: resultado ? resultado : null
     };
     res.status(200).json(perfilUsuario);
   } catch (error) {
@@ -35,7 +38,7 @@ router.get('/profile', async (req, res) => {
     res.status(500).json({ error: 'Erro ao buscar o perfil do usuário.' })
   }
 });
-
+ */
 router.get('/register', async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado) {
@@ -80,16 +83,18 @@ router.get('/deslogar', async (req, res) => {
   });
 });
 
-router.get('/usuarios', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado || usuarioLogado.role !== 'admin') {
-    return res.redirect('/');
-  }
-  const listaUsuarios = await UsuarioDAO.getAll();
-  res.status(200).json(listaUsuarios);
-});
+router.get('/admin/users', AuthController, UserController.getAllUsers)
 
-router.delete('/usuarios/:id', async (req, res) => {
+// router.get('/usuarios',AuthController,  async (req, res) => {
+//   const usuarioLogado = await getUsuarioLogado(req);
+//   if (!usuarioLogado || usuarioLogado.role !== 'admin') {
+//     return res.redirect('/');
+//   }
+//   const listaUsuarios = await UsuarioDAO.getAll();
+//   res.status(200).json(listaUsuarios);
+// });
+
+router.delete('/usuarios/:id',AuthController, async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado || usuarioLogado.role !== 'admin') {
     return res.status(403).json({ error: 'Apenas administradores podem excluir usuários.' });
@@ -149,7 +154,7 @@ router.post('/criar-lista', async (req, res) => {
   }
 });
 
-router.get('/minha-lista', async (req, res) => {
+router.get('/minha-lista',AuthController, async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado) {
     return res.status(403).json({ error: 'Usuário não autenticado.' });
@@ -238,7 +243,7 @@ router.get('/lista-filmes/:token', async (req, res) => {
     }
 });
 
-router.get('/info-lista/:token', async (req, res) => {
+router.get('/info-lista/:token',AuthController, async (req, res) => {
     const { token } = req.params;
     const usuarioLogado = await getUsuarioLogado(req); 
 

@@ -13,7 +13,7 @@ class LoginController {
 
             if (!usuario || senha !== usuario.senha) {
                 console.log('Usuário ou senha inválidos. ');
-                return res.status(200).render('login', { message: 'Usuário ou senha inválidos ' });
+                return res.status(200).json({ message: 'Usuário ou senha inválidos ' });
             }
 
             const token = jwt.sign({ id: usuario.id }, 'chave_secreta', { expiresIn: '1d' });

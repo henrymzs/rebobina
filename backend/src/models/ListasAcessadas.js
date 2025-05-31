@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const sequelize = require('../config/database');
 const { Model, DataTypes } = require('sequelize');
 
 class ListasAcessadas extends Model {}
@@ -21,7 +21,7 @@ ListasAcessadas.init({
         defaultValue: DataTypes.NOW
     }
 }, {
-    sequelize: db.sequelize,
+    sequelize,
     modelName: 'ListasAcessadas',
     tableName: 'listas_acessadas'
 });

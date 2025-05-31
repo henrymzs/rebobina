@@ -1,5 +1,6 @@
-const db = require('../config/database');
-const {  Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
+const { Model, DataTypes } = require('sequelize');
+const ListaFilmes = require("./ListaFilmes");
 
 class Usuario extends Model{}
 
@@ -13,10 +14,13 @@ Usuario.init({
         defaultValue: 'user',
     },
 }, {
-    sequelize: db.sequelize,
+    sequelize,
     modelName: 'Usuario',
     tableName: 'usuarios',
     
 });
+
+Usuario.hasOne(ListaFilmes, { foreignKey: "usuarioId", onDelete: "CASCADE" });
+ListaFilmes.belongsTo(Usuario, { foreignKey: "usuarioId", onDelete: "CASCADE" });
 
 module.exports = Usuario;

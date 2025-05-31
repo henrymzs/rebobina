@@ -1,5 +1,4 @@
 const ListaFilmesDAO = require("../models/DAO/ListaFilmesDAO");
-const UsuarioDAO = require("../models/DAO/UsuarioDAO");
 const UserService = require('../services/UserService');
 
 const getProfile = async (req, res) => {
@@ -35,6 +34,21 @@ const getAllUsers = async (req, res) => {
         console.error('Erro ao buscar lista de usuários:', error);
         res.status(500).json({ erro: 'Erro ao buscar usuários.' });
     }
+};
+
+const updateRole = async (req, res) => {
+    try {
+        const usuarioId = req.params.id;
+        const resultado = await UserService.updateRole(usuarioId);
+
+        if (resultado.success) {
+            return res.status(200).json({ message: resultado.message });
+        }
+        return res.status(404).json({ message: resultado.message });
+    } catch (error) {
+        console.error('Erro ao atualizar role do usuário:', error);
+        res.status(500).json({ error: 'Erro ao atualizar role do usuário.' })
+    }
 }
 
-module.exports = { getProfile, getAllUsers };
+module.exports = { getProfile, getAllUsers, updateRole };

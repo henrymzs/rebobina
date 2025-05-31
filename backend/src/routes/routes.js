@@ -94,7 +94,9 @@ router.get('/admin/users', AuthController, UserController.getAllUsers)
 //   res.status(200).json(listaUsuarios);
 // });
 
-router.delete('/usuarios/:id',AuthController, async (req, res) => {
+
+
+router.delete('/usuarios/:id', AuthController, async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado || usuarioLogado.role !== 'admin') {
     return res.status(403).json({ error: 'Apenas administradores podem excluir usuários.' });
@@ -107,31 +109,32 @@ router.delete('/usuarios/:id',AuthController, async (req, res) => {
   return res.status(404).json({ message: result.message });
 });
 
-router.put('/usuarios/update/:id', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (usuarioLogado.role === 'admin') {
-    const usuarioId = req.params.id;
-    const novoRole = req.body.role;
+router.put('/admin/users/:id/role', UserController.updateRole)
+// router.put('/usuarios/update/:id', async (req, res) => {
+//   const usuarioLogado = await getUsuarioLogado(req);
+//   if (usuarioLogado.role === 'admin') {
+//     const usuarioId = req.params.id;
+//     const novoRole = req.body.role;
 
-    if (novoRole !== 'admin' && novoRole !== 'user') {
-      return res.status(400).json({ error: 'Role inválido. Deve ser "admin" ou "user".' });
-    }
+//     if (novoRole !== 'admin' && novoRole !== 'user') {
+//       return res.status(400).json({ error: 'Role inválido. Deve ser "admin" ou "user".' });
+//     }
 
-    try {
-      const result = await UsuarioDAO.updateRole(usuarioId, novoRole);
-      if (result.success) {
-        res.status(200).json({ message: result.message });
-      } else {
-        res.status(404).json({ message: result.message });
-      }
-    } catch (error) {
-      console.error('Erro ao atualizar role do usuário:', error);
-      res.status(500).json({ error: 'Erro ao atualizar role do usuário' });
-    }
-  } else {
-    res.status(403).json({ error: 'Usuário não autorizado' });
-  }
-});
+//     try {
+//       const result = await UsuarioDAO.updateRole(usuarioId, novoRole);
+//       if (result.success) {
+//         res.status(200).json({ message: result.message });
+//       } else {
+//         res.status(404).json({ message: result.message });
+//       }
+//     } catch (error) {
+//       console.error('Erro ao atualizar role do usuário:', error);
+//       res.status(500).json({ error: 'Erro ao atualizar role do usuário' });
+//     }
+//   } else {
+//     res.status(403).json({ error: 'Usuário não autorizado' });
+//   }
+// });
 
 router.post('/criar-lista', async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
@@ -154,7 +157,7 @@ router.post('/criar-lista', async (req, res) => {
   }
 });
 
-router.get('/minha-lista',AuthController, async (req, res) => {
+router.get('/minha-lista', AuthController, async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);
   if (!usuarioLogado) {
     return res.status(403).json({ error: 'Usuário não autenticado.' });
@@ -168,21 +171,21 @@ router.get('/minha-lista',AuthController, async (req, res) => {
 });
 
 router.put('/nome-lista', async (req, res) => {
-    const usuarioLogado = await getUsuarioLogado(req);
-    if (!usuarioLogado) {
-      return res.status(403).json({ error: 'Usuário não autenticado.' });
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (!usuarioLogado) {
+    return res.status(403).json({ error: 'Usuário não autenticado.' });
+  }
+  const { nomeLista } = req.body;
+  try {
+    const resultado = await ListaFilmesDAO.updateLista(usuarioLogado.id, nomeLista);
+    if (!resultado.sucesso) {
+      return res.status(404).json({ error: resultado.mensagem });
     }
-    const { nomeLista } = req.body;
-    try {
-        const resultado = await ListaFilmesDAO.updateLista(usuarioLogado.id, nomeLista);
-        if (!resultado.sucesso) {
-            return res.status(404).json({ error: resultado.mensagem });
-        }
-        res.status(200).json({ message: 'Nome da lista atualizado com sucesso!', lista: resultado.lista });
-    } catch (error) {
-        console.error('Erro na rota de atualização da lista:', error);
-        res.status(500).json({ error: 'Erro ao atualizar lista.' });
-    }
+    res.status(200).json({ message: 'Nome da lista atualizado com sucesso!', lista: resultado.lista });
+  } catch (error) {
+    console.error('Erro na rota de atualização da lista:', error);
+    res.status(500).json({ error: 'Erro ao atualizar lista.' });
+  }
 });
 
 router.delete('/minha-lista', async (req, res) => {
@@ -196,7 +199,7 @@ router.delete('/minha-lista', async (req, res) => {
     if (!resultado.sucesso) {
       return res.status(404).json({ error: resultado.mensagem });
     }
-    res.status(200).json({ message: 'Lista excluída com sucesso!'});
+    res.status(200).json({ message: 'Lista excluída com sucesso!' });
   } catch (error) {
     console.error('Erro na rota de exclusão da lista:', error);
     res.status(500).json({ error: 'Erro ao exclusão lista.' });
@@ -204,72 +207,72 @@ router.delete('/minha-lista', async (req, res) => {
 })
 
 router.get('/minha-lista/compartilhar', async (req, res) => {
-    const usuarioLogado = await getUsuarioLogado(req);
-    if (!usuarioLogado) {
-        return res.status(403).json({ error: 'Usuário não autenticado.' });
+  const usuarioLogado = await getUsuarioLogado(req);
+  if (!usuarioLogado) {
+    return res.status(403).json({ error: 'Usuário não autenticado.' });
+  }
+
+  try {
+    const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
+    if (!resultado.sucesso) {
+      return res.status(404).json({ error: resultado.mensagem });
     }
 
-    try {
-        const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
-        if (!resultado.sucesso) {
-            return res.status(404).json({ error: resultado.mensagem });
-        }
+    const linkCompartilhamento = `https://meusistema.com/lista-filmes/${resultado.lista.tokenCompartilhamento}`;
 
-        const linkCompartilhamento = `https://meusistema.com/lista-filmes/${resultado.lista.tokenCompartilhamento}`;
+    res.status(200).json({ link: linkCompartilhamento });
 
-        res.status(200).json({ link: linkCompartilhamento });
-
-    } catch (error) {
-        console.error('Erro ao gerar link de compartilhamento:', error);
-        res.status(500).json({ error: 'Erro ao gerar link de compartilhamento.' });
-    }
+  } catch (error) {
+    console.error('Erro ao gerar link de compartilhamento:', error);
+    res.status(500).json({ error: 'Erro ao gerar link de compartilhamento.' });
+  }
 });
 
 router.get('/lista-filmes/:token', async (req, res) => {
-    const { token } = req.params;
-    const usuarioLogado = await getUsuarioLogado(req);
-    try {
-        const resultado = await ListaFilmesDAO.findByToken(token);
-        if (!resultado.sucesso) {
-            return res.status(404).json({ error: resultado.mensagem });
-        }
-         if (usuarioLogado) {
-            await ListasAcessadasDAO.registrarAcesso(usuarioLogado.id, resultado.lista.id);
-        }
-        res.status(200).json({ lista: resultado.lista });
-    } catch (error) {
-        console.error('Erro ao buscar lista filmes:', error);
-        res.status(500).json({ error: 'Erro ao buscar lista .' });
+  const { token } = req.params;
+  const usuarioLogado = await getUsuarioLogado(req);
+  try {
+    const resultado = await ListaFilmesDAO.findByToken(token);
+    if (!resultado.sucesso) {
+      return res.status(404).json({ error: resultado.mensagem });
     }
+    if (usuarioLogado) {
+      await ListasAcessadasDAO.registrarAcesso(usuarioLogado.id, resultado.lista.id);
+    }
+    res.status(200).json({ lista: resultado.lista });
+  } catch (error) {
+    console.error('Erro ao buscar lista filmes:', error);
+    res.status(500).json({ error: 'Erro ao buscar lista .' });
+  }
 });
 
-router.get('/info-lista/:token',AuthController, async (req, res) => {
-    const { token } = req.params;
-    const usuarioLogado = await getUsuarioLogado(req); 
+router.get('/info-lista/:token', AuthController, async (req, res) => {
+  const { token } = req.params;
+  const usuarioLogado = await getUsuarioLogado(req);
 
-    try {
-        const resultado = await ListaFilmesDAO.findByToken(token);
-        if (!resultado.sucesso) {
-            return res.status(404).json({ error: resultado.mensagem });
-        }
-        const acessos = await ListasAcessadasDAO.buscarAcessosPorLista(resultado.lista.id);
-        const filmes = await FilmeDAO.findAllByLista(resultado.lista.id);
-        res.status(200).json({
-            nomeLista: resultado.lista.nomeLista,
-            dono: resultado.lista.usuarioId,
-            tokenCompartilhamento: resultado.lista.tokenCompartilhamento,
-            usuariosQueAcessaram: acessos || [],
-            usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null,
-            filmes: filmes || []
-        });
-
-    } catch (error) {
-        console.error('Erro ao obter informações da lista:', error);
-        res.status(500).json({ error: 'Erro ao obter informações da lista.' });
+  try {
+    const resultado = await ListaFilmesDAO.findByToken(token);
+    if (!resultado.sucesso) {
+      return res.status(404).json({ error: resultado.mensagem });
     }
+    const acessos = await ListasAcessadasDAO.buscarAcessosPorLista(resultado.lista.id);
+    const filmes = await FilmeDAO.findAllByLista(resultado.lista.id);
+    res.status(200).json({
+      nomeLista: resultado.lista.nomeLista,
+      dono: resultado.lista.usuarioId,
+      tokenCompartilhamento: resultado.lista.tokenCompartilhamento,
+      usuariosQueAcessaram: acessos || [],
+      usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null,
+      filmes: filmes || []
+    });
+
+  } catch (error) {
+    console.error('Erro ao obter informações da lista:', error);
+    res.status(500).json({ error: 'Erro ao obter informações da lista.' });
+  }
 });
 
-router.post('/filmes',AuthController, FilmeController.adicionarFilme);
+router.post('/filmes', AuthController, FilmeController.adicionarFilme);
 
 router.put('/filmes/:id', FilmeController.editarFilme);
 

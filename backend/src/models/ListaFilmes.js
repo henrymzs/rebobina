@@ -1,6 +1,6 @@
-const db = require('../config/database');
-const {  Model, DataTypes } = require('sequelize');
-const Filme = require('./Filme');
+const sequelize = require('../config/database');
+const { Model, DataTypes } = require('sequelize');
+const Filme = require("./Filme");
 
 class ListaFilmes extends Model {}
 
@@ -9,7 +9,8 @@ ListaFilmes.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
-        references: { model: 'usuarios', key: 'id' }
+        references: { model: 'usuarios', key: 'id' },
+        onDelete: 'CASCADE'
     },
     nomeLista: { type: DataTypes.STRING, allowNull: false },
     tokenCompartilhamento: {
@@ -19,12 +20,12 @@ ListaFilmes.init({
         defaultValue: () => Math.random().toString(36).substring(2, 12)
     }
 }, {
-    sequelize: db.sequelize,
+    sequelize,
     modelName: 'ListaFilmes',
     tableName: 'lista_filmes',
 });
 
-Filme.belongsTo(ListaFilmes, { foreignKey: 'listaId' });
-ListaFilmes.hasMany(Filme, { foreignKey: 'listaId', onDelete: 'CASCADE' });
+ListaFilmes.hasMany(Filme, { foreignKey: "listaId", onDelete: "CASCADE" });
+Filme.belongsTo(ListaFilmes, { foreignKey: "listaId" });
 
 module.exports = ListaFilmes;

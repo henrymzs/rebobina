@@ -1,7 +1,5 @@
-const ListaFilmes = require('./ListaFilmes');
 const { Model, DataTypes } = require('sequelize');
-const db = require('../config/database');
-
+const sequelize = require('../config/database');
 
 class Filme extends Model {}
 
@@ -21,7 +19,7 @@ Filme.init({
         references: { model: 'lista_filmes', key: 'id' } 
     }
 }, {
-    sequelize: db.sequelize,
+    sequelize,
     modelName: 'Filme',
     tableName: 'filmes'
 });

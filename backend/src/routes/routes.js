@@ -95,19 +95,19 @@ router.get('/admin/users', AuthController, UserController.getAllUsers)
 // });
 
 
-
-router.delete('/usuarios/:id', AuthController, async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado || usuarioLogado.role !== 'admin') {
-    return res.status(403).json({ error: 'Apenas administradores podem excluir usuários.' });
-  }
-  const usuarioId = req.params.id;
-  const result = await UsuarioDAO.delete(usuarioId)
-  if (result.success) {
-    return res.status(200).json({ message: result.message });
-  }
-  return res.status(404).json({ message: result.message });
-});
+router.delete('/admin/users/:id', AuthController, UserController.deleteUser);
+//  router.delete('/usuarios/:id', AuthController, async (req, res) => {
+//    const usuarioLogado = await getUsuarioLogado(req);
+//    if (!usuarioLogado || usuarioLogado.role !== 'admin') {
+//      return res.status(403).json({ error: 'Apenas administradores podem excluir usuários.' });
+//  }
+//    const usuarioId = req.params.id;
+//    const result = await UsuarioDAO.delete(usuarioId)
+//    if (result.success) {
+//      return res.status(200).json({ message: result.message });
+//    }
+//    return res.status(404).json({ message: result.message });
+//  });
 
 router.put('/admin/users/:id/role', UserController.updateRole)
 // router.put('/usuarios/update/:id', async (req, res) => {

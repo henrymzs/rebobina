@@ -49,6 +49,24 @@ const updateRole = async (req, res) => {
         console.error('Erro ao atualizar role do usuário:', error);
         res.status(500).json({ error: 'Erro ao atualizar role do usuário.' })
     }
-}
+};
 
-module.exports = { getProfile, getAllUsers, updateRole };
+const deleteUser = async (req, res) => {
+    try {
+        const usuarioLogado = await UserService.getUsuarioLogado(req);
+        if (!usuarioLogado || usuarioLogado.role !== 'admin') {
+            return res.status(403).json({ error: 'Apenas adminstradores podem utilizar essa funcionalidade.' });
+        }
+        const usuarioId = req.params.id;
+        const resultado = await UserService.deleteUser(usuarioId);
+        if (!resultado.success) {
+            return res.status(404).json({ message: resultado.message });
+        }
+        return res.status(404).json({ message: resultado.message });
+    } catch (error) {
+        console.error('Erro ao excluir usuário: ', error);
+        res.status(500).json({ error: 'Erro ao excluir usuário' });
+    }
+};
+
+module.exports = { getProfile, getAllUsers, updateRole, deleteUser };

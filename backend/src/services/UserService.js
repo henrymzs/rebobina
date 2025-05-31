@@ -1,3 +1,4 @@
+const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 
 const getUsuarioLogado = async (req) => {
@@ -14,10 +15,8 @@ const getAllUsers = async () => {
     return await UsuarioDAO.getAll();
 };
 
-const updateRole = async (usuarioId, novoRole) => {
-    console.log("🔄 Atualizando role do usuário ID:", usuarioId);
-
-
+const updateRole = async (usuarioId) => {
+    console.log("Atualizando role do usuário ID:", usuarioId);
     const usuario = await UsuarioDAO.getById(usuarioId);
     if (!usuario) {
         return { success: false, message: 'Usuário não encontrado' };
@@ -28,4 +27,14 @@ const updateRole = async (usuarioId, novoRole) => {
     return { success: true, message: `Role do usuário alterada para ${usuario.role}.` };
 };
 
-module.exports = { getUsuarioLogado, getAllUsers, updateRole };
+const deleteUser = async (usuarioId) => {
+    const listaUsuarios = await ListaFilmesDAO.findByUserId(usuarioId);
+    if (listaUsuarios && listaUsuarios > 0) {
+        for (const lista of listaUsuarios) {
+            await ListaFilmesDAO.deleteLista(usuarioId);            
+        }
+    }
+    await UsuarioDAO.delete(usuarioId);
+    return { success: true, message: 'Usuário excluído com sucesso.' };
+};
+module.exports = { getUsuarioLogado, getAllUsers, updateRole, deleteUser };

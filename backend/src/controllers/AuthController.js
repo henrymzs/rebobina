@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 const AuthService = require('../services/AuthService');
 require('dotenv').config();
 

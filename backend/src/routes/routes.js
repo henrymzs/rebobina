@@ -1,8 +1,5 @@
 const { Router } = require('express');
 const router = new Router();
-const LoginController = require('../controllers/LoginController');
-const RegisterController = require('../controllers/RegisterController')
-const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
 const FilmeController = require('../controllers/FilmeController');
@@ -15,9 +12,13 @@ const UserController = require('../controllers/UserController');
 //   return await UsuarioDAO.getById(req.id);
 // }
 
-router.post('/register', RegisterController.register);
-router.post('/login', LoginController.login);
+router.post('/user/register', AuthController.registerController);
+router.post('/user/login', AuthController.loginController);
 router.get('/user/perfil', AuthMiddleware, UserController.getProfile);
+
+// router.post('/register', RegisterController.register);
+// router.post('/login', LoginController.login);
+
 
 /*
 router.get('/profile', AuthController, async (req, res) => {

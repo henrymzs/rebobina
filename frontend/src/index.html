@@ -2,26 +2,25 @@
 <html lang="pt-BR">
 
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rebobina - Cadastro</title>
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
-
     <div id="app">
-
         <aside id="aside-container">
             <div class="aside-content">
                 <header class="aside-header">
-                    <h2>Porque para o Rebobina cada <span class="highlight">momento</span> conta</h2>
-                    <p>Faça sua conta e pare de perder para a paralisia da Escolha</p>
+                    <div class="header-visual">
+                        <img src="/frontend/imagens/rebobina_img1.png" alt="Logo Rebobina">
+                    </div>
                 </header>
             </div>
         </aside>
@@ -32,40 +31,51 @@
                 <form id="form">
                     <fieldset class="child-info">
                         <legend><span class="underline-orange">Cr</span>iar Conta</legend>
+
                         <div class="inputwrapper">
-                            <label for="fullname">Nome</label>
-                            <input id="name" name="fullname" type="text" placeholder="Digite seu nome">
+                            <label for="name">Nome</label>
+                            <div class="input-icon">
+                                <img src="/frontend/imagens/icone_nome_laranja 1.png" alt="Ícone de usuário">
+                                <input id="name" name="fullname" type="text" placeholder="Digite seu nome">
+                            </div>
                             <p id="name-error">Por favor, insira seu nome.</p>
                         </div>
 
                         <div class="inputwrapper">
                             <label for="email">E-mail</label>
-                            <input id="email" name="email" type="email" placeholder="Digite seu e-mail">
+                            <div class="input-icon">
+                                <img src="/frontend/imagens/icone-email.png" alt="Ícone de e-mail">
+                                <input id="email" name="email" type="email" placeholder="Digite seu e-mail">
+                            </div>
                             <p id="email-error">Por favor, insira um e-mail válido.</p>
                         </div>
 
                         <div class="inputwrapper">
                             <label for="password">Senha</label>
-                            <input id="password" name="password" type="password" placeholder="Digite sua senha">
+                            <div class="input-icon">
+                                <img src="/frontend/imagens/Icone-cadeado.png" alt="ícone de cadeado">
+                                <input id="password" name="password" type="password" placeholder="Digite sua senha">
+                                <span class="toggle-password" onclick="togglePassword()">👁</span>
+                            </div>
                             <p id="password-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>
                     </fieldset>
 
                     <div class="actions-wrapper">
-                        <button class="btn-primary" type="submit">Criar Conta</button>
-                    </div>
+    <button class="btn-primary" type="submit">Criar Conta</button>
+</div>
 
-                    <div class="terms-wrapper input-wrapper">
-                        <label for="terms">
-                            Já tem uma conta?<a href="./templates/login.html"> Clique aqui </a> e acesse sua conta
-                            agora!
-                        </label>
+<div class="terms-wrapper input-wrapper">
+    <label for="terms">
+        Já tem cadastro? <a href="./templates/login.html">Clique AQUI</a> e acesse sua conta agora!
+    </label>
+</div>
                     </div>
-
                 </form>
             </div>
         </main>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('form');
@@ -128,7 +138,11 @@
                 }
             });
         });
+        window.togglePassword = function () {
+    const passwordInput = document.getElementById('password');
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+};
     </script>
 </body>
-
 </html>

@@ -18,8 +18,9 @@
         <aside id="aside-container">
             <div class="aside-content">
                 <header class="aside-header">
-                    <h2>Porque para o Rebobina cada <span class="highlight">momento</span> conta</h2>
-                    <p>Faça sua conta e pare de perder para a paralisia da Escolha</p>
+                    <div class="header-visual">
+                        <img src="/frontend/imagens/rebobina_img1.png" alt="Logo Rebobina">
+                    </div>
                 </header>
             </div>
         </aside>
@@ -34,13 +35,20 @@
 
                         <div class="inputwrapper">
                             <label for="email">E-mail</label>
-                            <input id="email" name="email" type="email" placeholder="Digite seu e-mail">
+                            <div class="input-icon">
+                                <img src="/frontend/imagens/icone-email.png" alt="Ícone de e-mail">
+                                <input id="email" name="email" type="email" placeholder="Digite seu e-mail">
+                            </div>
                             <p id="email-error">Por favor, insira um e-mail válido.</p>
                         </div>
 
                         <div class="inputwrapper">
                             <label for="password">Senha</label>
-                            <input id="password" name="password" type="password" placeholder="Digite sua senha">
+                            <div class="input-icon">
+                                <img src="/frontend/imagens/Icone-cadeado.png" alt="ícone de cadeado">
+                                <input id="password" name="password" type="password" placeholder="Digite sua senha">
+                                <span class="toggle-password" onclick="togglePassword()">👁</span>
+                            </div>
                             <p id="password-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>
                     </fieldset>
@@ -114,6 +122,11 @@
                 }
             });
         });
+       window.togglePassword = function () {
+    const passwordInput = document.getElementById('password');
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+};
     </script>
 
 </body>

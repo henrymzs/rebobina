@@ -19,17 +19,21 @@ fieldset + fieldset {
 }
 
 .actions-wrapper {
-    margin-top: 3rem;
+    margin-top: 1rem;
+    /* desnecessario
     display: flex;
     gap: 1rem;
     justify-content: center;
+    */
 }
 
 .terms-wrapper {
+     margin-top: 1.6rem;
+    /* desnecessario
     display: flex;
-    margin-top: 3rem;
     gap: .75rem;
     align-items: flex-start;
+    */
 }
 
 .terms-wrapper strong {

@@ -1,11 +1,11 @@
 #main {
+   /* overflow: auto; redimensiona a para telas menores*/
     overflow: auto;
-    padding: 4rem;
+    padding: 8rem;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--bg-primary);
-    background-color: #000;
 }
 
 .main-container {
@@ -33,6 +33,7 @@
 .inputwrapper {
     display: flex;
     flex-direction: column;
+    /* margim e bootom nao precisa, fica melhor sem */
     margin-bottom: 1.5rem;
     gap: 0.5rem;
 }

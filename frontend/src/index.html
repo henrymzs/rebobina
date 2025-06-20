@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rebobina - Cadastro</title>
+    <title>Rebobina - Cadastro Refactor</title>
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +11,14 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
         rel="stylesheet">
 </head>
-
 <body>
+
     <div id="app">
         <aside id="aside-container">
             <div class="aside-content">
                 <header class="aside-header">
                     <div class="header-visual">
-                        <img src="/frontend/imagens/rebobina_img1.png" alt="Logo Rebobina">
+                        <img src="../imagens/rebobina_img1.png" alt="Logo Rebobina">
                     </div>
                 </header>
             </div>
@@ -35,8 +34,8 @@
                         <div class="inputwrapper">
                             <label for="name">Nome</label>
                             <div class="input-icon">
-                                <img src="/frontend/imagens/icone_nome_laranja 1.png" alt="Ícone de usuário">
-                                <input id="name" name="fullname" type="text" placeholder="Digite seu nome">
+                                <img src="../imagens/icone_nome_laranja 1.png" alt="Icone de Usuário">
+                                <input id="name" name="fullname" type="text" placeholder="Digite seu Nome">
                             </div>
                             <p id="name-error">Por favor, insira seu nome.</p>
                         </div>
@@ -44,17 +43,17 @@
                         <div class="inputwrapper">
                             <label for="email">E-mail</label>
                             <div class="input-icon">
-                                <img src="/frontend/imagens/icone-email.png" alt="Ícone de e-mail">
-                                <input id="email" name="email" type="email" placeholder="Digite seu e-mail">
+                                <img src="../imagens/icone-email.png" alt="Icone de E-mail">
+                                <input id="email" name="email" type="email" placeholder="Digite seu E-mail">
                             </div>
-                            <p id="email-error">Por favor, insira um e-mail válido.</p>
+                            <p id="email-error">Por favor, insira um E-mail válido.</p>
                         </div>
 
                         <div class="inputwrapper">
                             <label for="password">Senha</label>
                             <div class="input-icon">
-                                <img src="/frontend/imagens/Icone-cadeado.png" alt="ícone de cadeado">
-                                <input id="password" name="password" type="password" placeholder="Digite sua senha">
+                                <img src="../imagens/Icone-cadeado.png" alt="Ícone de Cadeado">
+                                <input id="password" name="password" type="password" placeholder="Digite sua Senha">
                                 <span class="toggle-password" onclick="togglePassword()">👁</span>
                             </div>
                             <p id="password-error">A senha deve ter pelo menos 6 caracteres.</p>
@@ -62,87 +61,18 @@
                     </fieldset>
 
                     <div class="actions-wrapper">
-    <button class="btn-primary" type="submit">Criar Conta</button>
-</div>
-
-<div class="terms-wrapper input-wrapper">
-    <label for="terms">
-        Já tem cadastro? <a href="./templates/login.html">Clique AQUI</a> e acesse sua conta agora!
-    </label>
-</div>
+                        <button class="btn-primary" type="submit">Criar Conta</button>
                     </div>
+
+                    <div class="terms-wrapper input-wrapper">
+                        <label for="terms">
+                            Já tem cadastro? Clique <a href="./templates/login.html">AQUI</a> e acesse sua conta agora!
+                        </label>
+                    </div>
+                    
                 </form>
             </div>
         </main>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('form');
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            const nameError = document.getElementById('name-error');
-            const emailError = document.getElementById('email-error');
-            const passwordError = document.getElementById('password-error');
-
-            form.addEventListener('submit', async function (e) {
-                e.preventDefault();
-                let isValid = true;
-
-                if (nameInput.value.trim() === '') {
-                    nameError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    nameError.style.display = 'none';
-                }
-
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(emailInput.value.trim())) {
-                    emailError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    emailError.style.display = 'none';
-                }
-
-                if (passwordInput.value.length < 6) {
-                    passwordError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    passwordError.style.display = 'none';
-                }
-
-                if (isValid) {
-                    try {
-                        const response = await fetch('http://localhost:3000/register', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                nome: nameInput.value.trim(),
-                                email: emailInput.value.trim(),
-                                senha: passwordInput.value
-                            })
-                        });
-
-                        const data = await response.json();
-
-                        if (response.ok) {
-                            alert('Conta criada com sucesso!');
-                            window.location.href = './templates/login.html';
-                        } else {
-                            alert(`Erro: ${data.erro}`);
-                        }
-                    } catch (error) {
-                        alert('Erro ao conectar ao servidor.');
-                    }
-                }
-            });
-        });
-        window.togglePassword = function () {
-    const passwordInput = document.getElementById('password');
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-};
-    </script>
 </body>
 </html>

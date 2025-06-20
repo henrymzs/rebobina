@@ -16,20 +16,20 @@
 <body>
     <div id="app">
         <aside id="aside-container">
+            <!-- apos as mudanças feitas no css essas classes so enchem linguiça
             <div class="aside-content">
                 <header class="aside-header">
                     <div class="header-visual">
-                        <img src="/frontend/imagens/rebobina_img1.png" alt="Logo Rebobina">
                     </div>
                 </header>
             </div>
+            -->
         </aside>
 
         <main id="main">
             <div class="main-container">
                 <h1>REBOBINA</h1>
                 <form id="form">
-
                     <fieldset class="child-info">
                         <legend><span class="underline-orange">En</span>trar</legend>
 
@@ -39,7 +39,7 @@
                                 <img src="/frontend/imagens/icone-email.png" alt="Ícone de e-mail">
                                 <input id="email" name="email" type="email" placeholder="Digite seu e-mail">
                             </div>
-                            <p id="email-error">Por favor, insira um e-mail válido.</p>
+                            <p id="email-error" class="input-error">Por favor, insira um e-mail válido.</p>
                         </div>
 
                         <div class="input-wrapper">
@@ -49,8 +49,9 @@
                                 <input id="password" name="password" type="password" placeholder="Digite sua senha">
                                 <span class="toggle-password" onclick="togglePassword()">👁</span>
                             </div>
-                            <p id="password-error">A senha deve ter pelo menos 6 caracteres.</p>
+                            <p id="password-error" class="input-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>
+
                     </fieldset>
 
                     <div class="actions-wrapper">
@@ -62,7 +63,6 @@
                             Não tem uma conta?<a href="../index.html"> Clique aqui </a> e faça sua conta agora!
                         </label>
                     </div>
-
                 </form>
             </div>
         </main>
@@ -122,11 +122,11 @@
                 }
             });
         });
-       window.togglePassword = function () {
-    const passwordInput = document.getElementById('password');
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-};
+        window.togglePassword = function () {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        };
     </script>
 
 </body>

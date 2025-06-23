@@ -1,4 +1,5 @@
 .footer {
+    /* discutir um layout sem este background no footer */
     background-color: var(--bg-banner);
     padding: 12px;
     margin-top: auto;
@@ -7,13 +8,11 @@
 .users-container {
     display: flex;
     justify-content: center;
+    gap: 12px;
 }
 
 .user-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20px;
+    height: 50%;
     border-radius: 50%;
     color: var(--text-primary);
     transition: all 0.3s ease;
@@ -22,8 +21,7 @@
 
 .user-btn:hover {
     background-color: var(--stroke-hightlight);
-    transform: scale(1.1);
-    
+    transform: scale(1.1); 
 }
 
 @media (max-width: 768px) {

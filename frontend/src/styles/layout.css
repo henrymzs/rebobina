@@ -1,0 +1,141 @@
+/* === HEADER/MAIN === */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+/* === LINKS DE FILMES === */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+}
+
+.links-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.link-card {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(249, 115, 22, 0.2);
+}
+
+.movie-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--stroke-hightlight);
+}
+
+.links-functions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.watch-on {
+    color: #aaa;
+    margin: 0px 8px 8px 0px;
+}
+
+.watch-on i {
+    color: var(--text-tertiary);
+}
+
+.movie-link {
+    word-break: break-word;
+    color: #fff;
+    text-decoration: none;
+}
+
+.movie-link:hover {
+    text-decoration: underline;
+    color: var(--text-tertiary);
+}
+
+.action-btn {
+    color: #aaa;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    padding: 5px;
+}
+
+.action-btn:hover {
+    color: #f97316;
+    transform: scale(1.1);
+}
+
+/* === FOOTER/MAIN === */
+.footer {
+    background-color: var(--bg-banner);
+    padding: 8px;
+    margin-top: auto;
+}
+
+.users-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.user-btn {
+    height: 50%;
+    border-radius: 50%;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    background-color: var(--btn-color);
+}
+
+.user-btn:hover {
+    background-color: var(--stroke-hightlight);
+    transform: scale(1.1); 
+}
+
+/* === LOGIN/CADASTRO === */
+#app {
+    display: grid;
+    grid-template-columns: 51.25% 48.75%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* === ASIDE/LEFT === */
+#aside-container {
+    background-image: url('/frontend/imagens/rebobina_img1.png');
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+
+/* === MAIN/RIGHT === */
+#main {
+    overflow: auto; /* redimensiona a para telas menores*/
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+}
+
+.main-container {
+    max-width: 36rem;
+    text-align: center;
+    padding: 30px;
+}
+

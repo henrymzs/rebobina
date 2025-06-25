@@ -1,11 +1,4 @@
-@import url(./aside/index.css);
-@import url(./global.css);
-@import url(./main/index.css);
-@import url(./buttons/index.css);
-@import url(./inputs/index.css);
-@import url(./main/index.css);
-@import url(./terms/index.css);
-@import url(./header/index.css);
-@import url(./links/index.css);
-@import url(./modal/index.css);
-@import url(./footer/index.css);
+@import url(global.css);
+@import url(layout.css);
+@import url(components.css);
+@import url(media.css);

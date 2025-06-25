@@ -1,0 +1,46 @@
+/* === FOOTER MEDIA QUERIES === */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .link-card {
+        padding: 10px;
+    }
+
+    .movie-title {
+        font-size: 1.1rem;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .submit-btn {
+        width: 86%;
+    }
+
+}
+
+/* === ASIDE MEDIA QUERIES === */
+@media only screen and (max-width: 600px) {
+    #aside-container {
+        display: none;
+    }
+
+    #app {
+        display: flex;
+        width: 100vh;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #aside-container {
+        display: none;
+      }
+
+    #app {
+        display: flex;
+        width: 100vh;
+    }
+}

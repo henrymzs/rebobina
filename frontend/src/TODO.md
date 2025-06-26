@@ -17,6 +17,15 @@ button, poderia colocar .button e dar essa classe para todos os botões e torna-
 ### Tarefa 05:
 - Após ler e entender todas as mudanças se desfazer de todos os comentarios no codigo, aqueles que nao forem necessarios e excluir os arquivos que estão no gitignore, menos o TODO.md
 
+### Tarefa 06:
+ - Retirar qualquer função js colocando diretamente no html, por exemplo 
+  <span class="toggle-password" onclick="togglePassword()">👁</span>
+  separar cada parte em seu devido lugar, levar esta função ao javascript de modo que não seja necessário onlick no html
+
+### Tarefa 07:
+ - Na página main retirar os cards após todos os testes de estilzações, novos usuários não terão nenhum card de filmes, então não mostrar card e mostrar uma mensagem por exemplo 'Sua lista esta vazio, adicione filmes' 
+
+
 
 
 

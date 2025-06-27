@@ -1,17 +1,17 @@
 # Rebobina
-
 Sua lista de filmes, agora compartilhada, prática e divertida.
 
  ## O que é o Rebobina?
-
 Rebobina é uma plataforma pensada para ajudar pessoas que sofrem com a paralisia da escolha aquela indecisão que surge quando, entre dezenas de opções nos serviços de streaming, você e seu grupo passam mais tempo escolhendo do que assistindo.
 Desenvolvido para casais e grupos de amigos, o sistema torna a escolha do filme um processo 
 
 fácil, democrático e até divertido.
 
-## Por que o Rebobina?
+## Problema Enxergado 
+Em um mundo cheio de opções nos catálogos de streaming, as pessoas passam mais tempo decidindo do que assistindo, a chamada paralisia da escolha. Essa sobrecarga gera frustração, dispersão noites mal aproveitadas.
 
-Hoje em dia é comum salvar ideias de filmes que aparecem em redes sociais, trailers ou conversas com amigos — e depois esquecê-las. Rebobina resolve isso com uma proposta simples:
+## Por que o Rebobina?
+Hoje em dia é comum salvar ideias de filmes que aparecem em redes sociais, trailers ou conversas com amigos e depois esquecê-las. Rebobina resolve isso com uma proposta simples:
 - Você adiciona os filmes que deseja assistir durante a semana.
 - Ao reunir pelo menos 3 filmes, a plataforma ativa o modo “aleatorizar” como se você estivesse lançando um dado onde cada face é um dos filmes escolhidos.
 - Com um clique, Rebobina escolhe o filme por você (e por todos).
@@ -24,8 +24,10 @@ Além de organizar suas ideias, o Rebobina é colaborativo:
 - Todos podem adicionar sugestões.
 - A decisão de qual filme assistir se torna coletiva, leve e sem estresse.
 
-## Identidade visual
-O Rebobina adota uma estética minimalista em tons de preto e laranja, remetendo ao mundo do cinema e ao ato de “rebobinar” ideias para resgatá-las em forma de escolhas conscientes.
+## Estrutura do Projeto
+Este repositório está dividido em dois módulos:
+- [📂 Backend](./backend/src/doc/README.md) – API RESTful em Node.js + MySQL
+- [🎨 Frontend](./frontend/src/doc/README.md) – Interface web com HTML, CSS e JavaScript puro
 
 ## Contribuições e feedback
 Este projeto está em evolução. Feedbacks e ideias são bem-vindos!

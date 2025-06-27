@@ -29,5 +29,5 @@ button, poderia colocar .button e dar essa classe para todos os botões e torna-
 
 
 
-
- 
+### Adição de script:
+em 25/06/2025 foi adicionado um script em index.html para que funcione o mostrar/ocultar senha e os avisos "A senha deve ter pelo menos 6 caracteres" e "Por favor, insira um E-mail válido" 

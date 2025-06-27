@@ -49,14 +49,14 @@ O backend do Rebobina fornece todas as funcionalidades essenciais para que usuá
 Abaixo estão representadas as principais entidades que compõem o sistema Rebobina, bem como seus respectivos atributos. As entidades foram identificadas com base nas funcionalidades essenciais do sistema, como gerenciamento de usuários, listas de filmes, adição de sugestões e histórico de acesso.
 Cada entidade é acompanhada de seus atributos classificados como simples, derivados ou chaves (primárias e estrangeiras), além do tipo da entidade (forte ou fraca, quando aplicável).
 
-![Entidades](entidades.png)
+![Entidades](../public/entities.png)
 
 ### 2.4 Esquema de banco de dados relacional
 
 A imagem abaixo representa o esquema relacional do banco de dados do Rebobina. Ela mostra de forma detalhada as tabelas que compõem o sistema, seus atributos, tipos de dados e as relações entre elas por meio de chaves primárias (PK) e estrangeiras (FK).
 Esse esquema é fundamental para garantir a consistência, integridade e eficiência da aplicação, permitindo que os dados dos usuários, listas e filmes sejam armazenados e recuperados de maneira estruturada.
 
-![Esquema do Banco de Dados](esquema-database.png)
+![Esquema do Banco de Dados](../public/schema-database.png)
 
 3. Implementação das Funcionalidades
 

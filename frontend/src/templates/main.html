@@ -12,23 +12,15 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<style>
-    body {
-        background-color: var(--bg-input);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-</style>
-
+</head> 
+<!--Style body removido do HTML e adicionado ao CSS Global-->
 <body>
     <div class="container">
         <header class="header">
             <h1 class="section-title">
                 <span class="underline-orange">Lin</span>ks
             </h1>
-            <button class="btn-primary" id="openModalBtn">
+            <button class="button btn-add-link" id="openModalBtn">
                 <i class="fas fa-plus"></i> Adicionar Link
             </button>
         </header>
@@ -109,26 +101,26 @@
     <footer class="footer">
         <div class="users-container">
         
-             <button class="user-btn profile-btn">
+             <button class="button btn-footer-icon">
                 <i class="fa-solid fa-tornado"></i>
             </button>
-            <button class="user-btn profile-btn">
+            <button class="button btn-footer-icon">
                 <i class="fas fa-user"></i>
             </button>
-            <button class="user-btn profile-btn">
+            <button class="button btn-footer-icon">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </button>
             
         </div>
     </footer>
     <script>
-        /*
+        
         const token = localStorage.getItem('token');
         if (!token) {
             alert('Acesso negado! Faça login primeiro! ');
             window.location.href = './login.html';
         }
-       */
+
         document.addEventListener('DOMContentLoaded', function () {
             const openModalBtn = document.getElementById('openModalBtn');
             const closeModalBtn = document.getElementById('closeModalBtn');

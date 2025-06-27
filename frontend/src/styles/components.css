@@ -20,6 +20,49 @@ button {
     transform: translateY(-2px);
 }
 
+.btn-add-link {
+    color: #ff5a00;
+    background-color: #0e0e0e;
+    border: 2px solid #ff5a00;
+    border-radius: 40px;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.btn-add-link i {
+    font-size: 1rem;
+}
+
+.btn-add-link:hover {
+    background-color: #ff5a00;
+    color: #0e0e0e;
+    transform: translateY(-2px);
+}
+
+.btn-footer-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid #ff5a00;
+    color: #ff5a00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: 0.3s ease;
+}
+
+.btn-footer-icon:hover {
+    background-color: #ff5a00;
+    color: #0e0e0e;
+    transform: scale(1.1);
+}
+
 /* === COMPONENTE/INPUT === */
 input {
     appearance: none;

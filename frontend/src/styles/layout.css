@@ -26,10 +26,11 @@
 
 .link-card {
     background-color: #222;
-    border-radius: 8px;
-    padding: 18px;
-    margin-bottom: 8px;
+    border-radius: 20px;
+    padding: 12px;
+    margin-bottom: 1.5rem;
     transition: all 0.3s ease;
+    border-left: 4px solid #ff5a00;
 }
 
 .link-card:hover {
@@ -40,8 +41,8 @@
 .movie-title {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 5px;
-    color: var(--stroke-hightlight);
+    margin-bottom: 0.5rem;
+    color: #fff;
 }
 
 .links-functions {
@@ -51,7 +52,7 @@
 }
 
 .watch-on {
-    color: #aaa;
+   color: #aaa;
     margin: 0px 8px 8px 0px;
 }
 
@@ -60,9 +61,10 @@
 }
 
 .movie-link {
-    word-break: break-word;
     color: #fff;
+    word-break: break-word;
     text-decoration: none;
+    font-size: 14px;
 }
 
 .movie-link:hover {
@@ -71,10 +73,11 @@
 }
 
 .action-btn {
-    color: #aaa;
+    color: #f97316;
     font-size: 1.1rem;
     transition: all 0.3s ease;
     padding: 5px;
+    cursor: pointer;    
 }
 
 .action-btn:hover {
@@ -118,7 +121,7 @@
 
 /* === ASIDE/LEFT === */
 #aside-container {
-    background-image: url('/frontend/imagens/logo-rebobina.png');
+    background-image: url('/frontend/public/logo-rebobina.png');
     background-size: cover;
     background-repeat: no-repeat; 
 }

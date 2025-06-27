@@ -26,8 +26,8 @@ Além de organizar suas ideias, o Rebobina é colaborativo:
 
 ## Estrutura do Projeto
 Este repositório está dividido em dois módulos:
-- [📂 Backend](./backend/src/doc/README.md) – API RESTful em Node.js + MySQL
-- [🎨 Frontend](./frontend/src/doc/README.md) – Interface web com HTML, CSS e JavaScript puro
+- [📂 Backend](./backend/doc/README.md) – API RESTful em Node.js + MySQL
+- [🎨 Frontend](./frontend/doc/README.md) – Interface web com HTML, CSS e JavaScript puro
 
 ## Contribuições e feedback
 Este projeto está em evolução. Feedbacks e ideias são bem-vindos!

@@ -18,11 +18,7 @@ const getUsuarioLogado = async (req) => {
 
 const registerService = async (nome, email, senha) => {
     try {
-        const findNome = await UsuarioDAO.findOne({ nome });
         const findEmail = await UsuarioDAO.findOne({ email });
-        if (findNome) {
-            return { success: false, message: 'Nome já está em uso.' };
-        }
         if (findEmail) {
             return { success: false, message: 'Email já está em uso.' };
         }

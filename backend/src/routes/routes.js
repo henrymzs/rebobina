@@ -12,9 +12,9 @@ const UserController = require('../controllers/UserController');
 //   return await UsuarioDAO.getById(req.id);
 // }
 
-router.post('/user/register', AuthController.registerController);
-router.post('/user/login', AuthController.loginController);
-router.get('/user/deslogar', AuthController.logoutController);
+router.post('/user/register', AuthController.register);
+router.post('/user/login', AuthController.login);
+router.get('/user/deslogar', AuthController.logout);
 
 router.get('/user/perfil', AuthMiddleware, UserController.getProfile);
 

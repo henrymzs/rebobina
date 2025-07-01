@@ -1,27 +1,13 @@
 const AuthService = require('../services/AuthService');
 require('dotenv').config();
 
-const logoutController = async (req, res) => {
-    try {
-        const usuario = await AuthService.authenticateUser(req);
-        if (!usuario) {
-            return res.status(401).json({ error: 'Nenhum usuário logado' });
-        }
-        res.clearCookie('tokenJWT');
-        res.status(200).json({ message: 'Usuário deslogado com sucesso! ', email: usuario.email });
-    } catch (error) {
-        console.error('Erro ao deslogar usuário: ', error);
-        res.status(500).json({ error: 'Erro interno no servidor.' });
-    }
-};
-
-const registerController = async (req, res) => {
+const register = async (req, res) => {
     try {
         const { nome, email, senha } = req.body;
         if (!nome || !email || !senha) {
             return res.status(Continue).json({ erro: "Nome, email e senha são obrigatórios." });
         }
-        const resultado = await AuthService.registerService(nome, email, senha);
+        const resultado = await AuthService.register(nome, email, senha);
         if (!resultado.success) {
             return res.status(400).json({ erro: resultado.message });
         }
@@ -32,13 +18,13 @@ const registerController = async (req, res) => {
     }
 }
 
-const loginController = async (req, res) => {
+const login = async (req, res) => {
     try {
         const { email, senha } = req.body;
         if (!email || !senha) {
             return res.status(400).json({erro: "Nome e senha são obrigátorios."})
         }
-        const resultado = await AuthService.loginService(email, senha);
+        const resultado = await AuthService.login(email, senha);
         if (!resultado.success) {
             return res.status(401).json({ message: resultado.message });
         }
@@ -58,4 +44,18 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = { logoutController, registerController, loginController };
+const logout = async (req, res) => {
+    try {
+        const usuario = await AuthService.authenticateUser(req);
+        if (!usuario) {
+            return res.status(401).json({ error: 'Nenhum usuário logado' });
+        }
+        res.clearCookie('tokenJWT');
+        res.status(200).json({ message: 'Usuário deslogado com sucesso! ', email: usuario.email });
+    } catch (error) {
+        console.error('Erro ao deslogar usuário: ', error);
+        res.status(500).json({ error: 'Erro interno no servidor.' });
+    }
+};
+
+module.exports = { register,login,logout };

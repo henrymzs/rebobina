@@ -2,21 +2,7 @@ const jwt = require("jsonwebtoken");
 const UsuarioDAO = require("../models/DAO/UsuarioDAO");
 const ListaFilmesDAO = require("../models/DAO/ListaFilmesDAO");
 
-const authenticateUser = async (req) => {
-    const token = req.cookies.tokenJWT;
-    if (!token) {
-        return null;
-    }
-    try {
-        const decoded = jwt.verify(token, 'chave_secreta');
-        return await UsuarioDAO.getById(decoded.id);
-    } catch (error) {
-        console.error('Erro ao verificar usuário logado');
-        return null;
-    }
-};
-
-const registerService = async (nome, email, senha) => {
+const register = async (nome, email, senha) => {
     try {
         const findEmail = await UsuarioDAO.findOne({ email });
         if (findEmail) {
@@ -30,7 +16,7 @@ const registerService = async (nome, email, senha) => {
     }
 };
 
-const loginService = async (email, senha) => {
+const login = async (email, senha) => {
     const usuario = await UsuarioDAO.findOne({ email });
     if (!usuario) {
         return { success: false, message: 'Usuário não encontrado.' };
@@ -46,4 +32,18 @@ const loginService = async (email, senha) => {
     return { success: true, token, usuario, lista: listaExistente };
 };
 
-module.exports = { authenticateUser, loginService, registerService };
+const authenticateUser = async (req) => {
+    const token = req.cookies.tokenJWT;
+    if (!token) {
+        return null;
+    }
+    try {
+        const decoded = jwt.verify(token, 'chave_secreta');
+        return await UsuarioDAO.getById(decoded.id);
+    } catch (error) {
+        console.error('Erro ao verificar usuário logado');
+        return null;
+    }
+};
+
+module.exports = { authenticateUser,register,login };

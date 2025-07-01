@@ -19,7 +19,7 @@ const registerController = async (req, res) => {
     try {
         const { nome, email, senha } = req.body;
         if (!nome || !email || !senha) {
-            return res.status(400).json({ erro: "Nome, email e senha são obrigatórios." });
+            return res.status(Continue).json({ erro: "Nome, email e senha são obrigatórios." });
         }
         const resultado = await AuthService.registerService(nome, email, senha);
         if (!resultado.success) {
@@ -35,14 +35,17 @@ const registerController = async (req, res) => {
 const loginController = async (req, res) => {
     try {
         const { email, senha } = req.body;
+        if (!email || !senha) {
+            return res.status(400).json({erro: "Nome e senha são obrigátorios."})
+        }
         const resultado = await AuthService.loginService(email, senha);
         if (!resultado.success) {
             return res.status(401).json({ message: resultado.message });
         }
         res.cookie('tokenJWT', resultado.token, { httpOnly: true, secure: true });
         res.status(200).json({
-            email: resultado.usuario.email,
             login: 'Concluído',
+            email: resultado.usuario.email,
             token: resultado.token,
             lista: resultado.lista
         })

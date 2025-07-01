@@ -32,8 +32,11 @@ const registerService = async (nome, email, senha) => {
 
 const loginService = async (email, senha) => {
     const usuario = await UsuarioDAO.findOne({ email });
-    if (!usuario || senha !== usuario.senha) {
-        return { success: false, message: 'Usuário ou senha inválidos.' };
+    if (!usuario) {
+        return { success: false, message: 'Usuário não encontrado.' };
+    }
+    if (senha !== usuario.senha) {
+        return { success: false, message: 'Senha incorreta.' };
     }
     const token = jwt.sign({ id: usuario.id }, 'chave_secreta', { expiresIn: "1d" });
     let listaExistente = await ListaFilmesDAO.findByUserId(usuario.id);

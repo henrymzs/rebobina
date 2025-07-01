@@ -18,14 +18,17 @@ const deslogar = async (req, res) => {
 const registerController = async (req, res) => {
     try {
         const { nome, email, senha } = req.body;
+        if (!nome || !email || !senha) {
+            return res.status(400).json({ erro: "Nome, email e senha são obrigatórios." });
+        }
         const resultado = await AuthService.registerService(nome, email, senha);
         if (!resultado.success) {
-            return res.status(400).json({ erro: result.message });
+            return res.status(400).json({ erro: resultado.message });
         }
-        res.status(201).json({ sucesso: true, mensagem: resultado.message, usuario: resultado.usuario });
+        res.status(201).json({ success: true, messagem: resultado.message, usuario: resultado.usuario });
     } catch (error) {
         console.error("Erro ao registrar usuário:", error);
-        return res.status(500).json({ erro: "Erro ao cadastrar usuário.", detalhes: error.message });
+        return res.status(500).json({ erro: "Erro ao cadastrar usuário.", detalhes: error.messagem });
     }
 }
 

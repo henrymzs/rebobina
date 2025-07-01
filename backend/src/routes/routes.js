@@ -14,6 +14,8 @@ const UserController = require('../controllers/UserController');
 
 router.post('/user/register', AuthController.registerController);
 router.post('/user/login', AuthController.loginController);
+router.get('/user/deslogar', AuthController.logoutController);
+
 router.get('/user/perfil', AuthMiddleware, UserController.getProfile);
 
 // router.post('/register', RegisterController.register);
@@ -72,7 +74,7 @@ router.get('/profile', AuthController, async (req, res) => {
 //     redirect: '/'
 //   });
 // });
-router.get('/user/deslogar', AuthController.deslogar);
+
 // // router.get('/deslogar', async (req, res) => {
 // //   const usuarioLogado = await UserController(req);
 // //   if (!usuarioLogado) {

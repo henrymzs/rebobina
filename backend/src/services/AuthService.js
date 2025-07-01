@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const UsuarioDAO = require("../models/DAO/UsuarioDAO");
 const ListaFilmesDAO = require("../models/DAO/ListaFilmesDAO");
 
-const getUsuarioLogado = async (req) => {
+const authenticateUser = async (req) => {
     const token = req.cookies.tokenJWT;
     if (!token) {
         return null;
@@ -46,4 +46,4 @@ const loginService = async (email, senha) => {
     return { success: true, token, usuario, lista: listaExistente };
 };
 
-module.exports = { getUsuarioLogado, loginService, registerService };
+module.exports = { authenticateUser, loginService, registerService };

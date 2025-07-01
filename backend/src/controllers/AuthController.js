@@ -1,14 +1,14 @@
 const AuthService = require('../services/AuthService');
 require('dotenv').config();
 
-const deslogar = async (req, res) => {
+const logoutController = async (req, res) => {
     try {
-        const usuarioLogado = await AuthService.getUsuarioLogado(req);
-        if (!usuarioLogado) {
+        const usuario = await AuthService.authenticateUser(req);
+        if (!usuario) {
             return res.status(401).json({ error: 'Nenhum usuário logado' });
         }
         res.clearCookie('tokenJWT');
-        res.status(200).json({ message: 'Usuário deslogado com sucesso! ', email: usuarioLogado.email });
+        res.status(200).json({ message: 'Usuário deslogado com sucesso! ', email: usuario.email });
     } catch (error) {
         console.error('Erro ao deslogar usuário: ', error);
         res.status(500).json({ error: 'Erro interno no servidor.' });
@@ -58,4 +58,4 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = { deslogar, registerController, loginController };
+module.exports = { logoutController, registerController, loginController };

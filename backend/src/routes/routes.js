@@ -10,9 +10,9 @@ const UserController = require('../controllers/UserController');
 
 router.post('/user/register', AuthController.register);
 router.post('/user/login', AuthController.login);
-router.get('/user/deslogar', AuthController.logout);
+router.get('/user/logout', AuthMiddleware , AuthController.logout);
 
-router.get('/user/perfil', AuthMiddleware, UserController.getProfile);
+router.get('/user/profile', AuthMiddleware, UserController.profile);
 
 
 /*

@@ -46,15 +46,12 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
     try {
-        const usuario = await AuthService.authenticateUser(req);
-        if (!usuario) {
-            return res.status(401).json({ error: 'Nenhum usuário logado' });
-        }
+        const usuario = req.usuario;
         res.clearCookie('tokenJWT');
         res.status(200).json({ message: 'Usuário deslogado com sucesso! ', email: usuario.email });
     } catch (error) {
         console.error('Erro ao deslogar usuário: ', error);
-        res.status(500).json({ error: 'Erro interno no servidor.' });
+        res.status(500).json({ error: 'Erro interno no servidor.', detalhes: error.message });
     }
 };
 

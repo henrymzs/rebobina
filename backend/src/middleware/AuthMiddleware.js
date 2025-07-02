@@ -1,20 +1,22 @@
 const jwt = require('jsonwebtoken');
+const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 
-module.exports = (req, res, next) => {
-    res.set('Cache-Control', 'no-store');
-    let token = req.headers.authorization?.split(" ")[1] || req.cookies["tokenJWT"];
+module.exports = async (req, res, next) => {
+    const token = req.headers.authorization?.split(" ")[1] || req.cookies["tokenJWT"];
     if (!token) {
-        return res.status(401).json({ erro: "Token não fornecido" });
+        return res.status(401).json({ erro: "Usuário não autenticado." });
     }
-    
-    jwt.verify(token, 'chave_secreta', (err, user) => {
-        if (err) {
-            console.error("Erro ao verificar token:", err);
-            return res.status(401).json({ erro: "Token inválido ou expirado" });
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const usuario = await UsuarioDAO.getById(decoded.id);
+        if (!usuario) {
+            return res.status(404).json({ erro: "Usuário não encontrado" });
         }
-        req.id = user.id;
-        console.log("Usuário autenticado:", user);
+        req.usuario = usuario;
         next();
-    });
+    } catch (error) {
+        console.error("Erro ao verificar token:", error);
+        return res.status(401).json({ erro: "Token inválido ou expirado." });
+    }
 };
 

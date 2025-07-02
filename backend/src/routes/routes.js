@@ -14,9 +14,6 @@ router.get('/user/deslogar', AuthController.logout);
 
 router.get('/user/perfil', AuthMiddleware, UserController.getProfile);
 
-// router.post('/register', RegisterController.register);
-// router.post('/login', LoginController.login);
-
 
 /*
 router.get('/profile', AuthController, async (req, res) => {

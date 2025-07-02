@@ -11,7 +11,8 @@ const UserController = require('../controllers/UserController');
 router.post('/user/register', AuthController.register);
 router.post('/user/login', AuthController.login);
 router.get('/user/logout', AuthMiddleware , AuthController.logout);
-router.get('/user/profile', AuthMiddleware, UserController.getProfile);
+
+router.get('/user/profile', AuthMiddleware, UserController.profile);
 
 
 /*

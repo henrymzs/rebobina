@@ -1,24 +1,21 @@
 const ListaFilmesDAO = require("../models/DAO/ListaFilmesDAO");
 const UserService = require('../services/UserService');
 
-const getProfile = async (req, res) => {
-    const usuarioLogado = await UserService.getUsuarioLogado(req);
-    if (!usuarioLogado) {
-        return res.status(403).json({ error: 'Usuário não autenticado' });
-    }
-
+const profile = async (req, res) => {
+    const usuario = req.usuario;
     try {
-        const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
-        res.status(200).json({
-            id: usuarioLogado.id,
-            nome: usuarioLogado.nome,
-            email: usuarioLogado.email,
-            ListaFilmes: resultado || null
-        })
+        const lista = await ListaFilmesDAO.findByUserId(usuario.id);
+        return res.status(200).json({
+            id: usuario.id,
+            nome: usuario.nome,
+            email: usuario.email,
+            ListaFilmes: lista || null
+
+        });
     } catch (error) {
-        console.error('Erro ao buscar o perfil do usuário', error);
-        res.status(500).json({ error: 'Erro ao buscar perfil do usuário.' });
-    }
+        console.error("Erro ao buscar perfil do usuário", error);
+        return res.status(500).json({ error: 'Erro ao buscar perfil do usuário.' });
+    };
 };
 
 const getAllUsers = async (req, res) => {
@@ -69,4 +66,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { getProfile, getAllUsers, updateRole, deleteUser };
+module.exports = { profile, getAllUsers, updateRole, deleteUser };

@@ -4,7 +4,7 @@ const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 module.exports = async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1] || req.cookies["tokenJWT"];
     if (!token) {
-        return res.status(401).json({ erro: "Token não fornecido" });
+        return res.status(401).json({ erro: "Usuário não autenticado." });
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

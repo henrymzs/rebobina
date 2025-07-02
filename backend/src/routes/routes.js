@@ -8,10 +8,6 @@ const AuthController = require('../controllers/AuthController');
 const AuthMiddleware = require('../middleware/AuthMiddleware')
 const UserController = require('../controllers/UserController');
 
-// async function getUsuarioLogado(req) {
-//   return await UsuarioDAO.getById(req.id);
-// }
-
 router.post('/user/register', AuthController.register);
 router.post('/user/login', AuthController.login);
 router.get('/user/deslogar', AuthController.logout);

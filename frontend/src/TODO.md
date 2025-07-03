@@ -11,3 +11,7 @@ TODO – Tarefas pendentes
 - [] Deixar responsivo para telas menores, prioridade celulares
 - [] Quando possivel se desfazer de comentarios
 - [] Na página main retirar os cards após todos os testes de estilzações, novos usuários não terão nenhum card de filmes, então não mostrar card e mostrar uma mensagem por exemplo 'Sua lista esta vazio, adicione filmes' 
+- [] Redimensionar botões na página main, deixar definitivamente redondo
+- [] Pesquisar como podemos apresentar funções ao usuário
+- [] Colocar uma forma para que o usuario visualize o token da sua lista
+- [] Colocar botões para o usuario mudar o nome da lista ou excluir a lista

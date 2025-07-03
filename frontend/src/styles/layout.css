@@ -10,29 +10,33 @@
 
 /* === LINKS DE FILMES === */
 .container {
-    width: 90%;
+    width: 80%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     flex: 1;
 }
+    
 
 .links-container {
     max-height: 60vh;
 }
 
+
 .link-card {
     background-color: #222;
-    border-radius: 16px;
-    padding: 16px;
+    width: 800px;
+    height: 72px;
+    border-radius: 20px;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
     border-left: 4px solid #ff5a00;
     display: flex;
-    gap: 16px;
+    gap: 12px;
     align-items: center;
-
+    padding: 10px 15px;
 }
+
 
 .link-card:hover {
     transform: translateY(-3px);
@@ -47,27 +51,27 @@
 }
 
 
-/*
+
 .card-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-*/
+
 
 .card-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  margin-bottom: 6px;
 }
 
 
 .movie-title {
-    font-size: 1.3rem;
     font-weight: 600;
     color: #fff;
+    font-size: 1rem;
 }
 
 .links-functions {
@@ -78,13 +82,13 @@
 
 .watch-on {
    color: #111;
-    margin: 0px 8px 8px 0px;
     background-color: #ff5a00;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 3px 10px;
     border-radius: 20px;
     text-transform: lowercase;
+    margin: 10px auto auto 0px;
 }
 
 .watch-on i {
@@ -95,10 +99,10 @@
     color: #fff;
     word-break: break-word;
     text-decoration: none;
-    font-size: 0.80rem;
+    font-size: 0.8rem;
     overflow: hidden;
     white-space: nowrap;
-
+    width: 450px;
 }
 
 .movie-link:hover {
@@ -106,12 +110,17 @@
     color: var(--text-tertiary);
 }
 
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .action-btn {
     color: #f97316;
     transition: all 0.3s ease;
     cursor: pointer; 
-    padding: 5px;
-    margin: 4px;
+    padding: 5px;   
 }
 
 .action-btn:hover {

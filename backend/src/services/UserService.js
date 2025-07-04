@@ -37,4 +37,12 @@ const updateNameList = async (usuarioId, nomeLista) => {
     return await ListaFilmesDAO.updateLista(usuarioId, nomeLista);
 };
 
-module.exports = { getAllUsers, updateRole, deleteUser, updateNameList };
+const searchUserList = async (usuarioId) => {
+    const lista = await ListaFilmesDAO.findByUserId(usuarioId);
+    if (!lista) {
+        return { sucesso: false, mensagem: "Lista não encontrada para este usuário." };
+    }
+    return { sucesso: true, lista };
+}
+
+module.exports = { getAllUsers, updateRole, deleteUser, updateNameList, searchUserList };

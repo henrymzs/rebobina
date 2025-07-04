@@ -34,11 +34,8 @@ const userList = async (req, res) => {
 const nameList = async (req, res) => {
     const usuario = req.usuario;
     const { nomeLista } = req.body;
-    if (!nomeLista || nomeLista.trim() === '') {
-        return res.status(404).json({ error: "O nome da lista é obrigatório" });
-    }
     try {
-        const resultado = await ListaFilmesDAO.updateLista(usuario.id, nomeLista)
+        const resultado = await UserService.updateNameList(usuario.id, nomeLista)
         if (!resultado.sucesso) {
             return res.status(404).json({ error: resultado.mensagem })
         }

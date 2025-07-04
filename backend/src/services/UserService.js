@@ -30,4 +30,11 @@ const deleteUser = async (usuarioId) => {
     return { success: true, message: 'Usuário excluído com sucesso.' };
 };
 
-module.exports = { getAllUsers, updateRole, deleteUser };
+const updateNameList = async (usuarioId, nomeLista) => {
+    if (!nomeLista || nomeLista.trim() === '') {
+        return { sucesso: false, mensagem: "O nome da lista é obrigatório." };
+    }
+    return await ListaFilmesDAO.updateLista(usuarioId, nomeLista);
+};
+
+module.exports = { getAllUsers, updateRole, deleteUser, updateNameList };

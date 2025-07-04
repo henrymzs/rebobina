@@ -27,25 +27,8 @@ router.put('/filmes/:id', FilmeController.editarFilme);
 router.delete('/filmes/:id', FilmeController.excluirFilme);
 
 /* === ROUTES/LISTS === */
-router.get('/user/list', AuthMiddleware, UserController.userList)
-
-router.put('/nome-lista', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    return res.status(403).json({ error: 'Usuário não autenticado.' });
-  }
-  const { nomeLista } = req.body;
-  try {
-    const resultado = await ListaFilmesDAO.updateLista(usuarioLogado.id, nomeLista);
-    if (!resultado.sucesso) {
-      return res.status(404).json({ error: resultado.mensagem });
-    }
-    res.status(200).json({ message: 'Nome da lista atualizado com sucesso!', lista: resultado.lista });
-  } catch (error) {
-    console.error('Erro na rota de atualização da lista:', error);
-    res.status(500).json({ error: 'Erro ao atualizar lista.' });
-  }
-});
+router.get('/user/list', AuthMiddleware, UserController.userList);
+router.put('/user/name-list', AuthMiddleware, UserController.nameList);
 
 router.delete('/minha-lista', async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);

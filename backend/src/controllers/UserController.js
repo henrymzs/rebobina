@@ -31,6 +31,21 @@ const userList = async (req, res) => {
     }
 }
 
+const nameList = async (req, res) => {
+    const usuario = req.usuario;
+    const { nomeLista } = req.body;
+    try {
+        const resultado = await UserService.updateNameList(usuario.id, nomeLista)
+        if (!resultado.sucesso) {
+            return res.status(404).json({ error: resultado.mensagem })
+        }
+        res.status(200).json({ message: "Nome da lista atualizada com sucesso!", lista: resultado.lista });
+    } catch (error) {
+        console.error('Erro na rota de atualização da lista:', error);
+        res.status(500).json({ error: 'Erro ao atualizar lista.' });
+    }
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const usuarioLogado = await UserService.getUsuarioLogado(req);
@@ -79,4 +94,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { profile, getAllUsers, updateRole, deleteUser, userList };
+module.exports = { profile, getAllUsers, updateRole, deleteUser, userList, nameList };

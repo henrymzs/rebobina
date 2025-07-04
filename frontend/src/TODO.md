@@ -2,6 +2,7 @@ TODO – Tarefas pendentes
 - [x] Criar TODO para o frontend
 - [x] Começar Documentação do Readme do frontend
 - [x] Retirar styles no html da página main e colocar no proprio css
+- [] Começar página do perfil do usuário
 - [] Tirar background preto nos botões da pagina main
 - [] Criar variaveis para todos as cores presentes no projeto
 - [] Padronizar Cores

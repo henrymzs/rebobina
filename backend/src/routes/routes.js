@@ -11,7 +11,7 @@ const UserController = require('../controllers/UserController');
 /* === ROUTES/AUTH === */
 router.post('/user/register', AuthController.register);
 router.post('/user/login', AuthController.login);
-router.get('/user/logout', AuthMiddleware , AuthController.logout);
+router.get('/user/logout', AuthMiddleware, AuthController.logout);
 
 /* === ROUTES/USER === */
 router.get('/user/profile', AuthMiddleware, UserController.profile);
@@ -27,37 +27,7 @@ router.put('/filmes/:id', FilmeController.editarFilme);
 router.delete('/filmes/:id', FilmeController.excluirFilme);
 
 /* === ROUTES/LISTS === */
-router.post('/criar-lista', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    return res.status(403).json({ error: 'Usuário não autenticado' });
-  }
-  const { nomeLista } = req.body;
-  try {
-    const novaLista = await ListaFilmesDAO.create({ usuarioId: usuarioLogado.id, nomeLista });
-    if (novaLista) {
-      res.status(201).json({ message: 'Lista criada com sucesso!', lista: novaLista });
-    } else {
-      res.status(500).json({ error: 'Erro ao criar lista.' });
-    }
-  } catch (error) {
-    console.error('Erro na rota de criação da lista', error);
-    res.status(500).json({ error: 'Erro ao criar lista de filmes' });
-  }
-});
-
-router.get('/minha-lista', AuthMiddleware, async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    return res.status(403).json({ error: 'Usuário não autenticado.' });
-  }
-
-  const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
-  if (!resultado.sucesso) {
-    return res.status(404).json({ error: resultado.mensagem });
-  }
-  res.status(200).json({ lista: resultado.lista });
-});
+router.get('/user/list', AuthMiddleware, UserController.userList)
 
 router.put('/nome-lista', async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);

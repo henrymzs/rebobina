@@ -18,13 +18,11 @@ const profile = async (req, res) => {
 const userList = async (req, res) => {
     const usuario = req.usuario;
     try {
-        const lista = await ListaFilmesDAO.findByUserId(usuario.id);
-        if (!lista) {
-           return res.status(404).json({ error: "Lista não encontrada para este usuário." });
+        const resultado = await UserService.searchUserList(usuario.id);
+        if (!resultado.sucesso) {
+           return res.status(404).json({ error: mensagem });
         }
-        return res.status(200).json({
-            listaFilmes: lista
-        });
+        return res.status(200).json({ ListaFilmes: resultado.lista });
     } catch (error) {
         console.error("Erro ao buscar lista do usuário", error);
         return res.status(500).json({ error: 'Erro ao buscar lista do usuário.' });

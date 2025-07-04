@@ -4,19 +4,32 @@ const UserService = require('../services/UserService');
 const profile = async (req, res) => {
     const usuario = req.usuario;
     try {
-        const lista = await ListaFilmesDAO.findByUserId(usuario.id);
         return res.status(200).json({
             id: usuario.id,
             nome: usuario.nome,
             email: usuario.email,
-            ListaFilmes: lista || null
-
         });
     } catch (error) {
         console.error("Erro ao buscar perfil do usuário", error);
         return res.status(500).json({ error: 'Erro ao buscar perfil do usuário.' });
     };
 };
+
+const userList = async (req, res) => {
+    const usuario = req.usuario;
+    try {
+        const lista = await ListaFilmesDAO.findByUserId(usuario.id);
+        if (!lista) {
+           return res.status(404).json({ error: "Lista não encontrada para este usuário." });
+        }
+        return res.status(200).json({
+            listaFilmes: lista
+        });
+    } catch (error) {
+        console.error("Erro ao buscar lista do usuário", error);
+        return res.status(500).json({ error: 'Erro ao buscar lista do usuário.' });
+    }
+}
 
 const getAllUsers = async (req, res) => {
     try {
@@ -66,4 +79,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { profile, getAllUsers, updateRole, deleteUser };
+module.exports = { profile, getAllUsers, updateRole, deleteUser, userList };

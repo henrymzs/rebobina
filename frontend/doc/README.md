@@ -20,10 +20,10 @@ A interface está passando por refinamentos frequentes de usabilidade, acessibil
 Abaixo estão imagens demonstrando o fluxo de uso do sistema
 
 ## Página de Cadastro
-![Página de Cadastro](../imagens/page-cadastro.png)
+![Página de Cadastro](../public/page-cadastro.png)
 
 ## Página de Login
-![Página de Login](../imagens/page-login.png)
+![Página de Login](../public/page-login.png)
 
 ## Página de Principal
-![Página Principal](../imagens/page-main.png)
+![Página Principal](../public/page-main.png)

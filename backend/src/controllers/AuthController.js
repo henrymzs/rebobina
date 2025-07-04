@@ -33,7 +33,6 @@ const login = async (req, res) => {
             login: 'Concluído',
             email: resultado.usuario.email,
             token: resultado.token,
-            lista: resultado.lista
         })
     } catch (error) {
         console.error('Erro ao fazer login:', error);

@@ -27,7 +27,8 @@ router.put('/filmes/:id', FilmeController.editarFilme);
 router.delete('/filmes/:id', FilmeController.excluirFilme);
 
 /* === ROUTES/LISTS === */
-router.get('/user/list', AuthMiddleware, UserController.userList)
+router.get('/user/list', AuthMiddleware, UserController.userList);
+router.put('/user/name-list', AuthMiddleware, UserController.nameList);
 
 router.put('/nome-lista', async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);

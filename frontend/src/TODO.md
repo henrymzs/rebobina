@@ -4,10 +4,10 @@ TODO – Tarefas pendentes
 - [] Criar variaveis para todos as cores presentes no projeto
 - [] Padronizar Cores
 - [] Retirar codigo js no html
-- [] Retirar styles no html da página main e colocar no proprio css
+- [x] Retirar styles no html da página main e colocar no proprio css
 - [] Dar classe a todos os elementos utilizados no css
 - [] Refatorar todo o css, excluindo estilizações desnecessárias
-- [] Padronizar os inputs assim como os botões, criar uma classe pai e ter estiliuzação especifica para cada ambiente
+- [] Padronizar os inputs assim como os botões, criar uma classe pai e ter estilização especifica para cada ambiente
 - [] Deixar responsivo para telas menores, prioridade celulares
 - [] Quando possivel se desfazer de comentarios
 - [] Na página main retirar os cards após todos os testes de estilzações, novos usuários não terão nenhum card de filmes, então não mostrar card e mostrar uma mensagem por exemplo 'Sua lista esta vazio, adicione filmes' 

@@ -131,7 +131,6 @@
 
 /* === FOOTER/MAIN === */
 .footer {
-    background-color: var(--bg-banner);
     padding: 8px;
     margin-top: auto;
 }

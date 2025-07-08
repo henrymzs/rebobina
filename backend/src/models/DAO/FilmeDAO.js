@@ -10,14 +10,21 @@ class FilmeDAO {
             }
             throw new Error('Erro ao adicionar filme.');
         }
-        
+
     }
 
     async findAllByLista(listaId) {
-        return await Filme.findAll({ 
+        return await Filme.findAll({
             where: { listaId },
             attributes: ['id', 'id_tmdb', 'titulo', 'listaId', 'createdAt', 'updatedAt']
-         });
+        });
+    }
+
+    async findById(id) {
+        return await Filme.findOne({
+            where: { id },
+            attributes: ['id', 'id_tmdb', 'titulo', 'listaId', 'createdAt', 'updatedAt']
+        });
     }
 
     async update(id, dadosAtualizados) {

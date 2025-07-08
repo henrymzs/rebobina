@@ -28,4 +28,21 @@ const addMovieList = async (titulo, usuarioId) => {
     }
 }
 
-module.exports = { addMovieList };
+const editarFilme = async (titulo, id, usuarioId) => {
+    try {
+        const filme = await FilmeDAO.findById(id);
+        if (!filme) {
+            return { success: false, message: "Filme não encontrado." };
+        }
+        const listaDoUsuario = await ListaFilmesDAO.findByUserId(usuarioId);
+        if (!listaDoUsuario || filme.listaId !== listaDoUsuario.id) {
+            return { success: false, message: "Você não tem permissão para editar este filme." };
+        }
+        const filmeAtualizado = await FilmeDAO.update(id, { titulo });
+        return { success: true, filmeAtualizado };
+    } catch (error) {
+        console.error('Erro ao atualizar o nome do filme:', error);
+        return { success: false, message: 'Erro ao atualizar o nome do filme', detalhes: error.message };
+    }
+};
+module.exports = { addMovieList, editarFilme };

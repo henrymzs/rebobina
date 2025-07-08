@@ -21,13 +21,17 @@ const addMovie = async (req, res) => {
 
 const editarFilme = async (req, res) => {
     try {
+        const { titulo } = req.body
         const { id } = req.params;
-        const { titulo } = req.body;
+        const usuarioId = req.usuario.id;
         if (!titulo) {
-            return res.status(400).json({ erro: 'Título é obrigatório para edição.' });
+            return res.status(400).json({ erro: "Título é obrigatório para edição." });
         }
-        const filmesAtualizado = await FilmeDAO.update(id, { titulo });
-        res.status(200).json(filmesAtualizado);
+        const resultado = await FilmeSerivce.editarFilme(titulo, id, usuarioId);
+        if (!resultado.success) {
+            return res.status(404).json({ erro: resultado.message });
+        }
+        return res.status(200).json(resultado.filmeAtualizado);
     } catch (error) {
         res.status(400).json({ erro: error.message });
     }

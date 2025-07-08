@@ -22,7 +22,7 @@ router.put('/user/name-list', AuthMiddleware, UserController.nameList);
 
 /* === ROUTES/FILMS === //*/
 router.post('/filmes', AuthMiddleware, FilmeController.addMovie);
-router.put('/filmes/:id', FilmeController.editarFilme);
+router.put('/filmes/:id',AuthMiddleware, FilmeController.editarFilme);
 router.delete('/filmes/:id', FilmeController.excluirFilme);
 
 /* === ROUTES/ADMIN === //*/

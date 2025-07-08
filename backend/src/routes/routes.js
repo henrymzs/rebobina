@@ -16,19 +16,19 @@ router.get('/user/logout', AuthMiddleware, AuthController.logout);
 /* === ROUTES/USER === */
 router.get('/user/profile', AuthMiddleware, UserController.profile);
 
-/* === ROUTES/ADMIN === */
-router.get('/admin/users', AuthMiddleware, UserController.getAllUsers)
-router.delete('/admin/users/:id', AuthMiddleware, UserController.deleteUser);
-router.put('/admin/users/:id/role', UserController.updateRole)
+/* === ROUTES/LISTS === */
+router.get('/user/list', AuthMiddleware, UserController.userList);
+router.put('/user/name-list', AuthMiddleware, UserController.nameList);
 
-/* === ROUTES/FILMS === */
+/* === ROUTES/FILMS === //*/
 router.post('/filmes', AuthMiddleware, FilmeController.adicionarFilme);
 router.put('/filmes/:id', FilmeController.editarFilme);
 router.delete('/filmes/:id', FilmeController.excluirFilme);
 
-/* === ROUTES/LISTS === */
-router.get('/user/list', AuthMiddleware, UserController.userList);
-router.put('/user/name-list', AuthMiddleware, UserController.nameList);
+/* === ROUTES/ADMIN === //*/
+router.get('/admin/users', AuthMiddleware, UserController.getAllUsers)
+router.delete('/admin/users/:id', AuthMiddleware, UserController.deleteUser);
+router.put('/admin/users/:id/role', UserController.updateRole)
 
 router.delete('/minha-lista', async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);

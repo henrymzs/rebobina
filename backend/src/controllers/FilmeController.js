@@ -1,14 +1,14 @@
 const FilmeDAO = require('../models/DAO/FilmeDAO');
 const FilmeSerivce = require('../services/FilmeService');
 
-const adicionarFilme = async (req, res) => {
+const addMovie = async (req, res) => {
     try {
         const { titulo } = req.body;
         const usuarioId = req.usuario.id;
         if (!titulo) {
             return res.status(400).json({ erro: "Nome do filme é obrigatório para busca." });
         }
-        const resultado = await FilmeSerivce.adicionarFilme(titulo, usuarioId);
+        const resultado = await FilmeSerivce.addMovieList(titulo, usuarioId);
         if (!resultado.success) {
             return res.status(404).json({ erro: resultado.message });
         }
@@ -43,4 +43,4 @@ const excluirFilme = async (req, res) => {
     }
 };
 
-module.exports = { adicionarFilme, editarFilme, excluirFilme };
+module.exports = { addMovie, editarFilme, excluirFilme };

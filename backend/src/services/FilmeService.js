@@ -5,7 +5,7 @@ require('dotenv').config();
 const apiKey = process.env.API_KEY;
 
 
-const adicionarFilme = async (titulo, usuarioId) => {
+const addMovieList = async (titulo, usuarioId) => {
     try {
         const lista = await ListaFilmesDAO.findByUserId(usuarioId);
         if (!lista) {
@@ -28,4 +28,4 @@ const adicionarFilme = async (titulo, usuarioId) => {
     }
 }
 
-module.exports = { adicionarFilme };
+module.exports = { addMovieList };

@@ -20,10 +20,10 @@ router.get('/user/profile', AuthMiddleware, UserController.profile);
 router.get('/user/list', AuthMiddleware, UserController.userList);
 router.put('/user/name-list', AuthMiddleware, UserController.nameList);
 
-/* === ROUTES/FILMS === //*/
-router.post('/filmes', AuthMiddleware, FilmeController.addMovie);
-router.put('/filmes/:id',AuthMiddleware, FilmeController.editMovie);
-router.delete('/filmes/:id',AuthMiddleware, FilmeController.deleteMovie);
+/* === ROUTES/FILMS === */
+router.post('/movies', AuthMiddleware, FilmeController.addMovie);
+router.put('/movies/:id',AuthMiddleware, FilmeController.editMovie);
+router.delete('/movies/:id',AuthMiddleware, FilmeController.deleteMovie);
 
 /* === ROUTES/ADMIN === //*/
 router.get('/admin/users', AuthMiddleware, UserController.getAllUsers)

@@ -1,4 +1,3 @@
-const FilmeDAO = require('../models/DAO/FilmeDAO');
 const FilmeSerivce = require('../services/FilmeService');
 
 const addMovie = async (req, res) => {

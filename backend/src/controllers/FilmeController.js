@@ -38,14 +38,14 @@ const editMovie = async (req, res) => {
     }
 }
 
-const excluirFilme = async (req, res) => {
+const deleteMovie = async (req, res) => {
     try {
         const { id } = req.params;
         const usuarioId = req.usuario.id;
         if (isNaN(Number(id))) {
             return res.status(400).json({ erro: "ID inválido." });
         }
-        const resultado = await FilmeSerivce.excluirFilme(Number(id), usuarioId);
+        const resultado = await FilmeSerivce.removeMovieList(Number(id), usuarioId);
         if (!resultado.success) {
             return res.status(404).json({ erro: resultado.message });
         }
@@ -56,4 +56,4 @@ const excluirFilme = async (req, res) => {
     }
 };
 
-module.exports = { addMovie, editMovie, excluirFilme };
+module.exports = { addMovie, editMovie, deleteMovie };

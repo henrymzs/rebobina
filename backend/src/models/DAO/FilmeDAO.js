@@ -49,9 +49,8 @@ class FilmeDAO {
         }
     }
 
-    async filmeDelete(id) {
-        try {
-            const filme = await Filme.findByPk(id);
+    async deleteById(id) {
+        try {             const filme = await Filme.findByPk(id);
             if (!filme) {
                 throw new Error('Filme não encontrado');
             }

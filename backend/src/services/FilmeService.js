@@ -45,4 +45,22 @@ const editMovieList = async (titulo, id, usuarioId) => {
         return { success: false, message: 'Erro ao atualizar o nome do filme', detalhes: error.message };
     }
 };
-module.exports = { addMovieList, editMovieList };
+
+const excluirFilme = async (id, usuarioId) => {
+    try {
+        const filme = await FilmeDAO.findById(id);
+        if (!filme) {
+            return { success: false, message: "Filme não encontrado." };
+        }
+        const listaDoUsuario = await ListaFilmesDAO.findByUserId(usuarioId);
+        if (!listaDoUsuario || filme.listaId !== listaDoUsuario.id) {
+            return { success: false, message: "Você não tem permissão para excluir este filme." };
+        }
+        const filmeExcluido = await FilmeDAO.filmeDelete(id);
+        return { success: true, filmeExcluido };
+    } catch (error) {
+        console.error('Erro ao excluir o filme:', error);
+        return { success: false, message: 'Erro ao excluir o filme', detalhes: error.message };
+    }
+}
+module.exports = { addMovieList, editMovieList, excluirFilme };

@@ -28,7 +28,7 @@ const addMovieList = async (titulo, usuarioId) => {
     }
 }
 
-const editarFilme = async (titulo, id, usuarioId) => {
+const editMovieList = async (titulo, id, usuarioId) => {
     try {
         const filme = await FilmeDAO.findById(id);
         if (!filme) {
@@ -45,4 +45,4 @@ const editarFilme = async (titulo, id, usuarioId) => {
         return { success: false, message: 'Erro ao atualizar o nome do filme', detalhes: error.message };
     }
 };
-module.exports = { addMovieList, editarFilme };
+module.exports = { addMovieList, editMovieList };

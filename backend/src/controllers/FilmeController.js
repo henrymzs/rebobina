@@ -19,7 +19,7 @@ const addMovie = async (req, res) => {
     }
 };
 
-const editarFilme = async (req, res) => {
+const editMovie = async (req, res) => {
     try {
         const { titulo } = req.body
         const { id } = req.params;
@@ -27,7 +27,7 @@ const editarFilme = async (req, res) => {
         if (!titulo) {
             return res.status(400).json({ erro: "Título é obrigatório para edição." });
         }
-        const resultado = await FilmeSerivce.editarFilme(titulo, id, usuarioId);
+        const resultado = await FilmeSerivce.editMovieList(titulo, id, usuarioId);
         if (!resultado.success) {
             return res.status(404).json({ erro: resultado.message });
         }
@@ -47,4 +47,4 @@ const excluirFilme = async (req, res) => {
     }
 };
 
-module.exports = { addMovie, editarFilme, excluirFilme };
+module.exports = { addMovie, editMovie, excluirFilme };

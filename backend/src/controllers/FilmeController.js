@@ -33,17 +33,26 @@ const editMovie = async (req, res) => {
         }
         return res.status(200).json(resultado.filmeAtualizado);
     } catch (error) {
-        res.status(400).json({ erro: error.message });
+        console.error("Erro ao editar filme:", error);
+        return res.status(500).json({ erro: "Erro interno ao editar filme." });
     }
 }
 
 const excluirFilme = async (req, res) => {
     try {
         const { id } = req.params;
-        const resultado = await FilmeDAO.filmeDelete(id);
-        res.status(200).json(resultado);
+        const usuarioId = req.usuario.id;
+        if (isNaN(Number(id))) {
+            return res.status(400).json({ erro: "ID inválido." });
+        }
+        const resultado = await FilmeSerivce.excluirFilme(Number(id), usuarioId);
+        if (!resultado.success) {
+            return res.status(404).json({ erro: resultado.message });
+        }
+        return res.status(200).json(resultado.filmeExcluido);
     } catch (error) {
-        res.status(400).json({ erro: message || 'Erro ao excluir filme.' })
+        console.error("Erro ao excluir filme:", error);
+        return res.status(500).json({ erro: "Erro interno ao excluir filme." });
     }
 };
 

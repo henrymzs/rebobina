@@ -3,8 +3,8 @@ const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 const { formatUsers } = require('../utils/FormatUser');
 
 const fetchAllUsers = async () => {
-  const usuarios = await UsuarioDAO.getAll();
-  return formatUsers(usuarios);
+    const usuarios = await UsuarioDAO.getAll();
+    return formatUsers(usuarios);
 };
 
 const changeUserRole = async (usuarioId) => {
@@ -18,10 +18,10 @@ const changeUserRole = async (usuarioId) => {
 };
 
 const deleteUser = async (usuarioId) => {
-    const listaUsuarios = await ListaFilmesDAO.findByUserId(usuarioId);
-    if (listaUsuarios && listaUsuarios > 0) {
-        for (const lista of listaUsuarios) {
-            await ListaFilmesDAO.deleteLista(usuarioId);            
+    const listasDoUsuario = await ListaFilmesDAO.findByUserId(usuarioId);
+    if (Array.isArray(listasDoUsuario) && listasDoUsuario.length > 0) {
+        for (const lista of listasDoUsuario) {
+            await ListaFilmesDAO.deleteLista(lista.id);
         }
     }
     await UsuarioDAO.delete(usuarioId);

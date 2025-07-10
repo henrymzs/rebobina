@@ -1,10 +1,10 @@
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
-
+const { formatUsers } = require('../utils/FormatUser');
 
 const getAllUsers = async () => {
-    // Deve posteriormente haver filtros na busca de usuários, por isso separando essa função do database para maior flexibilidade
-    return await UsuarioDAO.getAll();
+  const usuarios = await UsuarioDAO.getAll();
+  return formatUsers(usuarios);
 };
 
 const updateRole = async (usuarioId) => {

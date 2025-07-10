@@ -13,7 +13,6 @@ const updateRole = async (usuarioId) => {
     if (!usuario) {
         return { success: false, message: 'Usuário não encontrado' };
     }
-
     usuario.role = usuario.role === "admin" ? "user" : "admin";
     await usuario.save();
     return { success: true, message: `Role do usuário alterada para ${usuario.role}.` };

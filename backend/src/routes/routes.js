@@ -27,8 +27,9 @@ router.delete('/movies/:id',AuthMiddleware, FilmeController.deleteMovie);
 
 /* === ROUTES/ADMIN === //*/
 router.get('/admin/users', AuthMiddleware, UserController.getAllUsers)
+router.put('/admin/user/:id/role', AuthMiddleware, UserController.updateRole)
 router.delete('/admin/users/:id', AuthMiddleware, UserController.deleteUser);
-router.put('/admin/users/:id/role', UserController.updateRole)
+
 
 router.delete('/minha-lista', async (req, res) => {
   const usuarioLogado = await getUsuarioLogado(req);

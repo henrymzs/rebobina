@@ -59,10 +59,13 @@ const getAllUsers = async (req, res) => {
 };
 
 const updateRole = async (req, res) => {
+    const usuario = req.usuario
+    const { id } = req.params;
     try {
-        const usuarioId = req.params.id;
-        const resultado = await UserService.updateRole(usuarioId);
-
+        if (!usuario || usuario.role !== "admin") {
+            return res.status(403).json({ erro: 'Acesso negado! Você precisa ser admin para acessar esta página.' });
+        }
+        const resultado = await UserService.updateRole(id);
         if (resultado.success) {
             return res.status(200).json({ message: resultado.message });
         }

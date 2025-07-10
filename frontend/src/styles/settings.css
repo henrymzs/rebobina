@@ -1,0 +1,266 @@
+
+body {
+    background-color: var(--bg-primary); 
+    color:#e65c00 ; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    min-height: 100vh;
+    box-sizing: border-box; 
+    font-family: var(--font-family); 
+}
+
+/* Botão de voltar */
+.back-button {
+    position: absolute; 
+    top: 25px; 
+    left: 25px;
+    background: none;
+    border: none;
+    font-size: 1.8rem; 
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10; 
+}
+
+.back-button:hover {
+    color: var(--stroke-hightlight); 
+}
+
+/* Contêiner principal das configurações */
+.settings-container {
+    padding: 30px 40px; 
+    width: 100%;
+    max-width: 700px;
+    margin-top: 50px; 
+    margin-bottom: 50px; 
+    display: flex;
+    flex-direction: column;
+    gap: 25px; 
+    align-items: flex-start;
+}
+
+/* Cabeçalho da página de configurações */
+.settings-header {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+    margin-bottom: 25px; 
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333; /* Linha divisória */
+    width: 100%; 
+}
+
+.settings-icon {
+    font-size: 2.5rem; 
+    color: var(--stroke-hightlight); 
+    
+}
+
+.settings-title {
+    font-size: 2em;
+    color: var(--text-primary); 
+    margin: 0; 
+}
+
+.settings-title .underline-orange {
+    text-decoration: underline;
+    text-decoration-color: var(--stroke-hightlight);
+    text-decoration-thickness: 4px;
+}
+
+
+.section-subtitle {
+    font-size: 0.9em;
+    color: #e65c00; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px; 
+    padding-top: 15px; 
+    border-top: 1px solid #333; 
+    width: 100%;
+}
+
+
+.settings-form .section-subtitle:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+
+.form-group-line {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; 
+    gap: 8px; 
+    width: 100%; /* Garante que o grupo ocupe toda a largura */
+}
+
+.form-group-line label {
+    font-size: 1em;
+    color: var(--text-primary); 
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+.form-group-line label i {
+    color: var(--stroke-hightlight); 
+    font-size: 1.1em;
+}
+
+/* Contêiner para o input e o botão de edição */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #2e2e2e;
+    border-radius: 8px;
+    padding-right: 40px; /* Espaço para o botão de lápis */
+    border: 1px solid #444; 
+    width: 100%; /* Garante que o input-with-icon ocupe 100% da largura do pai */
+}
+
+.input-with-icon input,
+.input-with-icon textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: none; 
+    background-color: transparent; /* Fundo transparente para não conflitar com o pai */
+    color: var(--text-primary); 
+    font-size: 1em;
+    border-radius: 8px; 
+    outline: none; /* Remove outline ao focar */
+    box-sizing: border-box; /*  Garante que padding não afete a largura total */
+    min-width: 0; 
+}
+
+
+.input-with-icon textarea::placeholder {
+    color: #888; /* Cor do placeholder para ser visível no fundo escuro */
+}
+
+/* Estilo para quando o campo está focado */
+.input-with-icon input:focus,
+.input-with-icon textarea:focus {
+    box-shadow: 0 0 0 2px var(--stroke-hightlight); 
+}
+
+
+.input-with-icon.textarea-wrapper { 
+    min-height: 120px; 
+    align-items: flex-start; 
+    padding-right: 15px; 
+    padding-top: 12px; /
+}
+
+.input-with-icon textarea {
+    resize: vertical; 
+    flex-grow: 1; 
+    padding-right: 25px; 
+}
+
+/* Botão de edição (lápis) */
+.edit-field-btn {
+    position: absolute;
+    right: 15px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    background: none;
+    border: none;
+    color: var(--stroke-hightlight); 
+    font-size: 1.1em;
+    cursor: pointer;
+    
+}
+
+.edit-field-btn:hover {
+    color: #e65c00; /* Tom mais escuro de laranja */
+    transform: scale(1.1);
+    transition: color 0.3s ease;
+}
+
+/* Estilo para o botão de salvar alterações (se for reativado) */
+.btn-save-changes {
+    background-color: var(--stroke-hightlight);
+    color: #fff; /* Texto branco */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 30px; /* Espaço acima do botão */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-save-changes:hover {
+    background-color: #e65c00; 
+    transform: translateY(-2px);
+}
+
+/* Estilos do formulário */
+.settings-form {
+    width: 100%; /* Garante que o formulário ocupe toda a largura */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .settings-container {
+        padding: 20px 20px; 
+        margin-top: 30px;
+        max-width: 95%; 
+    }
+
+    .settings-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .settings-icon {
+        font-size: 2rem;
+    }
+
+    .settings-title {
+        font-size: 1.6em;
+    }
+
+    .back-button {
+        top: 15px;
+        left: 15px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .settings-container {
+        padding: 15px 15px; 
+        max-width: 98%; 
+    }
+
+    .settings-title {
+        font-size: 1.4em;
+    }
+
+    .section-subtitle {
+        font-size: 0.8em;
+    }
+
+    .input-with-icon input,
+    .input-with-icon textarea {
+        font-size: 0.9em;
+        padding: 10px 12px;
+    }
+
+    .edit-field-btn {
+        font-size: 1em;
+        right:10px;
+   }
+}

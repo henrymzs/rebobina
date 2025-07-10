@@ -7,8 +7,7 @@ const fetchAllUsers = async () => {
   return formatUsers(usuarios);
 };
 
-const updateRole = async (usuarioId) => {
-    console.log("Atualizando role do usuário ID:", usuarioId);
+const changeUserRole = async (usuarioId) => {
     const usuario = await UsuarioDAO.getById(usuarioId);
     if (!usuario) {
         return { success: false, message: 'Usuário não encontrado' };
@@ -44,4 +43,4 @@ const searchUserList = async (usuarioId) => {
     return { sucesso: true, lista };
 }
 
-module.exports = { fetchAllUsers, updateRole, deleteUser, updateNameList, searchUserList };
+module.exports = { fetchAllUsers, changeUserRole, deleteUser, updateNameList, searchUserList };

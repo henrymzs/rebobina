@@ -66,10 +66,10 @@ const updateRole = async (req, res) => {
             return res.status(403).json({ erro: 'Acesso negado! Você precisa ser admin para acessar esta página.' });
         }
         const resultado = await UserService.changeUserRole(id);
-        if (resultado.success) {
-            return res.status(200).json({ message: resultado.message });
+        if (!resultado.success) {
+            return res.status(404).json({ message: resultado.message });
         }
-        return res.status(404).json({ message: resultado.message });
+        return res.status(200).json({ message: resultado.message });
     } catch (error) {
         console.error('Erro ao atualizar role do usuário:', error);
         res.status(500).json({ error: 'Erro ao atualizar role do usuário.' })

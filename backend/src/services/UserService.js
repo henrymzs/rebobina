@@ -2,7 +2,7 @@ const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 const { formatUsers } = require('../utils/FormatUser');
 
-const getAllUsers = async () => {
+const fetchAllUsers = async () => {
   const usuarios = await UsuarioDAO.getAll();
   return formatUsers(usuarios);
 };
@@ -45,4 +45,4 @@ const searchUserList = async (usuarioId) => {
     return { sucesso: true, lista };
 }
 
-module.exports = { getAllUsers, updateRole, deleteUser, updateNameList, searchUserList };
+module.exports = { fetchAllUsers, updateRole, deleteUser, updateNameList, searchUserList };

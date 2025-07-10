@@ -50,7 +50,7 @@ const getAllUsers = async (req, res) => {
         if (!usuario || usuario.role !== "admin") {
             return res.status(403).json({ erro: 'Acesso negado! Você precisa ser admin para acessar esta página.' });
         }
-        const listaUsuarios = await UserService.getAllUsers();
+        const listaUsuarios = await UserService.fetchAllUsers();
         res.status(200).json(listaUsuarios);
     } catch (error) {
          console.error('Erro ao buscar lista de usuários:', error);

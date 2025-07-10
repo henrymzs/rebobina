@@ -66,10 +66,10 @@ const updateRole = async (req, res) => {
             return res.status(403).json({ erro: 'Acesso negado! Você precisa ser admin para acessar esta página.' });
         }
         const resultado = await UserService.changeUserRole(id);
-        if (resultado.success) {
-            return res.status(200).json({ message: resultado.message });
+        if (!resultado.success) {
+            return res.status(404).json({ message: resultado.message });
         }
-        return res.status(404).json({ message: resultado.message });
+        return res.status(200).json({ message: resultado.message });
     } catch (error) {
         console.error('Erro ao atualizar role do usuário:', error);
         res.status(500).json({ error: 'Erro ao atualizar role do usuário.' })
@@ -77,17 +77,17 @@ const updateRole = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
+    const usuario = req.usuario
+    const { id } = req.params;
     try {
-        const usuarioLogado = await UserService.getUsuarioLogado(req);
-        if (!usuarioLogado || usuarioLogado.role !== 'admin') {
-            return res.status(403).json({ error: 'Apenas adminstradores podem utilizar essa funcionalidade.' });
+        if (!usuario || usuario.role !== "admin") {
+            return res.status(403).json({ erro: 'Acesso negado! Você precisa ser admin para acessar esta página.' });
         }
-        const usuarioId = req.params.id;
-        const resultado = await UserService.deleteUser(usuarioId);
+        const resultado = await UserService.deleteUser(id);
         if (!resultado.success) {
             return res.status(404).json({ message: resultado.message });
         }
-        return res.status(404).json({ message: resultado.message });
+        return res.status(200).json({ message: resultado.message });
     } catch (error) {
         console.error('Erro ao excluir usuário: ', error);
         res.status(500).json({ error: 'Erro ao excluir usuário' });

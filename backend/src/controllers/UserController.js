@@ -94,4 +94,18 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { profile, getAllUsers, updateRole, deleteUser, userList, nameList };
+const deleteUserAccount = async (req, res) => {
+  const { id } = req.usuario;
+  try {
+    const resultado = await UserService.deleteUserAccount(id);
+    if (!resultado.success) {
+      return res.status(404).json({ message: resultado.message });
+    }
+    return res.status(200).json({ message: 'Conta excluída com sucesso.' });
+  } catch (error) {
+    console.error('Erro ao excluir conta do usuário:', error);
+    return res.status(500).json({ error: 'Erro interno ao excluir conta.' });
+  }
+};
+
+module.exports = { profile, getAllUsers, updateRole, deleteUser, userList, nameList, deleteUserAccount };

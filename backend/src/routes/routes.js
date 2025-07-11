@@ -15,6 +15,7 @@ router.get('/user/logout', AuthMiddleware, AuthController.logout);
 
 /* === ROUTES/USER === */
 router.get('/user/profile', AuthMiddleware, UserController.profile);
+router.delete('/user', AuthMiddleware, UserController.deleteUserAccount)
 
 /* === ROUTES/LISTS === */
 router.get('/user/list', AuthMiddleware, UserController.userList);

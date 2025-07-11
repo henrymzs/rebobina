@@ -7,6 +7,7 @@ const FilmeDAO = require('../models/DAO/FilmeDAO');
 const AuthController = require('../controllers/AuthController');
 const AuthMiddleware = require('../middleware/AuthMiddleware')
 const UserController = require('../controllers/UserController');
+const AdminController = require('../controllers/AdminController');
 
 /* === ROUTES/AUTH === */
 router.post('/user/register', AuthController.register);
@@ -27,9 +28,9 @@ router.put('/movies/:id',AuthMiddleware, FilmeController.editMovie);
 router.delete('/movies/:id',AuthMiddleware, FilmeController.deleteMovie);
 
 /* === ROUTES/ADMIN === //*/
-router.get('/admin/users', AuthMiddleware, UserController.getAllUsers)
-router.put('/admin/user/:id/role', AuthMiddleware, UserController.updateRole)
-router.delete('/admin/user/:id', AuthMiddleware, UserController.deleteUser);
+router.get('/admin/users', AuthMiddleware, AdminController.getAllUsers)
+router.put('/admin/user/:id/role', AuthMiddleware, AdminController.updateRole)
+router.delete('/admin/user/:id', AuthMiddleware, AdminController.deleteUserAsAdmin);
 
 
 router.delete('/minha-lista', async (req, res) => {

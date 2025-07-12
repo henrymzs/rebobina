@@ -29,4 +29,16 @@ const searchUserList = async (usuarioId) => {
     return { sucesso: true, lista, acessadoPor };
 }
 
-module.exports = { updateNameList, searchUserList, deleteUserAccount };
+const shareList = async (usuarioId) => {
+  const lista = await ListaFilmesDAO.findByUserId(usuarioId);
+  if (!lista || !lista.tokenCompartilhamento) {
+    return {
+      sucesso: false,
+      mensagem: "Lista não encontrada ou sem token de compartilhamento."
+    };
+  }
+  return { sucesso: true, lista };
+};
+
+
+module.exports = { updateNameList, searchUserList, deleteUserAccount, shareList };

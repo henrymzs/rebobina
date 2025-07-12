@@ -1,3 +1,4 @@
+const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const UserService = require('../services/UserService');
 
 const profile = async (req, res) => {
@@ -59,4 +60,19 @@ const deleteUserAccount = async (req, res) => {
   }
 };
 
-module.exports = { profile, userList, nameList, deleteUserAccount };
+const userShareList = async (req, res) => {
+    const usuarioId = req.usuario.id;
+    try {
+        const resultado = await UserService.shareList(usuarioId);
+        if (!resultado.sucesso) {
+            return res.status(404).json({ error: resultado.mensagem });
+        }
+        const linkCompartilhamento = `https://meusistema.com/lista-filmes/${resultado.lista.tokenCompartilhamento}`;
+        res.status(200).json({ link: linkCompartilhamento });
+    } catch (error) {
+        console.error('Erro ao gerar link de compartilhamento:', error);
+        res.status(500).json({ error: 'Erro ao gerar link de compartilhamento.' });
+    }
+}
+
+module.exports = { profile, userList, nameList, deleteUserAccount, userShareList };

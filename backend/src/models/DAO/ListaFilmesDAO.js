@@ -13,14 +13,7 @@ class ListaFilmesDAO {
     }
 
     async findByUserId(usuarioId) {
-        try {
-            const lista = await ListaFilmes.findOne({ where: { usuarioId } });
-            return lista || [];
-        } catch (error) {
-            console.error('Erro ao buscar lista de filmes: ', error);
-            throw new Error("Erro ao buscar lista do usuário.")
-
-        }
+        return await ListaFilmes.findOne({ where: { usuarioId } });
     }
 
     async updateLista(usuarioId, nomeNovo) {
@@ -31,7 +24,7 @@ class ListaFilmesDAO {
                 return { sucesso: false, mensagem: 'Usuário não possui uma lista de filmes para editar.' };
             }
             lista.nomeLista = nomeNovo || lista.nomeLista;
-            await lista.save(); 
+            await lista.save();
             return { sucesso: true, lista };
         } catch (error) {
             console.error('Erro ao atualizar lista de filmes:', error);
@@ -41,7 +34,7 @@ class ListaFilmesDAO {
 
     async deleteLista(usuarioId) {
         try {
-            const lista = await ListaFilmes.findOne({ where: {usuarioId} });
+            const lista = await ListaFilmes.findOne({ where: { usuarioId } });
             if (!lista) {
                 return { sucesso: false, mensagem: 'Usuário não possui uma lista de filmes para excluir.' };
             }

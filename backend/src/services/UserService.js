@@ -1,4 +1,5 @@
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
+const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
 
 const deleteUserAccount = async (usuarioId) => {
@@ -24,7 +25,8 @@ const searchUserList = async (usuarioId) => {
     if (!lista) {
         return { sucesso: false, mensagem: "Lista não encontrada para este usuário." };
     }
-    return { sucesso: true, lista };
+    const acessadoPor = await ListasAcessadasDAO.buscarAcessosPorLista(lista.id);
+    return { sucesso: true, lista, acessadoPor };
 }
 
 module.exports = { updateNameList, searchUserList, deleteUserAccount };

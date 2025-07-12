@@ -73,24 +73,6 @@ router.get('/minha-lista/compartilhar', async (req, res) => {
   }
 });
 
-router.get('/lista-filmes/:token', async (req, res) => {
-  const { token } = req.params;
-  const usuarioLogado = await getUsuarioLogado(req);
-  try {
-    const resultado = await ListaFilmesDAO.findByToken(token);
-    if (!resultado.sucesso) {
-      return res.status(404).json({ error: resultado.mensagem });
-    }
-    if (usuarioLogado) {
-      await ListasAcessadasDAO.registrarAcesso(usuarioLogado.id, resultado.lista.id);
-    }
-    res.status(200).json({ lista: resultado.lista });
-  } catch (error) {
-    console.error('Erro ao buscar lista filmes:', error);
-    res.status(500).json({ error: 'Erro ao buscar lista .' });
-  }
-});
-
  router.get('/info-lista/:token', AuthMiddleware, async (req, res) => {
    const { token } = req.params;
   const usuarioLogado = await getUsuarioLogado(req);

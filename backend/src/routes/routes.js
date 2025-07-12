@@ -19,27 +19,6 @@ router.get('/user/profile', AuthMiddleware, UserController.profile);
 router.delete('/user', AuthMiddleware, UserController.deleteUserAccount)
 
 /* === ROUTES/LISTS === */
-router.get('/minha-lista/compartilhar', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    return res.status(403).json({ error: 'Usuário não autenticado.' });
-  }
-
-  try {
-    const resultado = await ListaFilmesDAO.findByUserId(usuarioLogado.id);
-    if (!resultado.sucesso) {
-      return res.status(404).json({ error: resultado.mensagem });
-    }
-
-    const linkCompartilhamento = `https://meusistema.com/lista-filmes/${resultado.lista.tokenCompartilhamento}`;
-
-    res.status(200).json({ link: linkCompartilhamento });
-
-  } catch (error) {
-    console.error('Erro ao gerar link de compartilhamento:', error);
-    res.status(500).json({ error: 'Erro ao gerar link de compartilhamento.' });
-  }
-});
 router.get('/user/share-list', AuthMiddleware, UserController.userShareList)
 router.get('/user/list', AuthMiddleware, UserController.userList);
 router.put('/user/name-list', AuthMiddleware, UserController.nameList);

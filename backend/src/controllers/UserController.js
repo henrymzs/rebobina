@@ -22,7 +22,7 @@ const userList = async (req, res) => {
         if (!resultado.sucesso) {
             return res.status(404).json({ error: resultado.mensagem });
         }
-        return res.status(200).json(resultado);
+        return res.status(200).json(resultado.dadosFormatados);
     } catch (error) {
         console.error("Erro ao buscar lista do usuário", error);
         return res.status(500).json({ error: 'Erro ao buscar lista do usuário.' });

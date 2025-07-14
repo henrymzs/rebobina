@@ -1,3 +1,4 @@
+const FilmeDAO = require('../models/DAO/FilmeDAO');
 const ListaFilmesDAO = require('../models/DAO/ListaFilmesDAO');
 const ListasAcessadasDAO = require('../models/DAO/ListasAcessadasDAO');
 const UsuarioDAO = require('../models/DAO/UsuarioDAO');
@@ -26,18 +27,27 @@ const searchUserList = async (usuarioId) => {
         return { sucesso: false, mensagem: "Lista não encontrada para este usuário." };
     }
     const acessadoPor = await ListasAcessadasDAO.buscarAcessosPorLista(lista.id);
-    return { sucesso: true, lista, acessadoPor };
-}
+    const filmes = await FilmeDAO.findAllByLista(lista.id);
+    return {
+        sucesso: true, dadosFormatados: {
+            idLista: lista.id,
+            owner: lista.usuarioId,
+            filmes: filmes,
+            usuariosQueAcessaram: acessadoPor || []
+
+        }
+    };
+};
 
 const shareList = async (usuarioId) => {
-  const lista = await ListaFilmesDAO.findByUserId(usuarioId);
-  if (!lista || !lista.tokenCompartilhamento) {
-    return {
-      sucesso: false,
-      mensagem: "Lista não encontrada ou sem token de compartilhamento."
-    };
-  }
-  return { sucesso: true, lista };
+    const lista = await ListaFilmesDAO.findByUserId(usuarioId);
+    if (!lista || !lista.tokenCompartilhamento) {
+        return {
+            sucesso: false,
+            mensagem: "Lista não encontrada ou sem token de compartilhamento."
+        };
+    }
+    return { sucesso: true, lista };
 };
 
 

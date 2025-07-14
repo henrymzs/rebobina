@@ -52,31 +52,4 @@ router.delete('/minha-lista', async (req, res) => {
   }
 })
 
-
- router.get('/info-lista/:token', AuthMiddleware, async (req, res) => {
-   const { token } = req.params;
-  const usuarioLogado = await getUsuarioLogado(req);
-
-   try {
-    const resultado = await ListaFilmesDAO.findByToken(token);
-     if (!resultado.sucesso) {
-      return res.status(404).json({ error: resultado.mensagem });
-     }
-     const acessos = await ListasAcessadasDAO.buscarAcessosPorLista(resultado.lista.id);
-     const filmes = await FilmeDAO.findAllByLista(resultado.lista.id);
-     res.status(200).json({
-       nomeLista: resultado.lista.nomeLista,
-       dono: resultado.lista.usuarioId,
-      tokenCompartilhamento: resultado.lista.tokenCompartilhamento,
-       usuariosQueAcessaram: acessos || [],
-       usuarioAtual: usuarioLogado ? { id: usuarioLogado.id, nome: usuarioLogado.nome } : null,
-       filmes: filmes || []
-     });
-
-   } catch (error) {
-     console.error('Erro ao obter informações da lista:', error);
-     res.status(500).json({ error: 'Erro ao obter informações da lista.' });
-   }
- });
- 
 module.exports = router;

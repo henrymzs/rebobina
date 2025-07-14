@@ -33,23 +33,4 @@ router.get('/admin/users', AuthMiddleware, AdminController.getAllUsers)
 router.put('/admin/user/:id/role', AuthMiddleware, AdminController.updateRole)
 router.delete('/admin/user/:id', AuthMiddleware, AdminController.deleteUserAsAdmin);
 
-
-router.delete('/minha-lista', async (req, res) => {
-  const usuarioLogado = await getUsuarioLogado(req);
-  if (!usuarioLogado) {
-    return res.status(403).json({ error: 'Usuário não autenticado. ' })
-  }
-  try {
-    await ListasAcessadasDAO.excluirAcessosPorLista(usuarioLogado.id);
-    const resultado = await ListaFilmesDAO.deleteLista(usuarioLogado.id);
-    if (!resultado.sucesso) {
-      return res.status(404).json({ error: resultado.mensagem });
-    }
-    res.status(200).json({ message: 'Lista excluída com sucesso!' });
-  } catch (error) {
-    console.error('Erro na rota de exclusão da lista:', error);
-    res.status(500).json({ error: 'Erro ao exclusão lista.' });
-  }
-})
-
 module.exports = router;

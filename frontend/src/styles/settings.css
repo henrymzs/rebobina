@@ -115,11 +115,9 @@ body {
 .input-with-icon {
     position: relative;
     display: flex;
-    align-items: center;
-    background-color: #2e2e2e;
+    background-color: #2e2d2d4b;
     border-radius: 8px;
-    padding-right: 40px; /* Espaço para o botão de lápis */
-    border: 1px solid #444; 
+    padding-right: 40px; /* Espaço para o botão de lápis */ 
     width: 100%; /* Garante que o input-with-icon ocupe 100% da largura do pai */
 }
 
@@ -153,7 +151,7 @@ body {
     min-height: 120px; 
     align-items: flex-start; 
     padding-right: 15px; 
-    padding-top: 12px; /
+    
 }
 
 .input-with-icon textarea {

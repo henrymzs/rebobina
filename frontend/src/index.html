@@ -28,7 +28,7 @@
                                 <img src="/frontend/public/icone-perfil.png" alt="Icone de Usuário">
                                 <input id="name" name="fullname" type="text" placeholder="Digite seu Nome">
                             </div>
-                            <p id="name-error" class="input-error">Por favor, insira seu nome.</p>
+                            <p id="name-error" class="input-error">O nome deve conter apenas letras sem acento.</p>
                         </div>
 
                         <div class="input-wrapper">
@@ -66,13 +66,16 @@
         </main>
     </div>
     <script src="./toggle.js"></script>
+    <script src="./validator.js"></script>
+    <script src="./register.js"></script>
+    
     <script>
-
+/*
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('form');
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
-            const emailError = document.getElementById('email-error');
+            const inputError = document.getElementById('input-error');
             const passwordError = document.getElementById('password-error');
 
             form.addEventListener('submit', async function (e) {
@@ -80,10 +83,10 @@
                 let isValid = true;
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(emailInput.value.trim())) {
-                    emailError.style.display = 'block';
+                    inputError.style.display = 'block';
                     isValid = false;
                 } else {
-                    emailError.style.display = 'none';
+                    inputError.style.display = 'none';
                 }
 
                 if (passwordInput.value.length < 6) {
@@ -120,6 +123,7 @@
                 }
             });
         });
+        */
     </script>
 </body>
 </html>

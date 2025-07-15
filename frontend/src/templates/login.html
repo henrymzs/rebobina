@@ -47,7 +47,7 @@
                             <div class="input-icon">
                                 <img src="/frontend/public/Icone-cadeado.png" alt="ícone de cadeado">
                                 <input id="password" name="password" type="password" placeholder="Digite sua senha">
-                                <span class="toggle-password" onclick="togglePassword()">👁</span>
+                                <button type="button" class="toggle-password" id="eye">👁</button>
                             </div>
                             <p id="password-error" class="input-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>
@@ -67,6 +67,7 @@
             </div>
         </main>
     </div>
+    <script src="../toggle.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -80,6 +81,7 @@
                 e.preventDefault();
                 let isValid = true;
 
+                
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(emailInput.value.trim())) {
                     emailError.style.display = 'block';
@@ -122,11 +124,7 @@
                 }
             });
         });
-        window.togglePassword = function () {
-            const passwordInput = document.getElementById('password');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-        };
+
     </script>
 
 </body>

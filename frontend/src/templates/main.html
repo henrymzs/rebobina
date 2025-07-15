@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +12,6 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
   <div class="container">
     <header class="header">
@@ -103,180 +101,180 @@
       </div>
     </section>
 
-        </main>
+    </main>
+  </div>
+
+  <section class="modal" id="addLinkModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModalBtn">&times;</span>
+      <h2 class="modal-title">Adicionar Novo Link</h2>
+      <form id="addLinkForm">
+        <div class="form-group">
+          <label for="movieName">Nome do Filme</label>
+          <input type="text" id="movieName" placeholder="Digite o nome do filme" required>
+        </div>
+        <button type="submit" class="btn-primary submit-btn">Buscar Informações</button>
+      </form>
     </div>
+  </section>
 
-    <section class="modal" id="addLinkModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModalBtn">&times;</span>
-            <h2 class="modal-title">Adicionar Novo Link</h2>
-            <form id="addLinkForm">
-                <div class="form-group">
-                    <label for="movieName">Nome do Filme</label>
-                    <input type="text" id="movieName" placeholder="Digite o nome do filme" required>
-                </div>
-                <button type="submit" class="btn-primary submit-btn">Buscar Informações</button>
-            </form>
-        </div>
-    </section>
+  <footer class="footer">
+    <div class="users-container">
 
-    <footer class="footer">
-        <div class="users-container">
-        
-             <button class="button btn-footer-icon"  id="randomizeCardsBtn">
-                <i class="fa-solid fa-dice"></i>
-            </button>
-            <button class="button btn-footer-icon" id="accountSettingsBtn">
-                <i class="fas fa-user"></i>
-            </button>
-            <button class="button btn-footer-icon" id="logoutBtnFooter">
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </button>
-            
-        </div>
-    </footer>
-    <script>
-        /*
-        const token = localStorage.getItem('token');
-        if (!token) {
-            alert('Acesso negado! Faça login primeiro! ');
-            window.location.href = './login.html';
+      <button class="button btn-footer-icon" id="randomizeCardsBtn">
+        <i class="fa-solid fa-dice"></i>
+      </button>
+      <button class="button btn-footer-icon" id="accountSettingsBtn">
+        <i class="fas fa-user"></i>
+      </button>
+      <button class="button btn-footer-icon" id="logoutBtnFooter">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+
+    </div>
+  </footer>
+  <script>
+    /*
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Acesso negado! Faça login primeiro! ');
+        window.location.href = './login.html';
+    }
+  */
+    document.addEventListener('DOMContentLoaded', function () {
+      const openModalBtn = document.getElementById('openModalBtn');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const modal = document.getElementById('addLinkModal');
+      const addLinkForm = document.getElementById('addLinkForm');
+      const linksContainer = document.getElementById('linksContainer');
+      const movieNameInput = document.getElementById('movieName');
+      const listaId = localStorage.getItem('listaId');
+
+      // Referências aos novos botões do rodapé 
+      const randomizeCardsBtn = document.getElementById('randomizeCardsBtn');
+      const accountSettingsBtn = document.getElementById('accountSettingsBtn');
+      const logoutBtnFooter = document.getElementById('logoutBtnFooter'); // ID do botão de sair no rodapé
+
+      // Botão do Dado (Aleatorizar Cards)
+      if (randomizeCardsBtn) { // Garante que o botão existe
+        randomizeCardsBtn.addEventListener('click', function () {
+          const linksContainerElement = document.querySelector('.container'); // Seleciona o container principal dos cards
+          const cards = Array.from(document.querySelectorAll('.link-card')); // Seleciona todos os cards
+
+          // Função para embaralhar um array (Fisher-Yates)
+          function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]]; // Troca elementos
+            }
+          }
+
+          shuffleArray(cards); // Embaralha os cards
+
+          // Remove os cards existentes e adiciona-os na nova ordem
+          cards.forEach(card => {
+            linksContainerElement.appendChild(card);
+          });
+          alert('Cards aleatorizados!'); // Opcional: feedback para o usuário
+        });
+      }
+
+      // Botão de Perfil (Configurações da Conta)
+      if (accountSettingsBtn) { // Garante que o botão existe
+        accountSettingsBtn.addEventListener('click', function () {
+          // Altere './configuracoes.html' para o caminho real da sua página de configurações
+          window.location.href = './configuracoes.html';
+        });
+      }
+
+      // Botão de Sair (Logout) - AGORA USANDO O ID DO BOTÃO DO RODAPÉ
+      if (logoutBtnFooter) {
+        logoutBtnFooter.addEventListener('click', () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("usuarioId");
+
+          alert("Você saiu da conta!");
+          window.location.href = "./login.html"; // Redireciona para a página de login
+        });
+      }
+
+
+      openModalBtn.addEventListener('click', function () {
+        modal.style.display = 'flex';
+      });
+
+      closeModalBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+      });
+
+      window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
         }
-      */
-        document.addEventListener('DOMContentLoaded', function () {
-            const openModalBtn = document.getElementById('openModalBtn');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const modal = document.getElementById('addLinkModal');
-            const addLinkForm = document.getElementById('addLinkForm');
-            const linksContainer = document.getElementById('linksContainer');
-            const movieNameInput = document.getElementById('movieName');
-            const listaId = localStorage.getItem('listaId');
+      });
 
-               // Referências aos novos botões do rodapé 
-        const randomizeCardsBtn = document.getElementById('randomizeCardsBtn');
-        const accountSettingsBtn = document.getElementById('accountSettingsBtn');
-        const logoutBtnFooter = document.getElementById('logoutBtnFooter'); // ID do botão de sair no rodapé
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("usuarioId");
 
-        // Botão do Dado (Aleatorizar Cards)
-        if (randomizeCardsBtn) { // Garante que o botão existe
-            randomizeCardsBtn.addEventListener('click', function() {
-                const linksContainerElement = document.querySelector('.container'); // Seleciona o container principal dos cards
-                const cards = Array.from(document.querySelectorAll('.link-card')); // Seleciona todos os cards
+        alert("Você saiu da conta!");
+        window.location.href = "./login.html";
+      });
 
-                // Função para embaralhar um array (Fisher-Yates)
-                function shuffleArray(array) {
-                    for (let i = array.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [array[i], array[j]] = [array[j], array[i]]; // Troca elementos
-                    }
-                }
+      addLinkForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const titulo = movieNameInput.value.trim();
 
-                shuffleArray(cards); // Embaralha os cards
-
-                // Remove os cards existentes e adiciona-os na nova ordem
-                cards.forEach(card => {
-                    linksContainerElement.appendChild(card);
-                });
-                alert('Cards aleatorizados!'); // Opcional: feedback para o usuário
-            });
+        if (!titulo) {
+          alert('Por favor, digite um nome válido');
+          return;
         }
 
-        // Botão de Perfil (Configurações da Conta)
-        if (accountSettingsBtn) { // Garante que o botão existe
-            accountSettingsBtn.addEventListener('click', function() {
-                // Altere './configuracoes.html' para o caminho real da sua página de configurações
-                window.location.href = './configuracoes.html';
-            });
+        if (!listaId) {
+          alert('Erro ao recuperar credenciais do usuário');
         }
 
-        // Botão de Sair (Logout) - AGORA USANDO O ID DO BOTÃO DO RODAPÉ
-        if (logoutBtnFooter) { 
-            logoutBtnFooter.addEventListener('click', () => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("usuarioId");
+        try {
+          if (!token || !listaId) {
+            alert('Erro ao recuperar credenciais do usuário');
+            return;
+          }
+          const response = await fetch('http://localhost:3000/filmes', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            credentials: 'include',
+            body: JSON.stringify({ titulo, listaId })
+          });
 
-                alert("Você saiu da conta!");
-                window.location.href = "./login.html"; // Redireciona para a página de login
-            });
-        }
+          const data = await response.json();
+          if (data.sucesso) {
+            alert('Filme adicionado com sucesso!');
+            modal.style.display = 'none';
+            movieNameInput.value = '';
 
-
-            openModalBtn.addEventListener('click', function () {
-                modal.style.display = 'flex';
-            });
-
-            closeModalBtn.addEventListener('click', function () {
-                modal.style.display = 'none';
-            });
-
-            window.addEventListener('click', function (event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-
-            document.getElementById("logoutBtn").addEventListener("click", () => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("usuarioId");
-
-                alert("Você saiu da conta!");
-                window.location.href = "./login.html";
-            });
-
-            addLinkForm.addEventListener('submit', async function (e) {
-                e.preventDefault();
-                const titulo = movieNameInput.value.trim();
-
-                if (!titulo) {
-                    alert('Por favor, digite um nome válido');
-                    return;
-                }
-
-                if (!listaId) {
-                    alert('Erro ao recuperar credenciais do usuário');
-                }
-
-                try {
-                    if (!token || !listaId) {
-                        alert('Erro ao recuperar credenciais do usuário');
-                        return;
-                    }
-                    const response = await fetch('http://localhost:3000/filmes', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        credentials: 'include',
-                        body: JSON.stringify({ titulo, listaId })
-                    });
-
-                    const data = await response.json();
-                    if (data.sucesso) {
-                        alert('Filme adicionado com sucesso!');
-                        modal.style.display = 'none';
-                        movieNameInput.value = '';
-
-                        const newCard = document.createElement('section');
-                        newCard.classList.add('link-card');
-                        newCard.innerHTML = `
+            const newCard = document.createElement('section');
+            newCard.classList.add('link-card');
+            newCard.innerHTML = `
                             <h3 class="movie-title">${titulo}</h3>
                             <div class="card-actions">
                                 <button class="action-btn edit-btn"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
                             </div>
                         `;
-                        linksContainer.appendChild(newCard);
-                    } else {
-                        alert(`Erro: ${data.erro}`);
-                    }
-                } catch (error) {
-                    alert('Erro ao conectar ao servidor');
-                }
-            });
-        });
-        
-    </script>               
+            linksContainer.appendChild(newCard);
+          } else {
+            alert(`Erro: ${data.erro}`);
+          }
+        } catch (error) {
+          alert('Erro ao conectar ao servidor');
+        }
+      });
+    });
+
+  </script>
 </body>
 
 </html>

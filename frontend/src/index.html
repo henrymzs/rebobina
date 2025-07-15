@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,7 @@
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -46,7 +45,7 @@
                             <div class="input-icon">
                                 <img src="/frontend/public/Icone-cadeado.png" alt="Ícone de Cadeado">
                                 <input id="password" name="password" type="password" placeholder="Digite sua Senha">
-                                <span class="toggle-password" onclick="togglePassword()">👁</span>
+                                <button type="button" class="toggle-password" id="eye">👁</button>
                             </div>
                             <p id="password-error" class="input-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>
@@ -61,12 +60,12 @@
                             Já tem cadastro? Clique <a href="./templates/login.html">AQUI</a> e acesse sua conta agora!
                         </label>
                     </div>
-                    
+
                 </form>
             </div>
         </main>
     </div>
-
+    <script src="./toggle.js"></script>
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -79,7 +78,6 @@
             form.addEventListener('submit', async function (e) {
                 e.preventDefault();
                 let isValid = true;
-
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(emailInput.value.trim())) {
                     emailError.style.display = 'block';
@@ -122,12 +120,6 @@
                 }
             });
         });
-        
-        window.togglePassword = function () {
-            const passwordInput = document.getElementById('password');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-        };
     </script>
 </body>
 </html>

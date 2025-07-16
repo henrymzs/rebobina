@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rebobina</title>
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -23,7 +24,7 @@
                         <div class="input-wrapper">
                             <label for="email">E-mail</label>
                             <div class="input-icon">
-                                <img src="/frontend/public/icone-email.png" alt="Ícone de e-mail">
+                                <i class="fa-solid fa-envelope"></i>
                                 <input id="email" name="email" type="email" placeholder="Digite seu e-mail">
                             </div>
                             <p id="email-error" class="input-error">Por favor, insira um e-mail válido.</p>
@@ -32,9 +33,9 @@
                         <div class="input-wrapper">
                             <label for="password">Senha</label>
                             <div class="input-icon">
-                                <img src="/frontend/public/Icone-cadeado.png" alt="ícone de cadeado">
+                                <i class="fa-solid fa-lock"></i>
                                 <input id="password" name="password" type="password" placeholder="Digite sua senha">
-                                <button type="button" class="toggle-password" id="eye">👁</button>
+                                <button class="eye"><i class="fa-solid fa-eye"></i></button>
                             </div>
                             <p id="password-error" class="input-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>

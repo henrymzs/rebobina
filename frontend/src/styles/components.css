@@ -101,7 +101,6 @@ input:invalid {
 .input-icon i {
   position: absolute;
   left: 12px;
-  color: #555;
   pointer-events: none;
 }
 
@@ -115,7 +114,6 @@ input:invalid {
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #555;
 }
 
 /* === COMPONENTE/MODAL === */

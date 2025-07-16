@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -7,8 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rebobina</title>
     <link rel="stylesheet" href="./src/styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <aside id="aside-container"></aside>
@@ -23,8 +26,9 @@
                         <div class="input-wrapper">
                             <label for="name">Nome</label>
                             <div class="input-icon">
-                                <img src="/frontend/public/icone-perfil.png" alt="Icone de Usuário">
-                                <input id="name" name="fullname" type="text" placeholder="Digite seu Nome">
+                                <i class="fa-solid fa-user"></i>
+                                <input id="name" name="fullname" type="text"
+                                    placeholder="Digite seu Nome">
                             </div>
                             <p id="name-error" class="input-error">O nome deve conter apenas letras sem acento.</p>
                         </div>
@@ -32,8 +36,8 @@
                         <div class="input-wrapper">
                             <label for="email">E-mail</label>
                             <div class="input-icon">
-                                <img src="/frontend/public/icone-email.png" alt="Icone de E-mail">
-                                <input id="email" name="email" type="email" placeholder="Digite seu E-mail">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" placeholder="Digite seu e-mail" />
                             </div>
                             <p id="email-error" class="input-error">Por favor, insira um E-mail válido.</p>
                         </div>
@@ -41,9 +45,9 @@
                         <div class="input-wrapper">
                             <label for="password">Senha</label>
                             <div class="input-icon">
-                                <img src="/frontend/public/Icone-cadeado.png" alt="Ícone de Cadeado">
+                                <i class="fa-solid fa-lock"></i>
                                 <input id="password" name="password" type="password" placeholder="Digite sua Senha">
-                                <button type="button" class="toggle-password" id="eye">👁</button>
+                                <button class="eye"><i class="fa-solid fa-eye"></i></button>
                             </div>
                             <p id="password-error" class="input-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>
@@ -55,7 +59,8 @@
 
                     <div class="terms-wrapper input-wrapper">
                         <label for="terms">
-                            Já tem cadastro? Clique <a href="./src/templates/login.html">AQUI</a> e acesse sua conta agora!
+                            Já tem cadastro? Clique <a href="./src/templates/login.html">AQUI</a> e acesse sua conta
+                            agora!
                         </label>
                     </div>
                 </form>
@@ -68,4 +73,5 @@
     <script src="./src/scripts/register.js"></script>
 
 </body>
+
 </html>

@@ -16,12 +16,10 @@
     padding: 20px;
     flex: 1;
 }
-    
 
 .links-container {
     max-height: 60vh;
 }
-
 
 .link-card {
     background-color: #222;
@@ -50,8 +48,6 @@
   border-radius: 8px;
 }
 
-
-
 .card-content {
   flex: 1;
   display: flex;
@@ -66,7 +62,6 @@
   justify-content: space-between;
   gap: 10px;
 }
-
 
 .movie-title {
     font-weight: 600;
@@ -119,8 +114,8 @@
 .action-btn {
     color: #f97316;
     transition: all 0.3s ease;
-    cursor: pointer; 
-    padding: 5px;   
+    cursor: pointer;
+    padding: 5px;
 }
 
 .action-btn:hover {
@@ -151,7 +146,7 @@
 
 .user-btn:hover {
     background-color: var(--stroke-hightlight);
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 /* === LOGIN/CADASTRO === */
@@ -166,7 +161,7 @@
 #aside-container {
     background-image: url('/frontend/public/logo-rebobina.png');
     background-size: cover;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
 }
 
 /* === MAIN/RIGHT === */

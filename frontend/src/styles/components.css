@@ -12,7 +12,7 @@ button {
 .btn-primary {
     color: #000000;
     background-color: var(--btn-color);
-    
+
 }
 
 .btn-primary:hover {
@@ -90,6 +90,32 @@ input:focus {
 
 input:invalid {
     border: 0.125rem solid var(--semantic-error);
+}
+
+.input-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 12px;
+  color: #555;
+  pointer-events: none;
+}
+
+.input-icon input {
+  padding-left: 36px; /* espaço para o ícone */
+}
+
+.eye {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #555;
 }
 
 /* === COMPONENTE/MODAL === */
@@ -257,7 +283,7 @@ fieldset + fieldset {
 
 .input-icon input {
     width: 100%;
-    padding: 0.75rem 1rem 0.75rem 3rem; 
+    padding: 0.75rem 1rem 0.75rem 3rem;
     border: 1px solid var(--stroke-dark);
     border-radius: 0.5rem;
     font-size: 1rem;
@@ -282,6 +308,5 @@ fieldset + fieldset {
 }
 
 
-  
 
-  
+

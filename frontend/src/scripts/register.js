@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showError(nameErro, !validName);
 
     if (validEmail && validPassword) {
-      form.submit(); 
+        registerUser();
     }
   });
 });

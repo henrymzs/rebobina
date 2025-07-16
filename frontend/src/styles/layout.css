@@ -9,7 +9,7 @@
 }
 
 /* === LINKS DE FILMES === */
-.container {
+#container {
     width: 80%;
     max-width: 1200px;
     margin: 0 auto;
@@ -17,13 +17,22 @@
     flex: 1;
 }
 
-.links-container {
-    max-height: 60vh;
+#container-links {
+  max-height: 600px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  display: block;
+  padding-right: 8px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color:  #333 #222;
 }
 
 .link-card {
     background-color: #222;
-    width: 800px;
+    max-width: 800px;
     height: 82px;
     border-radius: 20px;
     margin-bottom: 1rem;
@@ -68,12 +77,6 @@
     font-size: 1rem;
 }
 
-.links-functions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .watch-on {
    color: #111;
     background-color: #ff5a00;
@@ -110,15 +113,22 @@
 }
 
 .action-btn {
-    color: #f97316;
+    color: #ffffff;
     transition: all 0.3s ease;
     cursor: pointer;
     padding: 5px;
 }
 
 .action-btn:hover {
-    color: #f97316;
     transform: scale(1.1);
+}
+
+.edit-btn:hover {
+    color: #d66000;
+}
+
+.delete-btn:hover {
+    color: #f91616;
 }
 
 

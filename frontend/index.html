@@ -27,7 +27,7 @@
                             <label for="name">Nome</label>
                             <div class="input-icon">
                                 <i class="fa-solid fa-user"></i>
-                                <input id="name" name="fullname" type="text"
+                                <input id="name" name="name" type="text"
                                     placeholder="Digite seu Nome">
                             </div>
                             <p id="name-error" class="input-error">O nome deve conter apenas letras sem acento.</p>
@@ -37,7 +37,7 @@
                             <label for="email">E-mail</label>
                             <div class="input-icon">
                                 <i class="fa-solid fa-envelope"></i>
-                                <input type="email" placeholder="Digite seu e-mail" />
+                                <input id="email" name="email" type="email" placeholder="Digite seu e-mail" />
                             </div>
                             <p id="email-error" class="input-error">Por favor, insira um E-mail válido.</p>
                         </div>
@@ -47,7 +47,7 @@
                             <div class="input-icon">
                                 <i class="fa-solid fa-lock"></i>
                                 <input id="password" name="password" type="password" placeholder="Digite sua Senha">
-                                <button id="eye-lock" class="eye"><i class="fa-solid fa-eye"></i></button>
+                                <button type="button" id="eye-lock" class="eye"><i class="fa-solid fa-eye"></i></button>
                             </div>
                             <p id="password-error" class="input-error">A senha deve ter pelo menos 6 caracteres.</p>
                         </div>
@@ -70,6 +70,7 @@
 
     <script src="./src/scripts/toggle.js"></script>
     <script src="./src/scripts/validator.js"></script>
+    <script src="./src/scripts/registerUser.js"></script>
     <script src="./src/scripts/register.js"></script>
 
 </body>

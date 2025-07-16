@@ -126,27 +126,19 @@
 
 /* === FOOTER/MAIN === */
 .footer {
-    padding: 8px;
+    padding: 1.2rem;
     margin-top: auto;
-}
-
-.users-container {
     display: flex;
     justify-content: center;
-    gap: 8px;
 }
 
-.user-btn {
-    height: 50%;
-    border-radius: 50%;
-    color: var(--text-primary);
-    transition: all 0.3s ease;
-    background-color: var(--btn-color);
-}
-
-.user-btn:hover {
-    background-color: var(--stroke-hightlight);
-    transform: scale(1.1);
+.btn-container {
+    border: 1px solid #222;
+    border-radius: 12px;
+    width: 12%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
 }
 
 /* === LOGIN/CADASTRO === */

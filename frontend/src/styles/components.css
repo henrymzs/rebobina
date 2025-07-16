@@ -8,6 +8,17 @@ button {
     transition: all 0.3s ease;
 }
 
+.btn-primary {
+    color: #000000;
+    background-color: var(--btn-color);
+
+}
+
+.btn-primary:hover {
+    background-color: var(--stroke-hightlight);
+    transform: translateY(-2px);
+}
+
 .btn-add-link {
     color: #ff5a00;
     border: 2px solid #ff5a00;

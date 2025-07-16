@@ -24,7 +24,7 @@
 .link-card {
     background-color: #222;
     width: 800px;
-    height: 72px;
+    height: 82px;
     border-radius: 20px;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
@@ -57,10 +57,9 @@
 
 
 .card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+    display: flex;
+    text-align: left;
+    gap: 12px;
 }
 
 .movie-title {
@@ -83,7 +82,6 @@
     padding: 3px 10px;
     border-radius: 20px;
     text-transform: lowercase;
-    margin: 10px auto auto 0px;
 }
 
 .watch-on i {
@@ -108,7 +106,7 @@
 .card-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 18px;
 }
 
 .action-btn {

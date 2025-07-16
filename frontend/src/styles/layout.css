@@ -64,7 +64,6 @@
   justify-content: center;
 }
 
-
 .card-header {
     display: flex;
     text-align: left;
@@ -131,7 +130,6 @@
     color: #f91616;
 }
 
-
 /* === FOOTER/MAIN === */
 .footer {
     padding: 1.2rem;
@@ -166,7 +164,7 @@
 
 /* === MAIN/RIGHT === */
 #main {
-    overflow: auto; /* redimensiona a para telas menores*/
+    overflow: auto;
     padding: 2rem;
     display: flex;
     justify-content: center;

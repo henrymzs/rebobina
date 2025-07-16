@@ -11,7 +11,6 @@ button {
 .btn-primary {
     color: #000000;
     background-color: var(--btn-color);
-
 }
 
 .btn-primary:hover {
@@ -88,10 +87,6 @@ input:invalid {
   pointer-events: none;
 }
 
-.input-icon input {
-  padding-left: 36px; /* espaço para o ícone */
-}
-
 .eye {
   position: absolute;
   right: 12px;
@@ -117,8 +112,8 @@ input:invalid {
 .modal-content {
     background-color: #222;
     padding: 30px;
-    border-radius: 10px;
-    width: 90%;
+    border-radius: 8px;
+    width: 100%;
     max-width: 500px;
     position: relative;
     animation: modalFadeIn 0.3s ease;
@@ -151,18 +146,12 @@ input:invalid {
 }
 
 .modal-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: 1.2rem;
     color: var(--text-tertiary);
 }
 
 .form-group {
     margin-bottom: 12px;
-}
-
-.form-group label {
-    margin-bottom: 12px;
-    font-weight: bold;
 }
 
 .form-group input {

@@ -28,7 +28,7 @@ body {
     color: var(--stroke-hightlight);
 }
 
-/* Contêiner principal das configurações */
+
 .settings-container {
     padding: 30px 40px;
     width: 100%;
@@ -41,14 +41,14 @@ body {
     align-items: flex-start;
 }
 
-/* Cabeçalho da página de configurações */
+
 .settings-header {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #333; /* Linha divisória */
+    border-bottom: 1px solid #333;
     width: 100%;
 }
 
@@ -94,7 +94,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 100%; /* Garante que o grupo ocupe toda a largura */
+    width: 100%; 
 }
 
 .form-group-line label {
@@ -111,14 +111,13 @@ body {
     font-size: 1.1em;
 }
 
-/* Contêiner para o input e o botão de edição */
+
 .input-with-icon {
     position: relative;
     display: flex;
     background-color: #2e2d2d4b;
     border-radius: 8px;
-    padding-right: 40px; /* Espaço para o botão de lápis */
-    width: 100%; /* Garante que o input-with-icon ocupe 100% da largura do pai */
+    width: 100%; 
 }
 
 .input-with-icon input,
@@ -126,21 +125,21 @@ body {
     width: 100%;
     padding: 12px 15px;
     border: none;
-    background-color: transparent; /* Fundo transparente para não conflitar com o pai */
+    background-color: transparent; 
     color: var(--text-primary);
     font-size: 1em;
     border-radius: 8px;
-    outline: none; /* Remove outline ao focar */
-    box-sizing: border-box; /*  Garante que padding não afete a largura total */
+    outline: none; 
+    box-sizing: border-box; 
     min-width: 0;
 }
 
 
 .input-with-icon textarea::placeholder {
-    color: #888; /* Cor do placeholder para ser visível no fundo escuro */
+    color: #888; 
 }
 
-/* Estilo para quando o campo está focado */
+
 .input-with-icon input:focus,
 .input-with-icon textarea:focus {
     box-shadow: 0 0 0 2px var(--stroke-hightlight);
@@ -160,12 +159,9 @@ body {
     padding-right: 25px;
 }
 
-/* Botão de edição (lápis) */
+
 .edit-field-btn {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+    margin-right: 10px;
     background: none;
     border: none;
     color: var(--stroke-hightlight);
@@ -175,15 +171,31 @@ body {
 }
 
 .edit-field-btn:hover {
-    color: #e65c00; /* Tom mais escuro de laranja */
+    color: #e65c00; 
     transform: scale(1.1);
     transition: color 0.3s ease;
 }
 
-/* Estilo para o botão de salvar alterações (se for reativado) */
+.edit-field-btn2{
+    margin-right: 10px;
+    margin-top: 20px;
+    background: none;
+    border: none;
+    color: var(--stroke-hightlight);
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.edit-field-btn2:hover {
+    color: #e65c00; 
+    transform: scale(1.1);
+    transition: color 0.3s ease;
+}
+
+
 .btn-save-changes {
     background-color: var(--stroke-hightlight);
-    color: #fff; /* Texto branco */
+    color: #fff; 
     padding: 15px 30px;
     border: none;
     border-radius: 8px;
@@ -191,7 +203,7 @@ body {
     font-size: 1.1em;
     font-weight: 600;
     width: 100%;
-    margin-top: 30px; /* Espaço acima do botão */
+    margin-top: 30px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -200,9 +212,8 @@ body {
     transform: translateY(-2px);
 }
 
-/* Estilos do formulário */
 .settings-form {
-    width: 100%; /* Garante que o formulário ocupe toda a largura */
+    width: 100%; 
     display: flex;
     flex-direction: column;
     gap: 15px;

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showError(passwordErro, !validPassword);
 
     if (validEmail && validPassword) {
-      form.submit(); 
+        loginUser();
     }
   });
 });

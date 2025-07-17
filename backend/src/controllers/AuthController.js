@@ -5,16 +5,16 @@ const register = async (req, res) => {
     try {
         const { nome, email, senha } = req.body;
         if (!nome || !email || !senha) {
-            return res.status(Continue).json({ erro: "Nome, email e senha são obrigatórios." });
+            return res.status(400).json({ erro: "Nome, email e senha são obrigatórios." });
         }
         const resultado = await AuthService.register(nome, email, senha);
         if (!resultado.success) {
             return res.status(400).json({ erro: resultado.message });
         }
-        res.status(201).json({ success: true, messagem: resultado.message, usuario: resultado.usuario });
+        res.status(201).json({ success: true, message: resultado.message, usuario: resultado.usuario });
     } catch (error) {
         console.error("Erro ao registrar usuário:", error);
-        return res.status(500).json({ erro: "Erro ao cadastrar usuário.", detalhes: error.messagem });
+        return res.status(500).json({ erro: "Erro ao cadastrar usuário.", detalhes: error.message });
     }
 }
 

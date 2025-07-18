@@ -1,4 +1,7 @@
-function initRegisterForm() {
+import { registerUser } from './registerUser.js';
+import { validateName, validateEmail, validatePassword, showError } from "./validator.js"
+
+export function initRegisterForm() {
     const form = document.getElementById('form');
 
     const nameInput = document.getElementById('name');

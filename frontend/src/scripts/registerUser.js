@@ -1,27 +1,20 @@
-function registerUser() {
-    const form = document.getElementById('form');
+function registerUser(form) {
     const nome = form.name.value;
     const email = form.email.value;
     const senha = form.password.value;
 
-    const dados = {
-        nome: nome,
-        email: email,
-        senha: senha
-    };
+    const dados = { nome, email, senha };
 
     fetch('http://localhost:3000/user/register', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
     })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert('Cadastro realizado com sucesso!');
-                form.reset()
+                form.reset();
                 window.location.href = 'src/templates/login.html';
             } else {
                 const msg = data.messagem || data.message || data.erro || "Erro desconhecido";

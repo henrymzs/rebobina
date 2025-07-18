@@ -1,23 +1,16 @@
-function loginUser() {
-    const form = document.getElementById('form');
+export function loginUser(form) {
     const email = form.email.value;
     const senha = form.password.value;
 
-    const dados = {
-        email: email,
-        senha: senha
-    };
+    const dados = { email: email, senha: senha };
 
     fetch('http://localhost:3000/user/login', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
     })
         .then(response => response.json())
         .then(data => {
-            console.log("Resposta do backend:", data);
             if (data.login === 'Concluído' && data.token) {
                 localStorage.setItem('authToken', data.token);
                 alert('Login realizado com sucesso!');

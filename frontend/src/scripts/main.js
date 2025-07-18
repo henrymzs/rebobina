@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initRegisterForm();
-    togglePassword();
-});
+import { initPage } from "./pages.js";
+
+document.addEventListener('DOMContentLoaded', initPage);

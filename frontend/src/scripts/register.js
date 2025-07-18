@@ -1,25 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('form');
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  const nameInput = document.getElementById('name');
-  const emailErro = document.getElementById('email-error');
-  const passwordErro = document.getElementById('password-error');
-  const nameErro = document.getElementById('name-error');
+function initRegisterForm() {
+    const form = document.getElementById('form');
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
 
-    const validEmail = validateEmail(emailInput.value);
-    const validPassword = validatePassword(passwordInput.value);
-    const validName = validateName(nameInput.value);
+    const nameErro = document.getElementById('name-error');
+    const emailErro = document.getElementById('email-error');
+    const passwordErro = document.getElementById('password-error');
 
-    showError(emailErro, !validEmail);
-    showError(passwordErro, !validPassword);
-    showError(nameErro, !validName);
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-    if (validEmail && validPassword) {
-        registerUser();
-    }
-  });
-});
+        const validEmail = validateEmail(emailInput.value);
+        const validPassword = validatePassword(passwordInput.value);
+        const validName = validateName(nameInput.value);
+
+        showError(emailErro, !validEmail);
+        showError(passwordErro, !validPassword);
+        showError(nameErro, !validName);
+
+        if (validEmail && validPassword && validName) {
+            registerUser(form);
+        }
+    });
+}

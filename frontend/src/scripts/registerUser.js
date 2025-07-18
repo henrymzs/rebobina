@@ -1,4 +1,4 @@
-function registerUser(form) {
+export function registerUser(form) {
     const nome = form.name.value;
     const email = form.email.value;
     const senha = form.password.value;

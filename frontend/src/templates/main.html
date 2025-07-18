@@ -21,7 +21,7 @@
             </button>
         </header>
 
-        <article id="container-links">
+        <main id="container-links">
             <!-- CARD 1 -->
             <section class="link-card">
                 <div class="card-thumb"></div>
@@ -96,7 +96,7 @@
                     </button>
                 </div>
             </section>
-        </article>
+        </main>
     </div>
 
     <section class="modal" id="addLinkModal">
@@ -106,9 +106,9 @@
             <form id="addLinkForm">
                 <div class="form-group">
                     <label for="movieName">Nome do Filme</label>
-                    <input type="text" id="movieName" placeholder="Digite o nome do filme" required>
+                    <input name="movie" type="text" id="movie-name" placeholder="Digite o nome do filme" required>
                 </div>
-                <button type="submit" class="btn-primary submit-btn">Buscar Informações</button>
+                <button type="button" class="btn-primary submit-btn">Buscar Informações</button>
             </form>
         </div>
     </section>
@@ -207,69 +207,13 @@
                     modal.style.display = 'none';
                 }
             });
-
-            document.getElementById("logoutBtn").addEventListener("click", () => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("usuarioId");
-
-                alert("Você saiu da conta!");
-                window.location.href = "./login.html";
-            });
-
-            addLinkForm.addEventListener('submit', async function (e) {
-                e.preventDefault();
-                const titulo = movieNameInput.value.trim();
-
-                if (!titulo) {
-                    alert('Por favor, digite um nome válido');
-                    return;
-                }
-
-                if (!listaId) {
-                    alert('Erro ao recuperar credenciais do usuário');
-                }
-
-                try {
-                    if (!token || !listaId) {
-                        alert('Erro ao recuperar credenciais do usuário');
-                        return;
-                    }
-                    const response = await fetch('http://localhost:3000/filmes', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        credentials: 'include',
-                        body: JSON.stringify({ titulo, listaId })
-                    });
-
-                    const data = await response.json();
-                    if (data.sucesso) {
-                        alert('Filme adicionado com sucesso!');
-                        modal.style.display = 'none';
-                        movieNameInput.value = '';
-
-                        const newCard = document.createElement('section');
-                        newCard.classList.add('link-card');
-                        newCard.innerHTML = `
-                            <h3 class="movie-title">${titulo}</h3>
-                            <div class="card-actions">
-                                <button class="action-btn edit-btn"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
-                            </div>
-                        `;
-                        linksContainer.appendChild(newCard);
-                    } else {
-                        alert(`Erro: ${data.erro}`);
-                    }
-                } catch (error) {
-                    alert('Erro ao conectar ao servidor');
-                }
-            });
         });
 
     </script>
+
+    <script src="../scripts/addMovie.js"></script>
+    <script src="../scripts/renderCard.js"></script>
+    <script src="../scripts/t.js"></script>
 </body>
 
 </html>

@@ -1,9 +1,10 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const passwordInput = document.getElementById('password');
-  const eyePassword = document.getElementById('eye-lock');
-  eyePassword.addEventListener('click', function () {
-    const currentType = passwordInput.getAttribute('type');
-    const type = currentType === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-  });
-});
+export function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const eyePassword = document.getElementById('eye-lock');
+
+    eyePassword.addEventListener('click', () => {
+        const currentType = passwordInput.getAttribute('type');
+        const newType = currentType === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', newType);
+    });
+}

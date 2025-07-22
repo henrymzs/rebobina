@@ -1,6 +1,5 @@
-import { loginUser } from '../api/user.js';
-import { registerUser } from '../registerUser.js';
-import { validateEmail, validatePassword, showError } from '../utils/validator.js';
+import { registerUser, loginUser } from '../api/user.js';
+import { validateEmail, validatePassword, showError, validateName } from '../utils/validator.js';
 
 export function initLoginForm() {
     const form = document.getElementById('form');

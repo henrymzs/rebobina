@@ -27,6 +27,13 @@ class FilmeDAO {
         });
     }
 
+    async findByFilmeDuplicate(id_tmdb, listaId) {
+        return await Filme.findOne({
+            where: { id_tmdb, listaId },
+            attributes: ['id', 'id_tmdb', 'titulo', 'listaId', 'createdAt', 'updatedAt']
+        });
+    }
+
     async update(id, dadosAtualizados) {
         try {
             const filme = await Filme.findByPk(id);

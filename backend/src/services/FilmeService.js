@@ -16,6 +16,11 @@ const addMovieList = async (titulo, usuarioId) => {
         if (!filmeTMDb) {
             return { success: false, message: "Filme não encontrado na API TMDb" };
         }
+        const filmeExistente = await FilmeDAO.findByFilmeDuplicate(filmeTMDb.id, lista.id);
+
+        if (filmeExistente) {
+            return { success: false, message: "O filme já está na sua lista!" };
+        }
         const novoFilme = await FilmeDAO.create({
             id_tmdb: filmeTMDb.id,
             titulo: filmeTMDb.title,
@@ -38,7 +43,15 @@ const editMovieList = async (titulo, id, usuarioId) => {
         if (!listaDoUsuario || filme.listaId !== listaDoUsuario.id) {
             return { success: false, message: "Você não tem permissão para editar este filme." };
         }
-        const filmeAtualizado = await FilmeDAO.update(id, { titulo });
+        const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${titulo}`);
+        const filmeTMDb = response.data.results[0];
+        if (!filmeTMDb) {
+            return { success: false, message: 'Filme não encontrado.' };
+        }
+        const filmeAtualizado = await FilmeDAO.update(id, {
+            id_tmdb: filmeTMDb.id,
+            titulo: filmeTMDb.title
+        });
         return { success: true, filmeAtualizado };
     } catch (error) {
         console.error('Erro ao atualizar o nome do filme:', error);

@@ -4,25 +4,29 @@ const sequelize = require('../config/database');
 class Filme extends Model {}
 
 Filme.init({
-    id_tmdb: { 
+    id_tmdb: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true
     },
-    titulo: { 
+    titulo: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    listaId: { 
+    listaId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'lista_filmes', key: 'id' } 
+        references: { model: 'lista_filmes', key: 'id' }
     }
 }, {
     sequelize,
     modelName: 'Filme',
-    tableName: 'filmes'
+    tableName: 'filmes',
+    indexes: [
+        {
+            unique: true,
+            fields: ['id_tmdb', 'listaId']
+        }
+    ]
 });
-
 
 module.exports = Filme;

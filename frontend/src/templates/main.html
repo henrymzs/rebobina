@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-page="main">
     <div id="container">
         <header class="header">
             <h1 class="section-title">
@@ -135,7 +135,7 @@
             alert('Acesso negado! Faça login primeiro! ');
             window.location.href = './login.html';
         }
-      */
+
         document.addEventListener('DOMContentLoaded', function () {
             const openModalBtn = document.getElementById('openModalBtn');
             const closeModalBtn = document.getElementById('closeModalBtn');
@@ -208,12 +208,11 @@
                 }
             });
         });
-
+ */
     </script>
 
-    <script src="../scripts/addMovie.js"></script>
-    <script src="../scripts/renderCard.js"></script>
-    <script src="../scripts/t.js"></script>
+
+    <script type="module" src="../scripts/app.js"></script>
 </body>
 
 </html>

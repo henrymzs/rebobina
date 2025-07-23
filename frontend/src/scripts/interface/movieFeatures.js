@@ -1,4 +1,4 @@
-import { postMovie, deleteMovie, updateMovie } from '../api/movie.js';
+import { postMovie, deleteMovie, updateMovie, loadMovies } from '../api/movie.js';
 import { renderMovieCard } from '../components/card.js';
 
 export function initAddMovie() {
@@ -77,7 +77,7 @@ export function initEditMovie() {
         const id = card.dataset.movieId;
 
         const newTitle = prompt(`Editar título do filme:`, oldTitle);
-         if (!id || !newTitle || newTitle.trim() === '' || newTitle === oldTitle) return;
+        if (!id || !newTitle || newTitle.trim() === '' || newTitle === oldTitle) return;
 
         try {
             const result = await updateMovie(id, newTitle.trim(), token);
@@ -94,5 +94,24 @@ export function initEditMovie() {
         }
     });
 }
+
+export async function loadUserMovies() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        return;
+    }
+
+    try {
+        const response = await loadMovies(token);
+        const filmes = response.filmes;
+        for (const filme of filmes) {
+            renderMovieCard(filme.titulo, filme.id);
+        }
+    } catch (error) {
+        console.error('Erro ao carregar lista:', error);
+        alert('Não foi possível carregar seus filmes.');
+    }
+}
+
 
 

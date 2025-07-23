@@ -1,5 +1,20 @@
 const API_URL = 'http://localhost:3000';
 
+export async function loadMovies(token) {
+    return fetch(`${API_URL}/user/list`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+        .then(res => res.json())
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao conectar com o servidor');
+        });
+}
+
 export async function postMovie(titulo, token) {
     return fetch(`${API_URL}/movies`, {
         method: 'POST',

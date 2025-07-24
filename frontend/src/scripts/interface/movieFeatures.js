@@ -1,5 +1,5 @@
 import { postMovie, deleteMovie, updateMovie, loadMovies } from '../api/movie.js';
-import { renderMovieCard } from '../components/card.js';
+import { renderMovieCard, showEmptyMessage } from '../components/card.js';
 
 export function initAddMovie() {
     const addBtn = document.querySelector('.submit-btn');
@@ -104,6 +104,14 @@ export async function loadUserMovies() {
     try {
         const response = await loadMovies(token);
         const filmes = response.filmes;
+        if ((!Array.isArray(filmes))) {
+            console.error('Resposta Inesperada:', response);
+            return;
+        }
+        if (filmes.length === 0) {
+            showEmptyMessage();
+            return;
+        }
         for (const filme of filmes) {
             renderMovieCard(filme.titulo, filme.id);
         }

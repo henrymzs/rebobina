@@ -30,3 +30,14 @@ export function renderMovieCard(titulo, id) {
 
   container.appendChild(card);
 }
+
+export function showEmptyMessage() {
+    const container = document.getElementById('container-links');
+    if (!container) {
+        return;
+    }
+    const message = document.createElement('p');
+    message.className = 'empty-list-message';
+    message.textContent = 'Sua lista ainda está vazia. Que tal adicionar seus filmes favoritos?';
+    container.appendChild(message);
+}

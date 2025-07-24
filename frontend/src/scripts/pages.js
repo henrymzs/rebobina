@@ -2,6 +2,7 @@ import { initRegisterForm, initLoginForm } from "./interface/userForm.js";
 import { togglePassword } from "./utils/toggle.js";
 import { initModal } from "./interface/modal.js";
 import { initAddMovie, initDeleteMovie, initEditMovie, loadUserMovies } from "./interface/movieFeatures.js"
+import { logoutUser, requireAuth, settingsUser } from "./utils/redirect.js";
 
 export function initPage() {
     const page = document.body.dataset.page;
@@ -17,6 +18,11 @@ export function initPage() {
         initAddMovie();
         initDeleteMovie();
         initEditMovie();
-        loadUserMovies()
+        loadUserMovies();
+        logoutUser();
+        requireAuth();
+        settingsUser();
+    } else if (page === 'settings') {
+        requireAuth();
     }
 }

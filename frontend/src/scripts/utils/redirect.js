@@ -1,9 +1,9 @@
 export function requireAuth(redirectTo = '../templates/login.html') {
-  const token = localStorage.getItem('authToken');
-  if (!token) {
-    alert('Você precisa estar logado para acessar esta página.');
-    window.location.href = redirectTo;
-  }
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        alert('Você precisa estar logado para acessar esta página.');
+        window.location.href = redirectTo;
+    }
 }
 
 export function logoutUser() {
@@ -23,5 +23,14 @@ export function settingsUser() {
         window.location.href = '../templates/settings.html';
     });
 }
+
+export function backSettings() {
+    const backButton = document.getElementById('backBtn');
+    backButton.addEventListener('click', () => {
+        history.back();
+    });
+
+}
+
 
 

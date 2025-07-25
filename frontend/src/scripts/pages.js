@@ -1,6 +1,6 @@
 import { initRegisterForm, initLoginForm } from "./interface/userForm.js";
 import { togglePassword } from "./utils/toggle.js";
-import { initModal } from "./interface/modal.js";
+import { openModalLink, openModalCard } from "./interface/modal.js";
 import { initAddMovie, initDeleteMovie, initEditMovie, loadUserMovies } from "./interface/movieFeatures.js"
 import { logoutUser, requireAuth, settingsUser } from "./utils/redirect.js";
 
@@ -14,7 +14,8 @@ export function initPage() {
         initLoginForm();
         togglePassword();
     } else if (page === 'main') {
-        initModal();
+        openModalLink();
+        openModalCard();
         initAddMovie();
         initDeleteMovie();
         initEditMovie();

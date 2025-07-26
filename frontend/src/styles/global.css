@@ -27,10 +27,10 @@
 body {
     font: var(--text);
     color: var(--text-secondary);
-     background-color: var(--bg-input);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+    background-color: var(--bg-input);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h1, h2 {

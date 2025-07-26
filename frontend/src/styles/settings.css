@@ -114,6 +114,15 @@
     transition: color 0.3s ease;
 }
 
+.tag {
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.tag:hover {
+    transform: scale(1.1);
+}
+
 /* Media Queries para responsividade */
 @media (max-width: 768px) {
     .settings-container {

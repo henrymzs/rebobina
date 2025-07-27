@@ -62,3 +62,13 @@ export async function updateMovie(id, newTitle, token) {
         });
 }
 
+export async function tokenListMovies(token) {
+  return fetch(`${API_URL}/user/share-list`, {
+    method: 'GET',
+     headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    },
+  }).then(res => res.json());
+}
+

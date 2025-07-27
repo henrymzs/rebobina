@@ -1,8 +1,9 @@
 import { initRegisterForm, initLoginForm, fillUserFields } from "./interface/userForm.js";
 import { togglePassword } from "./utils/toggle.js";
 import { openModalLink, openModalCard } from "./interface/modal.js";
-import { initAddMovie, initDeleteMovie, initEditMovie, loadUserMovies } from "./interface/movieFeatures.js"
+import { initAddMovie, initDeleteMovie, initEditMovie, loadUserMovies, fillUserTokenList } from "./interface/movieFeatures.js"
 import { logoutUser, requireAuth, settingsUser, backSettings } from "./utils/redirect.js";
+import { copyLinkToken } from "./utils/copyLink.js"
 
 export function initPage() {
     const page = document.body.dataset.page;
@@ -27,5 +28,7 @@ export function initPage() {
         requireAuth();
         backSettings();
         fillUserFields();
+        fillUserTokenList();
+        copyLinkToken();
     }
 }

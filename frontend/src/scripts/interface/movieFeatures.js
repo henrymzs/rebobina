@@ -1,4 +1,4 @@
-import { postMovie, deleteMovie, updateMovie, loadMovies } from '../api/movie.js';
+import { postMovie, deleteMovie, updateMovie, loadMovies, tokenListMovies } from '../api/movie.js';
 import { renderMovieCard, showEmptyMessage } from '../components/card.js';
 
 export function initAddMovie() {
@@ -121,5 +121,15 @@ export async function loadUserMovies() {
     }
 }
 
+export async function fillUserTokenList() {
+    try {
+        const token = localStorage.getItem('authToken');
+        const dados = await tokenListMovies(token);
+        const inputToken = document.getElementById('tokenList');
+        inputToken.value = dados.link || '';
+    } catch (error) {
+        console.error('Erro ao carregar dados do usuário:', error);
+    }
+}
 
 

@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from '../api/user.js';
+import { registerUser, loginUser, profileUser } from '../api/user.js';
 import { validateEmail, validatePassword, showError, validateName } from '../utils/validator.js';
 
 export function initLoginForm() {
@@ -87,4 +87,19 @@ export function initRegisterForm() {
             alert('Ocorreu um erro no servidor');
         }
     });
+}
+
+export async function fillUserFields() {
+    try {
+        const token = localStorage.getItem('authToken');
+        const dados = await profileUser(token);
+
+        const inputNome = document.getElementById('name');
+        const inputEmail = document.getElementById('email');
+
+        inputNome.value = dados.nome || '';
+        inputEmail.value = dados.email || '';
+    } catch (error) {
+        console.error('Erro ao carregar dados do usuário:', error);
+    }
 }

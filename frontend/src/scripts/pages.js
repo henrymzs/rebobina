@@ -1,4 +1,4 @@
-import { initRegisterForm, initLoginForm } from "./interface/userForm.js";
+import { initRegisterForm, initLoginForm, fillUserFields } from "./interface/userForm.js";
 import { togglePassword } from "./utils/toggle.js";
 import { openModalLink, openModalCard } from "./interface/modal.js";
 import { initAddMovie, initDeleteMovie, initEditMovie, loadUserMovies } from "./interface/movieFeatures.js"
@@ -26,5 +26,6 @@ export function initPage() {
     } else if (page === 'settings') {
         requireAuth();
         backSettings();
+        fillUserFields();
     }
 }

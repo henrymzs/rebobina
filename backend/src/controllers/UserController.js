@@ -65,7 +65,7 @@ const userShareList = async (req, res) => {
         if (!resultado.sucesso) {
             return res.status(404).json({ error: resultado.mensagem });
         }
-        const linkCompartilhamento = `https://meusistema.com/lista-filmes/${resultado.lista.tokenCompartilhamento}`;
+        const linkCompartilhamento = `https://minha-lista/${resultado.lista.tokenCompartilhamento}`;
         res.status(200).json({ link: linkCompartilhamento });
     } catch (error) {
         console.error('Erro ao gerar link de compartilhamento:', error);

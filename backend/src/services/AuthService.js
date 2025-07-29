@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+require('dotenv').config();
 const UsuarioDAO = require("../models/DAO/UsuarioDAO");
 const ListaFilmesDAO = require("../models/DAO/ListaFilmesDAO");
+const { formatUser } = require("../utils/FormatUser");
 
 const register = async (nome, email, senha) => {
     try {
@@ -8,8 +11,10 @@ const register = async (nome, email, senha) => {
         if (findEmail) {
             return { success: false, message: 'Email já está em uso.' };
         }
-        const newUser = await UsuarioDAO.create({ nome, email, senha });
-        return { success: true, message: 'Conta criada com sucesso!', usuario: newUser }
+        const hashedPassword = await bcrypt.hash(senha,10);
+        const newUser = await UsuarioDAO.create({ nome, email, senha: hashedPassword });
+        const usuarioFormatado = formatUser(newUser.get({ plain: true }));
+        return { success: true, message: 'Conta criada com sucesso!', usuario: usuarioFormatado };
     } catch (error) {
         console.error('Erro ao registrar usuário:', error);
         return { success: false, message: 'Erro ao cadastrar usuário', detalhes: error.message };
@@ -21,15 +26,16 @@ const login = async (email, senha) => {
     if (!usuario) {
         return { success: false, message: 'Usuário não encontrado.' };
     }
-    if (senha !== usuario.senha) {
-        return { success: false, message: 'Senha incorreta.' };
+    const isPasswordValid = await bcrypt.compare(senha, usuario.senha);
+    if (!isPasswordValid) {
+        return { success: false, message: 'Senha Incorreta.' }
     }
-    const token = jwt.sign({ id: usuario.id }, 'chave_secreta', { expiresIn: "1d" });
+    const token = jwt.sign({ id: usuario.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
     let listaExistente = await ListaFilmesDAO.findByUserId(usuario.id);
     if (!listaExistente) {
         listaExistente = await ListaFilmesDAO.create({ usuarioId: usuario.id, nomeLista: 'Minha Lista' });
     }
-    return { success: true, token, usuario, lista: listaExistente };
+    return { success: true, token, usuario: formatUser(usuario) };
 };
 
 const authenticateUser = async (req) => {
@@ -38,7 +44,7 @@ const authenticateUser = async (req) => {
         return null;
     }
     try {
-        const decoded = jwt.verify(token, 'chave_secreta');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         return await UsuarioDAO.getById(decoded.id);
     } catch (error) {
         console.error('Erro ao verificar usuário logado');
@@ -46,4 +52,4 @@ const authenticateUser = async (req) => {
     }
 };
 
-module.exports = { authenticateUser,register,login };
+module.exports = { authenticateUser, register, login };

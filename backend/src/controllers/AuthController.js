@@ -1,4 +1,5 @@
 const AuthService = require('../services/AuthService');
+const { setAuthCookie } = require('../utils/authHelper');
 require('dotenv').config();
 
 const register = async (req, res) => {
@@ -22,13 +23,13 @@ const login = async (req, res) => {
     try {
         const { email, senha } = req.body;
         if (!email || !senha) {
-            return res.status(400).json({erro: "Nome e senha são obrigátorios."})
+            return res.status(400).json({erro: "Email e senha são obrigátorios."})
         }
         const resultado = await AuthService.login(email, senha);
         if (!resultado.success) {
             return res.status(401).json({ message: resultado.message });
         }
-        res.cookie('tokenJWT', resultado.token, { httpOnly: true, secure: true });
+        setAuthCookie(res, resultado.token);
         res.status(200).json({
             login: 'Concluído',
             email: resultado.usuario.email,

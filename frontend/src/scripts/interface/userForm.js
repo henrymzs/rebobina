@@ -31,7 +31,7 @@ export function initLoginForm() {
                 localStorage.setItem('authToken', data.token);
                 alert('Login realizado com sucesso!');
                 form.reset();
-                window.location.href = '/frontend/src/templates/main.html';
+                window.location.href = '/src/templates/main.html';
             } else {
                 const msg = data.messagem || data.message || data.erro || "Erro desconhecido";
                 alert("Erro ao realizar login: " + msg);

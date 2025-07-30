@@ -1,4 +1,4 @@
-export function requireAuth(redirectTo = '../templates/login.html') {
+export function requireAuth(redirectTo = '/src/templates/login.html') {
     const token = localStorage.getItem('authToken');
     if (!token) {
         alert('Você precisa estar logado para acessar esta página.');
@@ -13,14 +13,14 @@ export function logoutUser() {
         localStorage.removeItem('authToken');
 
         alert('Você saiu da sua conta!');
-        window.location.href = '../templates/login.html';
+        window.location.href = '/src/templates/login.html';
     });
 }
 
 export function settingsUser() {
     const btnSettings = document.getElementById('accountSettingsBtn');
     btnSettings.addEventListener('click', () => {
-        window.location.href = '../templates/settings.html';
+        window.location.href = '/src/templates/settings.html';
     });
 }
 

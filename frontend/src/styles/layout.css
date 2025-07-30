@@ -164,7 +164,7 @@
 
 /* === ASIDE/LEFT === */
 #aside-container {
-    background-image: url('/frontend/public/logo-rebobina.png');
+    background-image: url('/public/logo-rebobina.png');
     background-size: cover;
     background-repeat: no-repeat;
 }

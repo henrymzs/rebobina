@@ -1,0 +1,23 @@
+.btn {
+    background: var(--btn-primary, #ff7b2c);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0 2px 12px rgba(255, 123, 44, 0.08);
+    outline: none;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--color-primary, #ff6b16);
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    background: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
